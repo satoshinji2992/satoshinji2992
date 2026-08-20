@@ -5,14 +5,12 @@
 </linearGradient>
 <radialGradient id="glow"><stop stop-color="#c89bad" stop-opacity=".14"/><stop offset="1" stop-color="#c89bad" stop-opacity="0"/></radialGradient>
 <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="11"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .055 0"/><feBlend in="SourceGraphic" mode="screen"/></filter>
-<linearGradient id="scan" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#cf9caf" stop-opacity="0"/><stop offset=".5" stop-color="#cf9caf" stop-opacity=".18"/><stop offset="1" stop-color="#cf9caf" stop-opacity="0"/></linearGradient>
 <style>
 @keyframes pulse{0%,100%{opacity:.42;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}
 @keyframes flow{to{stroke-dashoffset:-42}}
 @keyframes shimmer{0%,100%{opacity:.3}50%{opacity:1}}
 @keyframes radar{0%{opacity:.8;transform:scale(.72)}75%,100%{opacity:0;transform:scale(1.18)}}
 @keyframes bar{0%,100%{transform:scaleX(.45);opacity:.5}50%{transform:scaleX(1);opacity:1}}
-@keyframes scanline{0%{transform:translateX(-35%)}100%{transform:translateX(135%)}}
 @keyframes orbit{to{transform:rotate(360deg)}}
 @keyframes float{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
 @keyframes signal{0%,100%{opacity:.28}45%,55%{opacity:1}}
@@ -21,17 +19,15 @@
 .shimmer{animation:shimmer 2.8s ease-in-out infinite}
 .radar{animation:radar 3.2s ease-out infinite;transform-box:fill-box;transform-origin:center}
 .bar{animation:bar 3s ease-in-out infinite;transform-box:fill-box;transform-origin:left center}
-.scanline{animation:scanline 7s linear infinite}
 .orbit{animation:orbit 18s linear infinite;transform-box:fill-box;transform-origin:center}
 .float{animation:float 4.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
 .signal{animation:signal 2.6s ease-in-out infinite}
-@media(prefers-reduced-motion:reduce){.pulse,.flow,.shimmer,.radar,.bar,.scanline,.orbit,.float,.signal{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.pulse,.flow,.shimmer,.radar,.bar,.orbit,.float,.signal{animation:none!important}}
 </style>
 </defs>
 <rect width="1200" height="235" rx="18" fill="url(#bg)"/>
 <rect x="1" y="1" width="1198" height="233" rx="17" fill="none" stroke="#303744" stroke-width="2"/>
 <rect width="1200" height="235" rx="18" fill="transparent" filter="url(#grain)"/>
-<rect class="scanline" x="0" y="0" width="171" height="235" fill="url(#scan)" opacity=".55"/>
 <path d="M330 28V207M40 67H292" stroke="#303744"/>
 <text x="40" y="49" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1.3">WORKING STACK</text>
 <text x="40" y="120" fill="#f3eef1" font-family="Georgia,serif" font-size="35" font-weight="700" text-anchor="start" letter-spacing="0">Build it.</text>

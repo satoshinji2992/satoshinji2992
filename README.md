@@ -4,7 +4,7 @@
 
 <p align="center">
   <strong>Deep learning · Robotics · Computer vision</strong><br>
-  Learning systems by rebuilding them, testing them, and turning them into things that work.
+  Implementation, experiments, and practical systems.
 </p>
 
 <p align="center">
@@ -17,24 +17,22 @@
 
 ## ABOUT
 
-Computer Science undergraduate at **Beijing University of Posts and Telecommunications**, working around **deep learning, embodied intelligence, and robotics**.
+Computer Science undergraduate at **Beijing University of Posts and Telecommunications**, focused on **deep learning, robotics, and computer vision**.
 
-I prefer understanding systems from the inside out: implementing neural networks from NumPy, tracing modern Transformer components, experimenting with robot-learning stacks, and turning narrowly motivated ideas into complete public projects. I am currently exploring multimodal agents, vision-language-action systems, robot learning, and reusable representations of skills.
-
-> **I tend to learn things by rebuilding them.**
+My current work includes an implementation-oriented deep-learning tutorial, experiments with robot-learning systems, and a deployed face-retrieval application. I care about reproducible experiments, readable implementations, and documenting the parts that are easy to get wrong.
 
 <details>
 <summary><strong>中文介绍</strong></summary>
 <br>
 
-北京邮电大学计算机专业本科生，主要关注深度学习、具身智能与机器人。我习惯通过亲手重建系统来理解系统，从 NumPy 神经网络、ResNet 和 Transformer，到机器人学习、多模态智能体与可复用技能表示；也会把一些动机很具体的想法做成真正可运行、可公开使用的项目。
+北京邮电大学计算机专业本科生，主要关注深度学习、机器人与计算机视觉。目前在做面向实现的深度学习教程、机器人学习相关实验，以及一个已经上线的人脸检索应用。我比较在意实验能否复现、代码是否容易读懂，以及容易出错的实现细节有没有被说明清楚。
 
 </details>
 
 ## SELECTED WORK // 03
 
 <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning">
-  <img src="./assets/project-deep-learning.svg?v=motion-1" width="100%" alt="Deep Learning from Scratch">
+  <img src="./assets/project-deep-learning.svg?v=motion-2" width="100%" alt="Deep Learning from Scratch">
 </a>
 
 <p align="center">
@@ -46,14 +44,14 @@ I prefer understanding systems from the inside out: implementing neural networks
   <tr>
     <td width="50%" valign="top">
       <a href="https://github.com/satoshinji2992/lerobot">
-        <img src="./assets/project-lerobot.svg?v=motion-1" width="100%" alt="LeRobot Lab">
+        <img src="./assets/project-lerobot.svg?v=motion-2" width="100%" alt="LeRobot Lab">
       </a><br>
       <a href="https://github.com/satoshinji2992/lerobot"><strong>Workspace →</strong></a>
       · <a href="https://github.com/huggingface/lerobot/pull/2792"><strong>Merged PR #2792 ↗</strong></a>
     </td>
     <td width="50%" valign="top">
       <a href="https://seiyuumatch.org">
-        <img src="./assets/project-seiyuumatch.svg?v=motion-1" width="100%" alt="SeiyuuMatch">
+        <img src="./assets/project-seiyuumatch.svg?v=motion-2" width="100%" alt="SeiyuuMatch">
       </a><br>
       <a href="https://seiyuumatch.org"><strong>Live demo ↗</strong></a>
       · <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>Source →</strong></a>
@@ -65,7 +63,7 @@ I prefer understanding systems from the inside out: implementing neural networks
 
 <!-- LIVE_PROFILE:START -->
 <p align="center">
-  <img src="./assets/profile-metrics.svg?v=202608201909" width="100%" alt="Live GitHub profile metrics">
+  <img src="./assets/profile-metrics.svg?v=202608201915" width="100%" alt="Live GitHub profile metrics">
 </p>
 <details>
 <summary><strong>Accessible live data</strong></summary>
@@ -76,14 +74,14 @@ I prefer understanding systems from the inside out: implementing neural networks
 </td><td width="48%" valign="top"><strong>RECENT ACTIVITY</strong>
 <p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · closed a pull request</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · commented on an issue</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · pushed 1 commit</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · pushed 1 commit</sub></p>
 </td></tr></table>
-<sub>Auto-refreshed 2026-08-20 19:09 UTC · live GitHub API</sub>
+<sub>Auto-refreshed 2026-08-20 19:15 UTC · live GitHub API</sub>
 </details>
 <!-- LIVE_PROFILE:END -->
 
 ## CURRENTLY EXPLORING
 
 <p align="center">
-  <img src="./assets/research-map.svg?v=motion-1" width="100%" alt="Animated map of current research interests">
+  <img src="./assets/research-map.svg?v=motion-2" width="100%" alt="Animated map of current research interests">
 </p>
 
 <details>
@@ -99,9 +97,5 @@ I prefer understanding systems from the inside out: implementing neural networks
 ## TOOLS I ACTUALLY USE
 
 <p align="center">
-  <img src="./assets/toolchain.svg?v=motion-1" width="100%" alt="Animated working toolchain">
-</p>
-
-<p align="center">
-  <sub>Research, systems, and the occasional project that exists because the idea was worth testing.</sub>
+  <img src="./assets/toolchain.svg?v=motion-2" width="100%" alt="Animated working toolchain">
 </p>
