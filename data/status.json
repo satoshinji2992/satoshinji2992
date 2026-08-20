@@ -17,17 +17,17 @@
       "fallback_stars": 0
     },
     {
-      "repo": "lerobot",
-      "label": "LeRobot Lab",
-      "kind": "upstream contribution",
-      "fallback_pushed_at": "2026-01-20T13:27:47Z",
+      "repo": "SeiyuuMatch",
+      "label": "SeiyuuMatch",
+      "kind": "production website",
+      "fallback_pushed_at": "2026-06-04T06:17:10Z",
       "fallback_stars": 0
     },
     {
-      "repo": "SeiyuuMatch",
-      "label": "SeiyuuMatch",
-      "kind": "web app",
-      "fallback_pushed_at": "2026-06-04T06:17:10Z",
+      "repo": "lerobot",
+      "label": "LeRobot",
+      "kind": "upstream contribution",
+      "fallback_pushed_at": "2026-01-20T13:27:47Z",
       "fallback_stars": 0
     }
   ],
@@ -45,11 +45,11 @@
     {
       "created_at": "2026-06-04T06:17:10Z",
       "repo": "SeiyuuMatch",
-      "summary": "updated the public web application"
+      "summary": "updated the production website"
     },
     {
       "created_at": "2026-01-20T13:27:47Z",
-      "repo": "LeRobot Lab",
+      "repo": "LeRobot",
       "summary": "merged an async-inference device fix upstream"
     }
   ]

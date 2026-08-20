@@ -29,45 +29,45 @@
 <rect x="1" y="1" width="1198" height="233" rx="17" fill="none" stroke="#303744" stroke-width="2"/>
 <rect width="1200" height="235" rx="18" fill="transparent" filter="url(#grain)"/>
 <path d="M330 28V207M40 67H292" stroke="#303744"/>
-<text x="40" y="49" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1.3">WORKING STACK</text>
-<text x="40" y="120" fill="#f3eef1" font-family="Georgia,serif" font-size="35" font-weight="700" text-anchor="start" letter-spacing="0">Build it.</text>
-<text x="40" y="160" fill="#f3eef1" font-family="Georgia,serif" font-size="35" font-weight="700" text-anchor="start" letter-spacing="0">Trace it.</text>
-<text x="40" y="201" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0">TEST  →  PROFILE  →  SHIP</text>
+<text x="40" y="49" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" font-weight="700" text-anchor="start" letter-spacing="1.3">WORKING STACK</text>
+<text x="40" y="120" fill="#f3eef1" font-family="Georgia,serif" font-size="38" font-weight="700" text-anchor="start" letter-spacing="0">Build it.</text>
+<text x="40" y="160" fill="#f3eef1" font-family="Georgia,serif" font-size="38" font-weight="700" text-anchor="start" letter-spacing="0">Trace it.</text>
+<text x="40" y="201" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0">TEST  →  PROFILE  →  SHIP</text>
 <path class="flow" d="M385 181H1128" stroke="#8f6d7c" fill="none"/>
-<text x="375" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1">01 / LEARNING</text>
+<text x="375" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">01 / LEARNING</text>
 <rect x="375" y="66" width="235" height="93" rx="11" fill="#151b25" stroke="#3a4351"/>
 <circle class="pulse" style="animation-delay:0.00s" cx="394" cy="87" r="4" fill="#cf9caf"/>
-<text x="409" y="91" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0">PyTorch</text>
+<text x="409" y="91" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">PyTorch</text>
 <rect class="shimmer" style="animation-delay:0.00s" x="525" y="80" width="54" height="7" rx="3" fill="#8f6d7c"/>
 <circle class="pulse" style="animation-delay:0.18s" cx="394" cy="114" r="4" fill="#cf9caf"/>
-<text x="409" y="118" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0">NumPy</text>
+<text x="409" y="118" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">NumPy</text>
 <rect class="shimmer" style="animation-delay:0.18s" x="525" y="107" width="63" height="7" rx="3" fill="#8f6d7c"/>
 <circle class="pulse" style="animation-delay:0.36s" cx="394" cy="141" r="4" fill="#cf9caf"/>
-<text x="409" y="145" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0">Transformers</text>
+<text x="409" y="145" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">Transformers</text>
 <rect class="shimmer" style="animation-delay:0.36s" x="525" y="134" width="72" height="7" rx="3" fill="#8f6d7c"/>
 <circle class="pulse" style="animation-delay:0.00s" cx="383" cy="181" r="6" fill="#78d6c6"/>
-<text x="655" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1">02 / EMBODIED</text>
+<text x="655" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">02 / EMBODIED</text>
 <rect x="655" y="66" width="235" height="93" rx="11" fill="#151b25" stroke="#3a4351"/>
 <circle class="pulse" style="animation-delay:0.50s" cx="674" cy="87" r="4" fill="#cf9caf"/>
-<text x="689" y="91" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0">LeRobot</text>
+<text x="689" y="91" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">LeRobot</text>
 <rect class="shimmer" style="animation-delay:0.50s" x="805" y="80" width="54" height="7" rx="3" fill="#8f6d7c"/>
 <circle class="pulse" style="animation-delay:0.68s" cx="674" cy="114" r="4" fill="#cf9caf"/>
-<text x="689" y="118" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0">Isaac Lab</text>
+<text x="689" y="118" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">Isaac Lab</text>
 <rect class="shimmer" style="animation-delay:0.68s" x="805" y="107" width="63" height="7" rx="3" fill="#8f6d7c"/>
 <circle class="pulse" style="animation-delay:0.86s" cx="674" cy="141" r="4" fill="#cf9caf"/>
-<text x="689" y="145" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0">ROS</text>
+<text x="689" y="145" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">ROS</text>
 <rect class="shimmer" style="animation-delay:0.86s" x="805" y="134" width="72" height="7" rx="3" fill="#8f6d7c"/>
 <circle class="pulse" style="animation-delay:0.50s" cx="663" cy="181" r="6" fill="#78d6c6"/>
-<text x="935" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1">03 / SYSTEMS</text>
+<text x="935" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">03 / SYSTEMS</text>
 <rect x="935" y="66" width="235" height="93" rx="11" fill="#151b25" stroke="#3a4351"/>
 <circle class="pulse" style="animation-delay:1.00s" cx="954" cy="87" r="4" fill="#cf9caf"/>
-<text x="969" y="91" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0">Python</text>
+<text x="969" y="91" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">Python</text>
 <rect class="shimmer" style="animation-delay:1.00s" x="1085" y="80" width="54" height="7" rx="3" fill="#8f6d7c"/>
 <circle class="pulse" style="animation-delay:1.18s" cx="954" cy="114" r="4" fill="#cf9caf"/>
-<text x="969" y="118" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0">C++</text>
+<text x="969" y="118" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">C++</text>
 <rect class="shimmer" style="animation-delay:1.18s" x="1085" y="107" width="63" height="7" rx="3" fill="#8f6d7c"/>
 <circle class="pulse" style="animation-delay:1.36s" cx="954" cy="141" r="4" fill="#cf9caf"/>
-<text x="969" y="145" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0">Linux</text>
+<text x="969" y="145" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">Linux</text>
 <rect class="shimmer" style="animation-delay:1.36s" x="1085" y="134" width="72" height="7" rx="3" fill="#8f6d7c"/>
 <circle class="pulse" style="animation-delay:1.00s" cx="943" cy="181" r="6" fill="#78d6c6"/>
 </svg>

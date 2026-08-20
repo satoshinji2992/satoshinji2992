@@ -205,9 +205,10 @@ def svg_text(
     anchor: str = "start",
     spacing: float = 0,
 ) -> str:
+    rendered_size = max(size + 1, round(size * 1.08))
     return (
         f'<text x="{x}" y="{y}" fill="{fill}" font-family="{family}" '
-        f'font-size="{size}" font-weight="{weight}" text-anchor="{anchor}" '
+        f'font-size="{rendered_size}" font-weight="{weight}" text-anchor="{anchor}" '
         f'letter-spacing="{spacing}">{safe_text(value)}</text>'
     )
 
@@ -290,14 +291,15 @@ def render_deep_learning_card(item: dict[str, Any]) -> str:
 
 
 def render_lerobot_card(item: dict[str, Any]) -> str:
-    lines = svg_frame(590, 300, "LeRobot Lab project card")
+    lines = svg_frame(590, 300, "LeRobot upstream contribution project card")
     lines += [
         '<rect width="10" height="300" rx="5" fill="#cf9caf"/>',
         '<path d="M34 54H260M272 26V274" stroke="#303744"/>',
-        svg_text(34, 40, "02 / ROBOT LEARNING", 12, "#cf9caf", 700,
+        svg_text(34, 40, "03 / ROBOT LEARNING", 12, "#cf9caf", 700,
                  "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=1),
-        svg_text(34, 111, "LeRobot", 39, "#f3eef1", 700, "Georgia,serif"),
-        svg_text(34, 153, "LAB", 39, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(34, 123, "LeRobot", 43, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(34, 157, "UPSTREAM CONTRIBUTION", 10, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.5),
         svg_text(34, 190, "OBSERVE  →  REPRESENT  →  ACT", 11, "#a8afbb", 500,
                  "ui-monospace,SFMono-Regular,Consolas,monospace"),
         svg_text(34, 267, f'★ {item.get("stars", 0)} · {compact_date(item.get("pushed_at"))}',
@@ -329,12 +331,14 @@ def render_seiyuu_card(item: dict[str, Any]) -> str:
     lines += [
         '<rect width="10" height="300" rx="5" fill="#cf9caf"/>',
         '<path d="M34 54H260M272 26V274" stroke="#303744"/>',
-        svg_text(34, 40, "03 / COMPUTER VISION", 12, "#cf9caf", 700,
+        svg_text(34, 40, "02 / COMPUTER VISION", 12, "#cf9caf", 700,
                  "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=1),
         svg_text(34, 111, "Seiyuu", 38, "#f3eef1", 700, "Georgia,serif"),
         svg_text(34, 153, "MATCH", 38, "#f3eef1", 700, "Georgia,serif"),
         svg_text(34, 190, "EMBED  →  COMPARE  →  RANK", 11, "#a8afbb", 500,
                  "ui-monospace,SFMono-Regular,Consolas,monospace"),
+        svg_text(34, 226, "PRODUCTION WEBSITE", 10, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.4),
         svg_text(34, 267, f'★ {item.get("stars", 0)} · {compact_date(item.get("pushed_at"))}',
                  11, "#89919f", 500, "ui-monospace,SFMono-Regular,Consolas,monospace"),
         '<g fill="none" stroke="#8f6d7c">',
@@ -370,7 +374,7 @@ def render_profile_svg(config: dict[str, Any], data: dict[str, Any]) -> str:
                  "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=1.3),
         svg_text(34, 132, config["mode"], 27, "#edf0f5", 700),
         '<circle class="pulse" cx="340" cy="124" r="6" fill="#78d6c6"/>',
-        svg_text(34, 165, config["now"], 13, "#89919f"),
+        svg_text(34, 165, config["now"], 12, "#89919f"),
         svg_text(34, 205, "FOCUS", 11, "#89919f", 700,
                  "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=1),
         svg_text(34, 230, config["focus"], 17, "#edf0f5", 600),
@@ -501,10 +505,13 @@ def render_toolchain() -> str:
 
 def write_svg_assets(config: dict[str, Any], data: dict[str, Any]) -> None:
     ASSETS_PATH.mkdir(parents=True, exist_ok=True)
+    projects = {item["repo"]: item for item in data["projects"]}
     outputs = {
-        "project-deep-learning.svg": render_deep_learning_card(data["projects"][0]),
-        "project-lerobot.svg": render_lerobot_card(data["projects"][1]),
-        "project-seiyuumatch.svg": render_seiyuu_card(data["projects"][2]),
+        "project-deep-learning.svg": render_deep_learning_card(
+            projects["quickly_access_to_deeplearning"]
+        ),
+        "project-lerobot.svg": render_lerobot_card(projects["lerobot"]),
+        "project-seiyuumatch.svg": render_seiyuu_card(projects["SeiyuuMatch"]),
         "profile-metrics.svg": render_profile_svg(config, data),
         "research-map.svg": render_research_map(),
         "toolchain.svg": render_toolchain(),
