@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="Deep Learning from Scratch project card">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#0b0e14"/><stop offset="1" stop-color="#11151d"/>
+</linearGradient>
+<radialGradient id="glow"><stop stop-color="#c89bad" stop-opacity=".14"/><stop offset="1" stop-color="#c89bad" stop-opacity="0"/></radialGradient>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="11"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .055 0"/><feBlend in="SourceGraphic" mode="screen"/></filter>
+</defs>
+<rect width="1200" height="360" rx="18" fill="url(#bg)"/>
+<rect x="1" y="1" width="1198" height="358" rx="17" fill="none" stroke="#303744" stroke-width="2"/>
+<rect width="1200" height="360" rx="18" fill="transparent" filter="url(#grain)"/>
+<rect x="0" y="0" width="13" height="360" rx="6" fill="#cf9caf"/>
+<path d="M48 62H520M48 296H520M560 34V326" stroke="#303744"/>
+<text x="48" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" font-weight="700" text-anchor="start" letter-spacing="1.5">01 / TUTORIAL</text>
+<text x="48" y="128" fill="#f3eef1" font-family="Georgia,serif" font-size="55" font-weight="700" text-anchor="start" letter-spacing="0">Deep Learning</text>
+<text x="48" y="190" fill="#f3eef1" font-family="Georgia,serif" font-size="49" font-weight="700" text-anchor="start" letter-spacing="0">FROM SCRATCH</text>
+<text x="50" y="232" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="15" font-weight="500" text-anchor="start" letter-spacing="0.7">GRADIENTS   →   RESNET   →   TRANSFORMER</text>
+<text x="48" y="327" fill="#89919f" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0">implementation-first · runnable exercises · tests</text>
+<circle cx="870" cy="178" r="145" fill="url(#glow)"/>
+<g stroke="#8f6d7c" fill="none" opacity=".58">
+<circle cx="946" cy="174" r="42"/><circle cx="946" cy="174" r="70"/><circle cx="946" cy="174" r="98"/>
+<path d="M620 92L700 128 775 82 850 142 946 76 1088 104M620 258L706 218 790 268 858 214 946 274 1090 238M700 128L706 218M775 82L790 268M850 142L858 214"/>
+</g>
+<g fill="#cf9caf">
+<circle cx="620" cy="92" r="7"/><circle cx="700" cy="128" r="7"/><circle cx="775" cy="82" r="7"/><circle cx="850" cy="142" r="7"/><circle cx="946" cy="76" r="7"/><circle cx="1088" cy="104" r="7"/><circle cx="620" cy="258" r="7"/><circle cx="706" cy="218" r="7"/><circle cx="790" cy="268" r="7"/><circle cx="858" cy="214" r="7"/><circle cx="946" cy="274" r="7"/><circle cx="1090" cy="238" r="7"/>
+<rect x="720" y="145" width="12" height="12" rx="2"/><rect x="738" y="145" width="12" height="12" rx="2"/><rect x="756" y="145" width="12" height="12" rx="2"/><rect x="774" y="145" width="12" height="12" rx="2"/><rect x="792" y="145" width="12" height="12" rx="2"/><rect x="720" y="163" width="12" height="12" rx="2"/><rect x="738" y="163" width="12" height="12" rx="2"/><rect x="756" y="163" width="12" height="12" rx="2"/><rect x="774" y="163" width="12" height="12" rx="2"/><rect x="792" y="163" width="12" height="12" rx="2"/><rect x="720" y="181" width="12" height="12" rx="2"/><rect x="738" y="181" width="12" height="12" rx="2"/><rect x="756" y="181" width="12" height="12" rx="2"/><rect x="774" y="181" width="12" height="12" rx="2"/><rect x="792" y="181" width="12" height="12" rx="2"/><rect x="720" y="199" width="12" height="12" rx="2"/><rect x="738" y="199" width="12" height="12" rx="2"/><rect x="756" y="199" width="12" height="12" rx="2"/><rect x="774" y="199" width="12" height="12" rx="2"/><rect x="792" y="199" width="12" height="12" rx="2"/>
+</g>
+<text x="600" y="326" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="500" text-anchor="start" letter-spacing="0">NUMPY</text>
+<text x="790" y="326" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="500" text-anchor="start" letter-spacing="0">★ 26</text>
+<text x="1138" y="326" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="500" text-anchor="end" letter-spacing="0">20 Aug 2026</text>
+</svg>

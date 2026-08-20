@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="590" height="300" viewBox="0 0 590 300" role="img" aria-label="SeiyuuMatch project card">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#0b0e14"/><stop offset="1" stop-color="#11151d"/>
+</linearGradient>
+<radialGradient id="glow"><stop stop-color="#c89bad" stop-opacity=".14"/><stop offset="1" stop-color="#c89bad" stop-opacity="0"/></radialGradient>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="11"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .055 0"/><feBlend in="SourceGraphic" mode="screen"/></filter>
+</defs>
+<rect width="590" height="300" rx="18" fill="url(#bg)"/>
+<rect x="1" y="1" width="588" height="298" rx="17" fill="none" stroke="#303744" stroke-width="2"/>
+<rect width="590" height="300" rx="18" fill="transparent" filter="url(#grain)"/>
+<rect width="10" height="300" rx="5" fill="#cf9caf"/>
+<path d="M34 54H260M272 26V274" stroke="#303744"/>
+<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1">03 / COMPUTER VISION</text>
+<text x="34" y="111" fill="#f3eef1" font-family="Georgia,serif" font-size="38" font-weight="700" text-anchor="start" letter-spacing="0">Seiyuu</text>
+<text x="34" y="153" fill="#f3eef1" font-family="Georgia,serif" font-size="38" font-weight="700" text-anchor="start" letter-spacing="0">MATCH</text>
+<text x="34" y="190" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="start" letter-spacing="0">EMBED  →  COMPARE  →  RANK</text>
+<text x="34" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="start" letter-spacing="0">★ 5 · 04 Jun 2026</text>
+<g fill="none" stroke="#8f6d7c">
+<circle cx="350" cy="143" r="34"/><circle cx="350" cy="143" r="57"/><circle cx="350" cy="143" r="80"/>
+<path d="M325 120L367 105 381 151 346 174 318 151Z"/>
+</g>
+<g fill="#cf9caf">
+<circle cx="325" cy="120" r="5"/><circle cx="367" cy="105" r="5"/><circle cx="381" cy="151" r="5"/><circle cx="346" cy="174" r="5"/><circle cx="318" cy="151" r="5"/>
+</g>
+<g fill="#1a202b" stroke="#394252">
+<rect x="440" y="72" width="118" height="25" rx="5"/><rect x="440" y="109" width="118" height="25" rx="5"/><rect x="440" y="146" width="118" height="25" rx="5"/><rect x="440" y="183" width="118" height="25" rx="5"/><rect x="440" y="220" width="118" height="25" rx="5"/>
+</g><g fill="#cf9caf">
+<rect x="455" y="80" width="75" height="9" rx="4"/><rect x="455" y="117" width="67" height="9" rx="4"/><rect x="455" y="154" width="59" height="9" rx="4"/><rect x="455" y="191" width="51" height="9" rx="4"/><rect x="455" y="228" width="43" height="9" rx="4"/>
+</g>
+<text x="350" y="258" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0">FACE EMBEDDING</text>
+</svg>

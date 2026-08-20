@@ -33,45 +33,28 @@ I prefer understanding systems from the inside out: implementing neural networks
 
 ## SELECTED WORK // 03
 
+<a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning">
+  <img src="./assets/project-deep-learning.svg" width="100%" alt="Deep Learning from Scratch">
+</a>
+
+<p align="center">
+  <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><strong>Repository →</strong></a>
+  · <a href="https://satoshinji2992.github.io/quickly_access_to_deeplearning/"><strong>Interactive tutorial ↗</strong></a>
+</p>
+
 <table>
   <tr>
-    <td width="8%" align="center"><code>01</code></td>
-    <td width="58%" valign="top">
-      <h3><a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning">Deep Learning from Scratch</a></h3>
-      <p>Build the stack, inspect the mechanics, verify every boundary.</p>
-      <p><code>NumPy</code> <code>PyTorch</code> <code>ResNet</code> <code>Transformer</code> <code>Tests</code></p>
-    </td>
-    <td valign="top">
-      <strong>Implementation-first tutorial</strong><br><br>
-      Gradients → neural-network core → CIFAR-100 ResNet → decoder-only Transformer with RoPE, GQA, and KV cache.<br><br>
-      <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><strong>Repository →</strong></a>
-      · <a href="https://satoshinji2992.github.io/quickly_access_to_deeplearning/"><strong>Interactive tutorial ↗</strong></a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center"><code>02</code></td>
-    <td valign="top">
-      <h3><a href="https://github.com/satoshinji2992/lerobot">LeRobot Lab</a></h3>
-      <p>Experiment workspace for datasets, policies, simulation, and real-world control.</p>
-      <p><code>LeRobot</code> <code>VLA</code> <code>Imitation Learning</code></p>
-    </td>
-    <td valign="top">
-      <strong>Upstream contribution</strong><br><br>
-      Added explicit client-device handling to async inference, with docs, unit tests, and a CUDA-to-CPU end-to-end test.<br><br>
+    <td width="50%" valign="top">
+      <a href="https://github.com/satoshinji2992/lerobot">
+        <img src="./assets/project-lerobot.svg" width="100%" alt="LeRobot Lab">
+      </a><br>
       <a href="https://github.com/satoshinji2992/lerobot"><strong>Workspace →</strong></a>
       · <a href="https://github.com/huggingface/lerobot/pull/2792"><strong>Merged PR #2792 ↗</strong></a>
     </td>
-  </tr>
-  <tr>
-    <td align="center"><code>03</code></td>
-    <td valign="top">
-      <h3><a href="https://seiyuumatch.org">SeiyuuMatch ♡</a></h3>
-      <p>Face-similarity search across 119 Japanese voice-actress profiles.</p>
-      <p><code>InsightFace</code> <code>ONNX Runtime</code> <code>Computer Vision</code></p>
-    </td>
-    <td valign="top">
-      <strong>Deployed web application</strong><br><br>
-      Multi-face input, Top-5 retrieval, franchise filters, dataset contributions, and optional face restoration.<br><br>
+    <td width="50%" valign="top">
+      <a href="https://seiyuumatch.org">
+        <img src="./assets/project-seiyuumatch.svg" width="100%" alt="SeiyuuMatch">
+      </a><br>
       <a href="https://seiyuumatch.org"><strong>Live demo ↗</strong></a>
       · <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>Source →</strong></a>
     </td>
@@ -81,43 +64,20 @@ I prefer understanding systems from the inside out: implementing neural networks
 ## LIVE PROFILE
 
 <!-- LIVE_PROFILE:START -->
-<table>
-  <tr>
-    <td width="40%" valign="top">
-      <sub>LAB STATUS</sub><br>
-      <strong>EXPERIMENTING</strong> &nbsp; 🟢<br><br>
-      Building foundations across deep learning and robot learning.<br><br>
-      <sub>FOCUS</sub><br><strong>Embodied intelligence</strong>
-    </td>
-    <td width="20%" align="center" valign="middle">
-      <sub>REPOSITORIES</sub><br><strong>22</strong>
-    </td>
-    <td width="20%" align="center" valign="middle">
-      <sub>STARS</sub><br><strong>43</strong>
-    </td>
-    <td width="20%" align="center" valign="middle">
-      <sub>FOLLOWERS</sub><br><strong>2</strong>
-    </td>
-  </tr>
-</table>
-<table>
-  <tr>
-    <td width="52%" valign="top">
-      <strong>PROJECT PULSE // 03</strong>
-      <p><code>01</code> <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><strong>Deep Learning Tutorial</strong></a><br><sub>tutorial · ★ 26 · updated 20 Aug 2026</sub></p>
-      <p><code>02</code> <a href="https://github.com/satoshinji2992/lerobot"><strong>LeRobot Lab</strong></a><br><sub>upstream contribution · ★ 0 · updated 20 Jan 2026</sub></p>
-      <p><code>03</code> <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>SeiyuuMatch</strong></a><br><sub>web app · ★ 5 · updated 04 Jun 2026</sub></p>
-    </td>
-    <td width="48%" valign="top">
-      <strong>RECENT ACTIVITY</strong>
-      <p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · closed a pull request</sub></p>
-      <p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · commented on an issue</sub></p>
-      <p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · pushed 1 commit</sub></p>
-      <p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · pushed 1 commit</sub></p>
-    </td>
-  </tr>
-</table>
-<sub>Auto-refreshed 2026-08-20 18:39 UTC · live GitHub API</sub>
+<p align="center">
+  <img src="./assets/profile-metrics.svg?v=202608201847" width="100%" alt="Live GitHub profile metrics">
+</p>
+<details>
+<summary><strong>Accessible live data</strong></summary>
+<table><tr><td><strong>Status</strong></td><td><strong>Repositories</strong></td><td><strong>Stars</strong></td><td><strong>Followers</strong></td></tr>
+<tr><td>EXPERIMENTING</td><td>22</td><td>43</td><td>2</td></tr></table>
+<table><tr><td width="52%" valign="top"><strong>PROJECT PULSE</strong>
+<p><code>01</code> <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><strong>Deep Learning Tutorial</strong></a><br><sub>tutorial · ★ 26 · updated 20 Aug 2026</sub></p><p><code>02</code> <a href="https://github.com/satoshinji2992/lerobot"><strong>LeRobot Lab</strong></a><br><sub>upstream contribution · ★ 0 · updated 20 Jan 2026</sub></p><p><code>03</code> <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>SeiyuuMatch</strong></a><br><sub>web app · ★ 5 · updated 04 Jun 2026</sub></p>
+</td><td width="48%" valign="top"><strong>RECENT ACTIVITY</strong>
+<p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · closed a pull request</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · commented on an issue</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · pushed 1 commit</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · pushed 1 commit</sub></p>
+</td></tr></table>
+<sub>Auto-refreshed 2026-08-20 18:47 UTC · live GitHub API</sub>
+</details>
 <!-- LIVE_PROFILE:END -->
 
 ## CURRENTLY EXPLORING
