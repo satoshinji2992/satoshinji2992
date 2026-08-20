@@ -34,7 +34,7 @@ I prefer understanding systems from the inside out: implementing neural networks
 ## SELECTED WORK // 03
 
 <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning">
-  <img src="./assets/project-deep-learning.svg" width="100%" alt="Deep Learning from Scratch">
+  <img src="./assets/project-deep-learning.svg?v=motion-1" width="100%" alt="Deep Learning from Scratch">
 </a>
 
 <p align="center">
@@ -46,14 +46,14 @@ I prefer understanding systems from the inside out: implementing neural networks
   <tr>
     <td width="50%" valign="top">
       <a href="https://github.com/satoshinji2992/lerobot">
-        <img src="./assets/project-lerobot.svg" width="100%" alt="LeRobot Lab">
+        <img src="./assets/project-lerobot.svg?v=motion-1" width="100%" alt="LeRobot Lab">
       </a><br>
       <a href="https://github.com/satoshinji2992/lerobot"><strong>Workspace →</strong></a>
       · <a href="https://github.com/huggingface/lerobot/pull/2792"><strong>Merged PR #2792 ↗</strong></a>
     </td>
     <td width="50%" valign="top">
       <a href="https://seiyuumatch.org">
-        <img src="./assets/project-seiyuumatch.svg" width="100%" alt="SeiyuuMatch">
+        <img src="./assets/project-seiyuumatch.svg?v=motion-1" width="100%" alt="SeiyuuMatch">
       </a><br>
       <a href="https://seiyuumatch.org"><strong>Live demo ↗</strong></a>
       · <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>Source →</strong></a>
@@ -83,7 +83,7 @@ I prefer understanding systems from the inside out: implementing neural networks
 ## CURRENTLY EXPLORING
 
 <p align="center">
-  <img src="./assets/research-map.svg" width="100%" alt="Animated map of current research interests">
+  <img src="./assets/research-map.svg?v=motion-1" width="100%" alt="Animated map of current research interests">
 </p>
 
 <details>
@@ -99,7 +99,7 @@ I prefer understanding systems from the inside out: implementing neural networks
 ## TOOLS I ACTUALLY USE
 
 <p align="center">
-  <img src="./assets/toolchain.svg" width="100%" alt="Animated working toolchain">
+  <img src="./assets/toolchain.svg?v=motion-1" width="100%" alt="Animated working toolchain">
 </p>
 
 <p align="center">
