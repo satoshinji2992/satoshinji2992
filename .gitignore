@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+preview.html
+DEPLOY.md
+deploy.sh
+deploy.ps1

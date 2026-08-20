@@ -1,0 +1,56 @@
+{
+  "mode": "EXPERIMENTING",
+  "focus": "Embodied intelligence",
+  "now": "Building foundations across deep learning and robot learning.",
+  "tagline": "I tend to learn things by rebuilding them.",
+  "fallback": {
+    "public_repos": 22,
+    "total_stars": "—",
+    "followers": "—"
+  },
+  "projects": [
+    {
+      "repo": "quickly_access_to_deeplearning",
+      "label": "Deep Learning Tutorial",
+      "kind": "tutorial",
+      "fallback_pushed_at": "2026-08-20T14:15:07Z",
+      "fallback_stars": 0
+    },
+    {
+      "repo": "lerobot",
+      "label": "LeRobot Lab",
+      "kind": "upstream contribution",
+      "fallback_pushed_at": "2026-01-20T13:27:47Z",
+      "fallback_stars": 0
+    },
+    {
+      "repo": "SeiyuuMatch",
+      "label": "SeiyuuMatch",
+      "kind": "web app",
+      "fallback_pushed_at": "2026-06-04T06:17:10Z",
+      "fallback_stars": 0
+    }
+  ],
+  "fallback_activity": [
+    {
+      "created_at": "2026-08-20T14:15:07Z",
+      "repo": "Deep Learning Tutorial",
+      "summary": "refined the tutorial overview"
+    },
+    {
+      "created_at": "2026-08-19T14:41:02Z",
+      "repo": "Deep Learning Tutorial",
+      "summary": "added an interactive residual-block component"
+    },
+    {
+      "created_at": "2026-06-04T06:17:10Z",
+      "repo": "SeiyuuMatch",
+      "summary": "updated the public web application"
+    },
+    {
+      "created_at": "2026-01-20T13:27:47Z",
+      "repo": "LeRobot Lab",
+      "summary": "merged an async-inference device fix upstream"
+    }
+  ]
+}
