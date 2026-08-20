@@ -93,10 +93,10 @@ I prefer understanding systems from the inside out: implementing neural networks
       <sub>REPOSITORIES</sub><br><strong>22</strong>
     </td>
     <td width="20%" align="center" valign="middle">
-      <sub>STARS</sub><br><strong>—</strong>
+      <sub>STARS</sub><br><strong>43</strong>
     </td>
     <td width="20%" align="center" valign="middle">
-      <sub>FOLLOWERS</sub><br><strong>—</strong>
+      <sub>FOLLOWERS</sub><br><strong>2</strong>
     </td>
   </tr>
 </table>
@@ -104,20 +104,20 @@ I prefer understanding systems from the inside out: implementing neural networks
   <tr>
     <td width="52%" valign="top">
       <strong>PROJECT PULSE // 03</strong>
-      <p><code>01</code> <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><strong>Deep Learning Tutorial</strong></a><br><sub>tutorial · ★ 0 · updated 20 Aug 2026</sub></p>
+      <p><code>01</code> <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><strong>Deep Learning Tutorial</strong></a><br><sub>tutorial · ★ 26 · updated 20 Aug 2026</sub></p>
       <p><code>02</code> <a href="https://github.com/satoshinji2992/lerobot"><strong>LeRobot Lab</strong></a><br><sub>upstream contribution · ★ 0 · updated 20 Jan 2026</sub></p>
-      <p><code>03</code> <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>SeiyuuMatch</strong></a><br><sub>web app · ★ 0 · updated 04 Jun 2026</sub></p>
+      <p><code>03</code> <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>SeiyuuMatch</strong></a><br><sub>web app · ★ 5 · updated 04 Jun 2026</sub></p>
     </td>
     <td width="48%" valign="top">
       <strong>RECENT ACTIVITY</strong>
-      <p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · refined the tutorial overview</sub></p>
-      <p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · added an interactive residual-block component</sub></p>
-      <p>● <strong>SeiyuuMatch</strong><br><sub>04 Jun 2026 · updated the public web application</sub></p>
-      <p>● <strong>LeRobot Lab</strong><br><sub>20 Jan 2026 · merged an async-inference device fix upstream</sub></p>
+      <p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · closed a pull request</sub></p>
+      <p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · commented on an issue</sub></p>
+      <p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · pushed 1 commit</sub></p>
+      <p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · pushed 1 commit</sub></p>
     </td>
   </tr>
 </table>
-<sub>Auto-refreshed 2026-08-20 18:36 UTC · fallback snapshot</sub>
+<sub>Auto-refreshed 2026-08-20 18:39 UTC · live GitHub API</sub>
 <!-- LIVE_PROFILE:END -->
 
 ## CURRENTLY EXPLORING
