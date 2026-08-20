@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the profile's self-hosted live metrics SVG.
+"""Refresh the profile's native live-data components in README.md.
 
 Uses only the Python standard library. GitHub Actions supplies GITHUB_TOKEN.
 When the API is unavailable, the renderer falls back to data/status.json so
@@ -22,7 +22,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "data" / "status.json"
-OUTPUT_PATH = ROOT / "assets" / "profile-metrics.svg"
+README_PATH = ROOT / "README.md"
+START_MARKER = "<!-- LIVE_PROFILE:START -->"
+END_MARKER = "<!-- LIVE_PROFILE:END -->"
 API_ROOT = "https://api.github.com"
 
 
@@ -191,119 +193,79 @@ def collect_fallback_data(config: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def render_svg(config: dict[str, Any], data: dict[str, Any]) -> str:
-    accent = "#c89bad"
-    accent_soft = "#8f6d7c"
-    bg = "#0d1117"
-    panel = "#111720"
-    border = "#30363d"
-    text = "#f0f3f6"
-    muted = "#8b949e"
-    cyan = "#78d6c6"
-
-    def t(x: int, y: int, value: Any, size: int = 15, fill: str = text,
-          weight: int = 400, family: str = "Inter,Segoe UI,sans-serif",
-          spacing: float = 0.0) -> str:
-        return (
-            f'<text x="{x}" y="{y}" font-family="{family}" font-size="{size}" '
-            f'font-weight="{weight}" fill="{fill}" letter-spacing="{spacing}">'
-            f'{safe_text(value)}</text>'
+def render_readme_section(
+    config: dict[str, Any], data: dict[str, Any], username: str
+) -> str:
+    """Render live data as selectable, accessible GitHub-native HTML."""
+    projects: list[str] = []
+    for index, item in enumerate(data["projects"], start=1):
+        repo = urllib.parse.quote(item["repo"])
+        url = f"https://github.com/{urllib.parse.quote(username)}/{repo}"
+        projects.append(
+            f'<p><code>0{index}</code> '
+            f'<a href="{url}"><strong>{safe_text(item["label"])}</strong></a><br>'
+            f'<sub>{safe_text(item["kind"])} · ★ {item.get("stars", 0)} · '
+            f'updated {safe_text(compact_date(item.get("pushed_at")))}</sub></p>'
         )
 
-    lines: list[str] = [
-        '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" '
-        'viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">',
-        '<title id="title">Automatically refreshed GitHub profile status</title>',
-        '<desc id="desc">Current focus, project pulse and recent public activity.</desc>',
-        '<defs>',
-        '<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">',
-        f'<stop offset="0" stop-color="{bg}"/>',
-        '<stop offset="1" stop-color="#12131a"/>',
-        '</linearGradient>',
-        '<filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">',
-        '<feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity=".28"/>',
-        '</filter>',
-        '</defs>',
-        '<rect x="1" y="1" width="1198" height="358" rx="18" fill="url(#bg)" '
-        f'stroke="{border}" stroke-width="2"/>',
-        '<path d="M26 48H1174" stroke="#262e38"/>',
-        '<rect x="28" y="24" width="9" height="9" fill="#c89bad"/>',
-        t(49, 34, "LIVE PROFILE // AUTO-REFRESHED", 14, muted, 600,
-          "ui-monospace,SFMono-Regular,Consolas,monospace", 1.4),
-        t(1044, 34, "GITHUB ACTIONS", 12, muted, 500,
-          "ui-monospace,SFMono-Regular,Consolas,monospace", 1.0),
-        '<path d="M376 68V330M800 68V330" stroke="#262e38"/>',
-    ]
-
-    # Column 1: lab status
-    lines += [
-        t(34, 82, "LAB STATUS", 13, accent, 700,
-          "ui-monospace,SFMono-Regular,Consolas,monospace", 1.4),
-        t(34, 118, config["mode"], 25, text, 650),
-        '<circle cx="330" cy="111" r="5" fill="#78d6c6"/>',
-        t(34, 150, config["now"], 14, muted),
-        t(34, 184, "FOCUS", 11, muted, 600,
-          "ui-monospace,SFMono-Regular,Consolas,monospace", 1.0),
-        t(34, 207, config["focus"], 17, text, 550),
-    ]
-
-    stat_y = 247
-    stats = [
-        ("REPOSITORIES", data.get("public_repos", "—")),
-        ("STARS", data.get("total_stars", "—")),
-        ("FOLLOWERS", data.get("followers", "—")),
-    ]
-    stat_x = [34, 150, 252]
-    for x, (label, value) in zip(stat_x, stats):
-        lines.append(t(x, stat_y, label, 10, muted, 600,
-                       "ui-monospace,SFMono-Regular,Consolas,monospace", .8))
-        lines.append(t(x, stat_y + 31, value, 24, text, 650))
-    lines += [
-        '<path d="M34 304H342" stroke="#30363d"/>',
-        t(34, 327, config["tagline"], 13, accent, 500),
-    ]
-
-    # Column 2: project pulse
-    lines.append(t(404, 82, "PROJECT PULSE // 03", 13, accent, 700,
-                   "ui-monospace,SFMono-Regular,Consolas,monospace", 1.4))
-    project_y = [112, 180, 248]
-    for idx, (item, y) in enumerate(zip(data["projects"], project_y), start=1):
-        if idx > 1:
-            lines.append(f'<path d="M404 {y-18}H772" stroke="#262e38"/>')
-        lines += [
-            t(404, y, f"0{idx}", 12, accent_soft, 700,
-              "ui-monospace,SFMono-Regular,Consolas,monospace"),
-            t(440, y, item["label"], 16, text, 600),
-            t(440, y + 23, item["kind"], 12, muted, 500),
-            t(772, y, f"★ {item.get('stars', 0)}", 12, muted, 500,
-              "ui-monospace,SFMono-Regular,Consolas,monospace"),
-            t(772, y + 23, compact_date(item.get("pushed_at")), 11, muted, 400,
-              "ui-monospace,SFMono-Regular,Consolas,monospace"),
-        ]
-
-    # Column 3: recent activity
-    lines.append(t(828, 82, "RECENT ACTIVITY", 13, accent, 700,
-                   "ui-monospace,SFMono-Regular,Consolas,monospace", 1.4))
-    activity_y = [116, 170, 224, 278]
-    for item, y in zip(data["activity"][:4], activity_y):
-        lines += [
-            f'<circle cx="836" cy="{y-5}" r="4" fill="{accent}"/>',
-            f'<path d="M836 {y+4}V{y+33}" stroke="{border}"/>',
-            t(852, y, compact_date(item.get("created_at")), 11, muted, 500,
-              "ui-monospace,SFMono-Regular,Consolas,monospace"),
-            t(952, y, truncate(item.get("repo", ""), 27), 13, text, 600),
-            t(852, y + 22, truncate(item.get("summary", ""), 49), 13, muted, 400),
-        ]
+    activity: list[str] = []
+    for item in data["activity"][:4]:
+        activity.append(
+            f'<p>● <strong>{safe_text(truncate(item.get("repo", ""), 27))}</strong><br>'
+            f'<sub>{safe_text(compact_date(item.get("created_at")))} · '
+            f'{safe_text(truncate(item.get("summary", ""), 49))}</sub></p>'
+        )
 
     refreshed = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     source = "live GitHub API" if data.get("live") else "fallback snapshot"
-    lines += [
-        '<path d="M828 304H1166" stroke="#30363d"/>',
-        t(828, 328, f"updated {refreshed} · {source}", 11, muted, 400,
-          "ui-monospace,SFMono-Regular,Consolas,monospace"),
-        '</svg>',
-    ]
-    return "\n".join(lines) + "\n"
+    return "\n".join(
+        [
+            START_MARKER,
+            '<table>',
+            '  <tr>',
+            '    <td width="40%" valign="top">',
+            '      <sub>LAB STATUS</sub><br>',
+            f'      <strong>{safe_text(config["mode"])}</strong> &nbsp; 🟢<br><br>',
+            f'      {safe_text(config["now"])}<br><br>',
+            f'      <sub>FOCUS</sub><br><strong>{safe_text(config["focus"])}</strong>',
+            '    </td>',
+            '    <td width="20%" align="center" valign="middle">',
+            f'      <sub>REPOSITORIES</sub><br><strong>{safe_text(data.get("public_repos", "—"))}</strong>',
+            '    </td>',
+            '    <td width="20%" align="center" valign="middle">',
+            f'      <sub>STARS</sub><br><strong>{safe_text(data.get("total_stars", "—"))}</strong>',
+            '    </td>',
+            '    <td width="20%" align="center" valign="middle">',
+            f'      <sub>FOLLOWERS</sub><br><strong>{safe_text(data.get("followers", "—"))}</strong>',
+            '    </td>',
+            '  </tr>',
+            '</table>',
+            '<table>',
+            '  <tr>',
+            '    <td width="52%" valign="top">',
+            '      <strong>PROJECT PULSE // 03</strong>',
+            "      " + "\n      ".join(projects),
+            '    </td>',
+            '    <td width="48%" valign="top">',
+            '      <strong>RECENT ACTIVITY</strong>',
+            "      " + "\n      ".join(activity),
+            '    </td>',
+            '  </tr>',
+            '</table>',
+            f'<sub>Auto-refreshed {refreshed} · {source}</sub>',
+            END_MARKER,
+        ]
+    )
+
+
+def update_readme(section: str) -> None:
+    current = README_PATH.read_text(encoding="utf-8")
+    start = current.find(START_MARKER)
+    end = current.find(END_MARKER)
+    if start == -1 or end == -1 or end < start:
+        raise ValueError("README live-profile markers are missing or out of order")
+    end += len(END_MARKER)
+    README_PATH.write_text(current[:start] + section + current[end:], encoding="utf-8")
 
 
 def main() -> int:
@@ -328,9 +290,8 @@ def main() -> int:
             print(f"GitHub API unavailable, using fallback snapshot: {exc}", file=sys.stderr)
             data = collect_fallback_data(config)
 
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(render_svg(config, data), encoding="utf-8")
-    print(f"Wrote {OUTPUT_PATH}")
+    update_readme(render_readme_section(config, data, username))
+    print(f"Updated {README_PATH}")
     return 0
 
 
