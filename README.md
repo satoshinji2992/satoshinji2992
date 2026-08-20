@@ -65,7 +65,7 @@ I prefer understanding systems from the inside out: implementing neural networks
 
 <!-- LIVE_PROFILE:START -->
 <p align="center">
-  <img src="./assets/profile-metrics.svg?v=202608201850" width="100%" alt="Live GitHub profile metrics">
+  <img src="./assets/profile-metrics.svg?v=202608201903" width="100%" alt="Live GitHub profile metrics">
 </p>
 <details>
 <summary><strong>Accessible live data</strong></summary>
@@ -76,59 +76,31 @@ I prefer understanding systems from the inside out: implementing neural networks
 </td><td width="48%" valign="top"><strong>RECENT ACTIVITY</strong>
 <p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · closed a pull request</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · commented on an issue</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · pushed 1 commit</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · pushed 1 commit</sub></p>
 </td></tr></table>
-<sub>Auto-refreshed 2026-08-20 18:50 UTC · live GitHub API</sub>
+<sub>Auto-refreshed 2026-08-20 19:03 UTC · live GitHub API</sub>
 </details>
 <!-- LIVE_PROFILE:END -->
 
 ## CURRENTLY EXPLORING
 
-<table>
-  <tr>
-    <td width="20%"><code>01</code></td>
-    <td width="30%"><strong>Embodied Intelligence</strong></td>
-    <td>Agents that perceive, reason, and act in the physical world.</td>
-  </tr>
-  <tr>
-    <td><code>02</code></td>
-    <td><strong>Vision-Language-Action</strong></td>
-    <td>Connecting visual understanding, language-conditioned goals, and control.</td>
-  </tr>
-  <tr>
-    <td><code>03</code></td>
-    <td><strong>Robot Learning</strong></td>
-    <td>Imitation learning, reinforcement learning, datasets, and sim-to-real systems.</td>
-  </tr>
-  <tr>
-    <td><code>04</code></td>
-    <td><strong>Multimodal Agents</strong></td>
-    <td>Memory, planning, retrieval, and reusable skill representations.</td>
-  </tr>
-</table>
+<p align="center">
+  <img src="./assets/research-map.svg" width="100%" alt="Animated map of current research interests">
+</p>
+
+<details>
+<summary><strong>Research areas as text</strong></summary>
+
+1. **Embodied Intelligence** — Agents that perceive, reason, and act in the physical world.
+2. **Vision-Language-Action** — Connecting visual understanding, language-conditioned goals, and control.
+3. **Robot Learning** — Imitation learning, reinforcement learning, datasets, and sim-to-real systems.
+4. **Multimodal Agents** — Memory, planning, retrieval, and reusable skill representations.
+
+</details>
 
 ## TOOLS I ACTUALLY USE
 
-<table>
-  <tr>
-    <td width="33%" valign="top">
-      <strong>LEARNING</strong><br><br>
-      PyTorch<br>
-      NumPy<br>
-      Transformers
-    </td>
-    <td width="33%" valign="top">
-      <strong>EMBODIED</strong><br><br>
-      LeRobot<br>
-      Isaac Lab<br>
-      ROS
-    </td>
-    <td width="33%" valign="top">
-      <strong>SYSTEMS</strong><br><br>
-      Python<br>
-      C++<br>
-      Linux
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="./assets/toolchain.svg" width="100%" alt="Animated working toolchain">
+</p>
 
 <p align="center">
   <sub>Research, systems, and the occasional project that exists because the idea was worth testing.</sub>

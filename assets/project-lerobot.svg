@@ -5,10 +5,33 @@
 </linearGradient>
 <radialGradient id="glow"><stop stop-color="#c89bad" stop-opacity=".14"/><stop offset="1" stop-color="#c89bad" stop-opacity="0"/></radialGradient>
 <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="11"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .055 0"/><feBlend in="SourceGraphic" mode="screen"/></filter>
+<linearGradient id="scan" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#cf9caf" stop-opacity="0"/><stop offset=".5" stop-color="#cf9caf" stop-opacity=".18"/><stop offset="1" stop-color="#cf9caf" stop-opacity="0"/></linearGradient>
+<style>
+@keyframes pulse{0%,100%{opacity:.42;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}
+@keyframes flow{to{stroke-dashoffset:-42}}
+@keyframes shimmer{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes radar{0%{opacity:.8;transform:scale(.72)}75%,100%{opacity:0;transform:scale(1.18)}}
+@keyframes bar{0%,100%{transform:scaleX(.45);opacity:.5}50%{transform:scaleX(1);opacity:1}}
+@keyframes scanline{0%{transform:translateX(-35%)}100%{transform:translateX(135%)}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
+@keyframes signal{0%,100%{opacity:.28}45%,55%{opacity:1}}
+.pulse{animation:pulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.flow{stroke-dasharray:7 10;animation:flow 2.2s linear infinite}
+.shimmer{animation:shimmer 2.8s ease-in-out infinite}
+.radar{animation:radar 3.2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.bar{animation:bar 3s ease-in-out infinite;transform-box:fill-box;transform-origin:left center}
+.scanline{animation:scanline 7s linear infinite}
+.orbit{animation:orbit 18s linear infinite;transform-box:fill-box;transform-origin:center}
+.float{animation:float 4.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.signal{animation:signal 2.6s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.pulse,.flow,.shimmer,.radar,.bar,.scanline,.orbit,.float,.signal{animation:none!important}}
+</style>
 </defs>
 <rect width="590" height="300" rx="18" fill="url(#bg)"/>
 <rect x="1" y="1" width="588" height="298" rx="17" fill="none" stroke="#303744" stroke-width="2"/>
 <rect width="590" height="300" rx="18" fill="transparent" filter="url(#grain)"/>
+<rect class="scanline" x="0" y="0" width="90" height="300" fill="url(#scan)" opacity=".55"/>
 <rect width="10" height="300" rx="5" fill="#cf9caf"/>
 <path d="M34 54H260M272 26V274" stroke="#303744"/>
 <text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1">02 / ROBOT LEARNING</text>
@@ -18,12 +41,12 @@
 <text x="34" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="start" letter-spacing="0">★ 0 · 20 Jan 2026</text>
 <g fill="none" stroke="#596273">
 <rect x="294" y="82" width="78" height="132" rx="8"/><rect x="390" y="82" width="78" height="132" rx="8"/><rect x="486" y="82" width="78" height="132" rx="8"/>
-<path d="M372 148H390M468 148H486"/>
+<path class="flow" d="M372 148H390M468 148H486"/>
 <path d="M311 128L329 111 352 142 329 162 311 128M503 172L521 154 543 165"/>
 </g>
 <g fill="#cf9caf">
-<circle cx="311" cy="128" r="5"/><circle cx="329" cy="111" r="5"/><circle cx="352" cy="142" r="5"/><circle cx="329" cy="162" r="5"/><circle cx="503" cy="172" r="5"/><circle cx="521" cy="154" r="5"/><circle cx="543" cy="165" r="5"/>
-<rect x="405" y="113" width="8" height="8" rx="1"/><rect x="418" y="113" width="8" height="8" rx="1"/><rect x="431" y="113" width="8" height="8" rx="1"/><rect x="444" y="113" width="8" height="8" rx="1"/><rect x="405" y="126" width="8" height="8" rx="1"/><rect x="418" y="126" width="8" height="8" rx="1"/><rect x="431" y="126" width="8" height="8" rx="1"/><rect x="444" y="126" width="8" height="8" rx="1"/><rect x="405" y="139" width="8" height="8" rx="1"/><rect x="418" y="139" width="8" height="8" rx="1"/><rect x="431" y="139" width="8" height="8" rx="1"/><rect x="444" y="139" width="8" height="8" rx="1"/><rect x="405" y="152" width="8" height="8" rx="1"/><rect x="418" y="152" width="8" height="8" rx="1"/><rect x="431" y="152" width="8" height="8" rx="1"/><rect x="444" y="152" width="8" height="8" rx="1"/>
+<circle class="pulse" style="animation-delay:0.00s" cx="311" cy="128" r="5"/><circle class="pulse" style="animation-delay:0.18s" cx="329" cy="111" r="5"/><circle class="pulse" style="animation-delay:0.36s" cx="352" cy="142" r="5"/><circle class="pulse" style="animation-delay:0.54s" cx="329" cy="162" r="5"/><circle class="pulse" style="animation-delay:0.72s" cx="503" cy="172" r="5"/><circle class="pulse" style="animation-delay:0.90s" cx="521" cy="154" r="5"/><circle class="pulse" style="animation-delay:1.08s" cx="543" cy="165" r="5"/>
+<rect class="shimmer" style="animation-delay:0.00s" x="405" y="113" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.10s" x="418" y="113" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.20s" x="431" y="113" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.30s" x="444" y="113" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.40s" x="405" y="126" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.50s" x="418" y="126" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.60s" x="431" y="126" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.70s" x="444" y="126" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.80s" x="405" y="139" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.90s" x="418" y="139" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.00s" x="431" y="139" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.10s" x="444" y="139" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.20s" x="405" y="152" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.30s" x="418" y="152" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.40s" x="431" y="152" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.50s" x="444" y="152" width="8" height="8" rx="1"/>
 </g>
 <text x="333" y="237" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0">OBSERVE</text>
 <text x="429" y="237" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="0">REPRESENT</text>

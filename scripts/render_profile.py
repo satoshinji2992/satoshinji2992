@@ -225,11 +225,38 @@ def svg_frame(width: int, height: int, title: str) -> list[str]:
         '<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".72" '
         'numOctaves="3" seed="11"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 '
         '0 0 1 0 0 0 0 0 .055 0"/><feBlend in="SourceGraphic" mode="screen"/></filter>',
+        '<linearGradient id="scan" x1="0" y1="0" x2="1" y2="0">'
+        '<stop stop-color="#cf9caf" stop-opacity="0"/><stop offset=".5" '
+        'stop-color="#cf9caf" stop-opacity=".18"/><stop offset="1" '
+        'stop-color="#cf9caf" stop-opacity="0"/></linearGradient>',
+        '<style>',
+        '@keyframes pulse{0%,100%{opacity:.42;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}',
+        '@keyframes flow{to{stroke-dashoffset:-42}}',
+        '@keyframes shimmer{0%,100%{opacity:.3}50%{opacity:1}}',
+        '@keyframes radar{0%{opacity:.8;transform:scale(.72)}75%,100%{opacity:0;transform:scale(1.18)}}',
+        '@keyframes bar{0%,100%{transform:scaleX(.45);opacity:.5}50%{transform:scaleX(1);opacity:1}}',
+        '@keyframes scanline{0%{transform:translateX(-35%)}100%{transform:translateX(135%)}}',
+        '@keyframes orbit{to{transform:rotate(360deg)}}',
+        '@keyframes float{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}',
+        '@keyframes signal{0%,100%{opacity:.28}45%,55%{opacity:1}}',
+        '.pulse{animation:pulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}',
+        '.flow{stroke-dasharray:7 10;animation:flow 2.2s linear infinite}',
+        '.shimmer{animation:shimmer 2.8s ease-in-out infinite}',
+        '.radar{animation:radar 3.2s ease-out infinite;transform-box:fill-box;transform-origin:center}',
+        '.bar{animation:bar 3s ease-in-out infinite;transform-box:fill-box;transform-origin:left center}',
+        '.scanline{animation:scanline 7s linear infinite}',
+        '.orbit{animation:orbit 18s linear infinite;transform-box:fill-box;transform-origin:center}',
+        '.float{animation:float 4.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}',
+        '.signal{animation:signal 2.6s ease-in-out infinite}',
+        '@media(prefers-reduced-motion:reduce){.pulse,.flow,.shimmer,.radar,.bar,.scanline,.orbit,.float,.signal{animation:none!important}}',
+        '</style>',
         '</defs>',
         f'<rect width="{width}" height="{height}" rx="18" fill="url(#bg)"/>',
         f'<rect x="1" y="1" width="{width-2}" height="{height-2}" rx="17" '
         'fill="none" stroke="#303744" stroke-width="2"/>',
         f'<rect width="{width}" height="{height}" rx="18" fill="transparent" filter="url(#grain)"/>',
+        f'<rect class="scanline" x="0" y="0" width="{max(90, width//7)}" height="{height}" '
+        'fill="url(#scan)" opacity=".55"/>',
     ]
 
 
@@ -246,17 +273,17 @@ def render_deep_learning_card(item: dict[str, Any]) -> str:
                  "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.7),
         svg_text(48, 327, "implementation-first · runnable exercises · tests", 14, "#89919f"),
         '<circle cx="870" cy="178" r="145" fill="url(#glow)"/>',
-        '<g stroke="#8f6d7c" fill="none" opacity=".58">',
+        '<g class="flow" stroke="#8f6d7c" fill="none" opacity=".58">',
         '<circle cx="946" cy="174" r="42"/><circle cx="946" cy="174" r="70"/>'
         '<circle cx="946" cy="174" r="98"/>',
         '<path d="M620 92L700 128 775 82 850 142 946 76 1088 104M620 258L706 218 '
         '790 268 858 214 946 274 1090 238M700 128L706 218M775 82L790 268M850 142L858 214"/>',
         '</g>',
         '<g fill="#cf9caf">',
-        ''.join(f'<circle cx="{x}" cy="{y}" r="7"/>' for x, y in [
+        ''.join(f'<circle class="pulse" style="animation-delay:{i*.13:.2f}s" cx="{x}" cy="{y}" r="7"/>' for i, (x, y) in enumerate([
             (620,92),(700,128),(775,82),(850,142),(946,76),(1088,104),
-            (620,258),(706,218),(790,268),(858,214),(946,274),(1090,238)]),
-        ''.join(f'<rect x="{720 + c*18}" y="{145 + r*18}" width="12" height="12" rx="2"/>'
+            (620,258),(706,218),(790,268),(858,214),(946,274),(1090,238)])),
+        ''.join(f'<rect class="shimmer" style="animation-delay:{(r*5+c)*.08:.2f}s" x="{720 + c*18}" y="{145 + r*18}" width="12" height="12" rx="2"/>'
                 for r in range(4) for c in range(5)),
         '</g>',
         svg_text(600, 326, "NUMPY", 13, "#89919f", 500,
@@ -287,12 +314,12 @@ def render_lerobot_card(item: dict[str, Any]) -> str:
         '<rect x="294" y="82" width="78" height="132" rx="8"/>'
         '<rect x="390" y="82" width="78" height="132" rx="8"/>'
         '<rect x="486" y="82" width="78" height="132" rx="8"/>',
-        '<path d="M372 148H390M468 148H486"/>',
+        '<path class="flow" d="M372 148H390M468 148H486"/>',
         '<path d="M311 128L329 111 352 142 329 162 311 128M503 172L521 154 543 165"/>',
         '</g>',
         '<g fill="#cf9caf">',
-        ''.join(f'<circle cx="{x}" cy="{y}" r="5"/>' for x,y in [(311,128),(329,111),(352,142),(329,162),(503,172),(521,154),(543,165)]),
-        ''.join(f'<rect x="{405+c*13}" y="{113+r*13}" width="8" height="8" rx="1"/>' for r in range(4) for c in range(4)),
+        ''.join(f'<circle class="pulse" style="animation-delay:{i*.18:.2f}s" cx="{x}" cy="{y}" r="5"/>' for i,(x,y) in enumerate([(311,128),(329,111),(352,142),(329,162),(503,172),(521,154),(543,165)])),
+        ''.join(f'<rect class="shimmer" style="animation-delay:{(r*4+c)*.1:.2f}s" x="{405+c*13}" y="{113+r*13}" width="8" height="8" rx="1"/>' for r in range(4) for c in range(4)),
         '</g>',
         svg_text(333, 237, "OBSERVE", 10, "#89919f", 500,
                  "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
@@ -319,17 +346,17 @@ def render_seiyuu_card(item: dict[str, Any]) -> str:
         svg_text(34, 267, f'★ {item.get("stars", 0)} · {compact_date(item.get("pushed_at"))}',
                  11, "#89919f", 500, "ui-monospace,SFMono-Regular,Consolas,monospace"),
         '<g fill="none" stroke="#8f6d7c">',
-        '<circle cx="350" cy="143" r="34"/><circle cx="350" cy="143" r="57"/>'
-        '<circle cx="350" cy="143" r="80"/>',
+        '<circle cx="350" cy="143" r="34"/><circle class="radar" cx="350" cy="143" r="57"/>'
+        '<circle class="radar" style="animation-delay:1.6s" cx="350" cy="143" r="80"/>',
         '<path d="M325 120L367 105 381 151 346 174 318 151Z"/>',
         '</g>',
         '<g fill="#cf9caf">',
-        ''.join(f'<circle cx="{x}" cy="{y}" r="5"/>' for x,y in [(325,120),(367,105),(381,151),(346,174),(318,151)]),
+        ''.join(f'<circle class="pulse" style="animation-delay:{i*.22:.2f}s" cx="{x}" cy="{y}" r="5"/>' for i,(x,y) in enumerate([(325,120),(367,105),(381,151),(346,174),(318,151)])),
         '</g>',
         '<g fill="#1a202b" stroke="#394252">',
         ''.join(f'<rect x="440" y="{72+i*37}" width="118" height="25" rx="5"/>' for i in range(5)),
         '</g><g fill="#cf9caf">',
-        ''.join(f'<rect x="455" y="{80+i*37}" width="{75-i*8}" height="9" rx="4"/>' for i in range(5)),
+        ''.join(f'<rect class="bar" style="animation-delay:{i*.24:.2f}s" x="455" y="{80+i*37}" width="{75-i*8}" height="9" rx="4"/>' for i in range(5)),
         '</g>',
         svg_text(350, 258, "FACE EMBEDDING", 10, "#89919f", 500,
                  "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
@@ -350,7 +377,7 @@ def render_profile_svg(config: dict[str, Any], data: dict[str, Any]) -> str:
         svg_text(34, 92, "LAB STATUS", 12, "#cf9caf", 700,
                  "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=1.3),
         svg_text(34, 132, config["mode"], 27, "#edf0f5", 700),
-        '<circle cx="340" cy="124" r="6" fill="#78d6c6"/>',
+        '<circle class="pulse" cx="340" cy="124" r="6" fill="#78d6c6"/>',
         svg_text(34, 165, config["now"], 13, "#89919f"),
         svg_text(34, 205, "FOCUS", 11, "#89919f", 700,
                  "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=1),
@@ -379,7 +406,7 @@ def render_profile_svg(config: dict[str, Any], data: dict[str, Any]) -> str:
                           "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=1.3))
     for item, y in zip(data["activity"][:4], [126, 181, 236, 291]):
         lines += [
-            f'<circle cx="838" cy="{y-6}" r="4" fill="#cf9caf"/>',
+            f'<circle class="pulse" style="animation-delay:{(y-126)*.012:.2f}s" cx="838" cy="{y-6}" r="4" fill="#cf9caf"/>',
             svg_text(855, y, compact_date(item.get("created_at")), 11, "#89919f", 500,
                      "ui-monospace,SFMono-Regular,Consolas,monospace"),
             svg_text(958, y, truncate(item.get("repo", ""), 24), 13, "#edf0f5", 650),
@@ -391,6 +418,95 @@ def render_profile_svg(config: dict[str, Any], data: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def render_research_map() -> str:
+    lines = svg_frame(1200, 330, "Animated research interests map")
+    nodes = [
+        (440, 56, "01", "EMBODIED INTELLIGENCE", 0.0),
+        (930, 56, "02", "VISION-LANGUAGE-ACTION", .55),
+        (440, 216, "03", "ROBOT LEARNING", 1.1),
+        (930, 216, "04", "MULTIMODAL AGENTS", 1.65),
+    ]
+    lines += [
+        '<path d="M386 34V296M40 72H346" stroke="#303744"/>',
+        svg_text(40, 54, "RESEARCH VECTOR // 04", 13, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=1.3),
+        svg_text(40, 132, "Perceive.", 37, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(40, 175, "Reason. Act.", 37, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(40, 222, "Systems that connect visual understanding,", 13, "#89919f"),
+        svg_text(40, 244, "language-conditioned goals, and control.", 13, "#89919f"),
+        svg_text(40, 290, "MEMORY  →  PLANNING  →  SKILLS", 11, "#a8afbb", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace"),
+        '<g class="flow" fill="none" stroke="#8f6d7c" opacity=".65">',
+        '<path d="M650 86L790 165L930 86M650 246L790 165L930 246"/>',
+        '</g>',
+        '<circle cx="790" cy="165" r="112" fill="url(#glow)"/>',
+        '<g class="orbit" fill="none" stroke="#8f6d7c" opacity=".7">',
+        '<ellipse cx="790" cy="165" rx="92" ry="46"/>'
+        '<ellipse cx="790" cy="165" rx="46" ry="92" transform="rotate(34 790 165)"/>',
+        '<circle cx="882" cy="165" r="7" fill="#cf9caf" stroke="none"/>'
+        '<circle cx="757" cy="81" r="6" fill="#78d6c6" stroke="none"/>',
+        '</g>',
+        '<circle class="radar" cx="790" cy="165" r="45" fill="none" stroke="#cf9caf"/>',
+        '<circle cx="790" cy="165" r="31" fill="#171d27" stroke="#cf9caf"/>',
+        svg_text(790, 160, "AGENT", 12, "#f3eef1", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle", spacing=1),
+        svg_text(790, 180, "CORE", 10, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+    ]
+    for x, y, number, label, delay in nodes:
+        lines += [
+            f'<g class="float" style="animation-delay:{delay}s">',
+            f'<rect x="{x}" y="{y}" width="220" height="60" rx="10" fill="#151b25" stroke="#3a4351"/>',
+            f'<rect class="signal" style="animation-delay:{delay}s" x="{x}" y="{y}" width="5" height="60" rx="2" fill="#cf9caf"/>',
+            svg_text(x+20, y+27, number, 11, "#cf9caf", 700,
+                     "ui-monospace,SFMono-Regular,Consolas,monospace"),
+            svg_text(x+20, y+47, label, 11, "#edf0f5", 650,
+                     "ui-monospace,SFMono-Regular,Consolas,monospace"),
+            '</g>',
+        ]
+    lines.append('</svg>')
+    return "\n".join(lines) + "\n"
+
+
+def render_toolchain() -> str:
+    lines = svg_frame(1200, 235, "Animated tools and systems stack")
+    columns = [
+        (375, "01 / LEARNING", ["PyTorch", "NumPy", "Transformers"]),
+        (655, "02 / EMBODIED", ["LeRobot", "Isaac Lab", "ROS"]),
+        (935, "03 / SYSTEMS", ["Python", "C++", "Linux"]),
+    ]
+    lines += [
+        '<path d="M330 28V207M40 67H292" stroke="#303744"/>',
+        svg_text(40, 49, "WORKING STACK", 13, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=1.3),
+        svg_text(40, 120, "Build it.", 35, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(40, 160, "Trace it.", 35, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(40, 201, "TEST  →  PROFILE  →  SHIP", 11, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace"),
+        '<path class="flow" d="M385 181H1128" stroke="#8f6d7c" fill="none"/>',
+    ]
+    for column_index, (x, heading, tools) in enumerate(columns):
+        lines += [
+            svg_text(x, 48, heading, 12, "#cf9caf", 700,
+                     "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=1),
+            f'<rect x="{x}" y="66" width="235" height="93" rx="11" fill="#151b25" stroke="#3a4351"/>',
+        ]
+        for tool_index, tool in enumerate(tools):
+            y = 91 + tool_index * 27
+            delay = column_index * .5 + tool_index * .18
+            lines += [
+                f'<circle class="pulse" style="animation-delay:{delay:.2f}s" cx="{x+19}" cy="{y-4}" r="4" fill="#cf9caf"/>',
+                svg_text(x+34, y, tool, 14, "#edf0f5", 600),
+                f'<rect class="shimmer" style="animation-delay:{delay:.2f}s" x="{x+150}" y="{y-11}" '
+                f'width="{54 + tool_index*9}" height="7" rx="3" fill="#8f6d7c"/>',
+            ]
+        lines += [
+            f'<circle class="pulse" style="animation-delay:{column_index*.5:.2f}s" cx="{x+8}" cy="181" r="6" fill="#78d6c6"/>',
+        ]
+    lines.append('</svg>')
+    return "\n".join(lines) + "\n"
+
+
 def write_svg_assets(config: dict[str, Any], data: dict[str, Any]) -> None:
     ASSETS_PATH.mkdir(parents=True, exist_ok=True)
     outputs = {
@@ -398,6 +514,8 @@ def write_svg_assets(config: dict[str, Any], data: dict[str, Any]) -> None:
         "project-lerobot.svg": render_lerobot_card(data["projects"][1]),
         "project-seiyuumatch.svg": render_seiyuu_card(data["projects"][2]),
         "profile-metrics.svg": render_profile_svg(config, data),
+        "research-map.svg": render_research_map(),
+        "toolchain.svg": render_toolchain(),
     }
     for filename, content in outputs.items():
         (ASSETS_PATH / filename).write_text(content, encoding="utf-8")

@@ -5,10 +5,33 @@
 </linearGradient>
 <radialGradient id="glow"><stop stop-color="#c89bad" stop-opacity=".14"/><stop offset="1" stop-color="#c89bad" stop-opacity="0"/></radialGradient>
 <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="11"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .055 0"/><feBlend in="SourceGraphic" mode="screen"/></filter>
+<linearGradient id="scan" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#cf9caf" stop-opacity="0"/><stop offset=".5" stop-color="#cf9caf" stop-opacity=".18"/><stop offset="1" stop-color="#cf9caf" stop-opacity="0"/></linearGradient>
+<style>
+@keyframes pulse{0%,100%{opacity:.42;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}
+@keyframes flow{to{stroke-dashoffset:-42}}
+@keyframes shimmer{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes radar{0%{opacity:.8;transform:scale(.72)}75%,100%{opacity:0;transform:scale(1.18)}}
+@keyframes bar{0%,100%{transform:scaleX(.45);opacity:.5}50%{transform:scaleX(1);opacity:1}}
+@keyframes scanline{0%{transform:translateX(-35%)}100%{transform:translateX(135%)}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
+@keyframes signal{0%,100%{opacity:.28}45%,55%{opacity:1}}
+.pulse{animation:pulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.flow{stroke-dasharray:7 10;animation:flow 2.2s linear infinite}
+.shimmer{animation:shimmer 2.8s ease-in-out infinite}
+.radar{animation:radar 3.2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.bar{animation:bar 3s ease-in-out infinite;transform-box:fill-box;transform-origin:left center}
+.scanline{animation:scanline 7s linear infinite}
+.orbit{animation:orbit 18s linear infinite;transform-box:fill-box;transform-origin:center}
+.float{animation:float 4.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.signal{animation:signal 2.6s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.pulse,.flow,.shimmer,.radar,.bar,.scanline,.orbit,.float,.signal{animation:none!important}}
+</style>
 </defs>
 <rect width="1200" height="360" rx="18" fill="url(#bg)"/>
 <rect x="1" y="1" width="1198" height="358" rx="17" fill="none" stroke="#303744" stroke-width="2"/>
 <rect width="1200" height="360" rx="18" fill="transparent" filter="url(#grain)"/>
+<rect class="scanline" x="0" y="0" width="171" height="360" fill="url(#scan)" opacity=".55"/>
 <rect x="0" y="0" width="13" height="360" rx="6" fill="#cf9caf"/>
 <path d="M48 62H520M48 296H520M560 34V326" stroke="#303744"/>
 <text x="48" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" font-weight="700" text-anchor="start" letter-spacing="1.5">01 / TUTORIAL</text>
@@ -17,13 +40,13 @@
 <text x="50" y="232" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="15" font-weight="500" text-anchor="start" letter-spacing="0.7">GRADIENTS   →   RESNET   →   TRANSFORMER</text>
 <text x="48" y="327" fill="#89919f" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0">implementation-first · runnable exercises · tests</text>
 <circle cx="870" cy="178" r="145" fill="url(#glow)"/>
-<g stroke="#8f6d7c" fill="none" opacity=".58">
+<g class="flow" stroke="#8f6d7c" fill="none" opacity=".58">
 <circle cx="946" cy="174" r="42"/><circle cx="946" cy="174" r="70"/><circle cx="946" cy="174" r="98"/>
 <path d="M620 92L700 128 775 82 850 142 946 76 1088 104M620 258L706 218 790 268 858 214 946 274 1090 238M700 128L706 218M775 82L790 268M850 142L858 214"/>
 </g>
 <g fill="#cf9caf">
-<circle cx="620" cy="92" r="7"/><circle cx="700" cy="128" r="7"/><circle cx="775" cy="82" r="7"/><circle cx="850" cy="142" r="7"/><circle cx="946" cy="76" r="7"/><circle cx="1088" cy="104" r="7"/><circle cx="620" cy="258" r="7"/><circle cx="706" cy="218" r="7"/><circle cx="790" cy="268" r="7"/><circle cx="858" cy="214" r="7"/><circle cx="946" cy="274" r="7"/><circle cx="1090" cy="238" r="7"/>
-<rect x="720" y="145" width="12" height="12" rx="2"/><rect x="738" y="145" width="12" height="12" rx="2"/><rect x="756" y="145" width="12" height="12" rx="2"/><rect x="774" y="145" width="12" height="12" rx="2"/><rect x="792" y="145" width="12" height="12" rx="2"/><rect x="720" y="163" width="12" height="12" rx="2"/><rect x="738" y="163" width="12" height="12" rx="2"/><rect x="756" y="163" width="12" height="12" rx="2"/><rect x="774" y="163" width="12" height="12" rx="2"/><rect x="792" y="163" width="12" height="12" rx="2"/><rect x="720" y="181" width="12" height="12" rx="2"/><rect x="738" y="181" width="12" height="12" rx="2"/><rect x="756" y="181" width="12" height="12" rx="2"/><rect x="774" y="181" width="12" height="12" rx="2"/><rect x="792" y="181" width="12" height="12" rx="2"/><rect x="720" y="199" width="12" height="12" rx="2"/><rect x="738" y="199" width="12" height="12" rx="2"/><rect x="756" y="199" width="12" height="12" rx="2"/><rect x="774" y="199" width="12" height="12" rx="2"/><rect x="792" y="199" width="12" height="12" rx="2"/>
+<circle class="pulse" style="animation-delay:0.00s" cx="620" cy="92" r="7"/><circle class="pulse" style="animation-delay:0.13s" cx="700" cy="128" r="7"/><circle class="pulse" style="animation-delay:0.26s" cx="775" cy="82" r="7"/><circle class="pulse" style="animation-delay:0.39s" cx="850" cy="142" r="7"/><circle class="pulse" style="animation-delay:0.52s" cx="946" cy="76" r="7"/><circle class="pulse" style="animation-delay:0.65s" cx="1088" cy="104" r="7"/><circle class="pulse" style="animation-delay:0.78s" cx="620" cy="258" r="7"/><circle class="pulse" style="animation-delay:0.91s" cx="706" cy="218" r="7"/><circle class="pulse" style="animation-delay:1.04s" cx="790" cy="268" r="7"/><circle class="pulse" style="animation-delay:1.17s" cx="858" cy="214" r="7"/><circle class="pulse" style="animation-delay:1.30s" cx="946" cy="274" r="7"/><circle class="pulse" style="animation-delay:1.43s" cx="1090" cy="238" r="7"/>
+<rect class="shimmer" style="animation-delay:0.00s" x="720" y="145" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.08s" x="738" y="145" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.16s" x="756" y="145" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.24s" x="774" y="145" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.32s" x="792" y="145" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.40s" x="720" y="163" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.48s" x="738" y="163" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.56s" x="756" y="163" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.64s" x="774" y="163" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.72s" x="792" y="163" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.80s" x="720" y="181" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.88s" x="738" y="181" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:0.96s" x="756" y="181" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:1.04s" x="774" y="181" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:1.12s" x="792" y="181" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:1.20s" x="720" y="199" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:1.28s" x="738" y="199" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:1.36s" x="756" y="199" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:1.44s" x="774" y="199" width="12" height="12" rx="2"/><rect class="shimmer" style="animation-delay:1.52s" x="792" y="199" width="12" height="12" rx="2"/>
 </g>
 <text x="600" y="326" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="500" text-anchor="start" letter-spacing="0">NUMPY</text>
 <text x="790" y="326" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="500" text-anchor="start" letter-spacing="0">★ 26</text>
