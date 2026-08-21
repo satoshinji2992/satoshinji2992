@@ -811,9 +811,14 @@ def render_toolchain() -> str:
     return "\n".join(lines) + "\n"
 
 
-def render_link_button(label: str, width: int = 590) -> str:
+def render_link_button(
+    label: str, width: int = 590, height: int = 38, font_size: int = 15
+) -> str:
     """Render a card-width action control that remains clickable when wrapped in an anchor."""
-    height = 38
+    center = height / 2
+    icon_y = center - 4.5
+    text_y = center + font_size * 0.36
+    arrow_top = center - 6
     lines = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}" role="img" aria-label="{safe_text(label)}">',
@@ -821,10 +826,10 @@ def render_link_button(label: str, width: int = 590) -> str:
         '<stop offset="0" stop-color="#171d27"/><stop offset="1" stop-color="#202733"/>'
         '</linearGradient></defs>',
         f'<rect x="1" y="1" width="{width-2}" height="{height-2}" rx="9" fill="url(#linkbg)" stroke="#3a4351" stroke-width="2"/>',
-        '<rect x="14" y="14" width="9" height="9" rx="2" fill="#cf9caf"/>',
-        f'<text x="34" y="25" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" '
-        f'font-size="15" font-weight="700" letter-spacing=".2">{safe_text(label)}</text>',
-        f'<path d="M{width-30} 13l6 6-6 6" fill="none" stroke="#cf9caf" stroke-width="2" '
+        f'<rect x="14" y="{icon_y:.1f}" width="9" height="9" rx="2" fill="#cf9caf"/>',
+        f'<text x="34" y="{text_y:.1f}" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" '
+        f'font-size="{font_size}" font-weight="700" letter-spacing=".2">{safe_text(label)}</text>',
+        f'<path d="M{width-30} {arrow_top:.1f}l6 6-6 6" fill="none" stroke="#cf9caf" stroke-width="2" '
         'stroke-linecap="round" stroke-linejoin="round"/>',
         '</svg>',
     ]
@@ -873,10 +878,10 @@ def write_svg_assets(config: dict[str, Any], data: dict[str, Any]) -> None:
         "button-fpga.svg": render_link_button("Open fpga_cpu →"),
         "button-deep-repo.svg": render_link_button("Open repository →", 286),
         "button-deep-tutorial.svg": render_link_button("Interactive tutorial ↗", 286),
-        "button-seiyuu-site.svg": render_link_button("Visit website ↗", 286),
-        "button-seiyuu-source.svg": render_link_button("Open source →", 286),
-        "button-lerobot-repo.svg": render_link_button("Open repository →", 286),
-        "button-lerobot-pr.svg": render_link_button("Merged PR #2792 ↗", 286),
+        "button-seiyuu-site.svg": render_link_button("Visit website ↗", 286, 76, 22),
+        "button-seiyuu-source.svg": render_link_button("Open source →", 286, 76, 22),
+        "button-lerobot-repo.svg": render_link_button("Open repository →", 286, 76, 22),
+        "button-lerobot-pr.svg": render_link_button("Merged PR #2792 ↗", 286, 76, 22),
         "nav-research.svg": render_nav_item("01", "Research interests"),
         "nav-selected.svg": render_nav_item("02", "Selected work"),
         "nav-live.svg": render_nav_item("03", "Live activity"),

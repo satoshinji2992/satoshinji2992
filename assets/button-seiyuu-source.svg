@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="286" height="38" viewBox="0 0 286 38" role="img" aria-label="Open source →">
+<svg xmlns="http://www.w3.org/2000/svg" width="286" height="76" viewBox="0 0 286 76" role="img" aria-label="Open source →">
 <defs><linearGradient id="linkbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#171d27"/><stop offset="1" stop-color="#202733"/></linearGradient></defs>
-<rect x="1" y="1" width="284" height="36" rx="9" fill="url(#linkbg)" stroke="#3a4351" stroke-width="2"/>
-<rect x="14" y="14" width="9" height="9" rx="2" fill="#cf9caf"/>
-<text x="34" y="25" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="700" letter-spacing=".2">Open source →</text>
-<path d="M256 13l6 6-6 6" fill="none" stroke="#cf9caf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="1" y="1" width="284" height="74" rx="9" fill="url(#linkbg)" stroke="#3a4351" stroke-width="2"/>
+<rect x="14" y="33.5" width="9" height="9" rx="2" fill="#cf9caf"/>
+<text x="34" y="45.9" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="22" font-weight="700" letter-spacing=".2">Open source →</text>
+<path d="M256 32.0l6 6-6 6" fill="none" stroke="#cf9caf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

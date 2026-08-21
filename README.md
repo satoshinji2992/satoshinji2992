@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-  <a href="#currently-exploring"><img src="./assets/nav-research.svg" width="32%" alt="Research interests"></a>
-  <a href="#selected-work--07"><img src="./assets/nav-selected.svg" width="32%" alt="Selected work"></a>
-  <a href="#live-profile"><img src="./assets/nav-live.svg" width="32%" alt="Live activity"></a>
+  <a href="#currently-exploring"><img src="./assets/nav-research.svg?v=layout-3" width="32%" alt="Research interests"></a>
+  <a href="#selected-work--07"><img src="./assets/nav-selected.svg?v=layout-3" width="32%" alt="Selected work"></a>
+  <a href="#live-profile"><img src="./assets/nav-live.svg?v=layout-3" width="32%" alt="Live activity"></a>
 </p>
 
 ## CURRENTLY EXPLORING
