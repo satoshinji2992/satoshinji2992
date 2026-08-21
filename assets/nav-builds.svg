@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="280" height="52" viewBox="0 0 280 52" role="img" aria-label="Research builds">
-<style>.nav-label{fill:#edf0f5;stroke:#0b0e14;stroke-width:2;paint-order:stroke fill;stroke-linejoin:round}.nav-index{stroke:#0b0e14;stroke-width:1.5;paint-order:stroke fill}.nav-rule{stroke:#737d8c}</style>
-<rect x="0" y="11" width="3" height="30" rx="1.5" fill="#cf9caf"/>
-<path class="nav-rule" d="M0 50H280" stroke-width="1.5"/>
-<text class="nav-index" x="14" y="18" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" letter-spacing="1.1">02</text>
-<text class="nav-label" x="14" y="40" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="700" letter-spacing=".45">RESEARCH BUILDS</text>
-</svg>

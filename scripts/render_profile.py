@@ -878,9 +878,8 @@ def write_svg_assets(config: dict[str, Any], data: dict[str, Any]) -> None:
         "button-lerobot-repo.svg": render_link_button("Open repository →", 286),
         "button-lerobot-pr.svg": render_link_button("Merged PR #2792 ↗", 286),
         "nav-selected.svg": render_nav_item("01", "Selected work"),
-        "nav-builds.svg": render_nav_item("02", "Research builds"),
-        "nav-research.svg": render_nav_item("03", "Research interests"),
-        "nav-live.svg": render_nav_item("04", "Live activity"),
+        "nav-research.svg": render_nav_item("02", "Research interests"),
+        "nav-live.svg": render_nav_item("03", "Live activity"),
     }
     for filename, content in outputs.items():
         (ASSETS_PATH / filename).write_text(content, encoding="utf-8")

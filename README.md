@@ -3,13 +3,12 @@
 </p>
 
 <p align="center">
-  <a href="#selected-work--03"><img src="./assets/nav-selected.svg" width="24%" alt="Selected work"></a>
-  <a href="#research-builds--04"><img src="./assets/nav-builds.svg" width="24%" alt="Research builds"></a>
-  <a href="#currently-exploring"><img src="./assets/nav-research.svg" width="24%" alt="Research interests"></a>
-  <a href="#live-profile"><img src="./assets/nav-live.svg" width="24%" alt="Live activity"></a>
+  <a href="#selected-work--07"><img src="./assets/nav-selected.svg" width="32%" alt="Selected work"></a>
+  <a href="#currently-exploring"><img src="./assets/nav-research.svg" width="32%" alt="Research interests"></a>
+  <a href="#live-profile"><img src="./assets/nav-live.svg" width="32%" alt="Live activity"></a>
 </p>
 
-## SELECTED WORK // 03
+## SELECTED WORK // 07
 
 <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning">
   <img src="./assets/project-deep-learning.svg?v=layout-2" width="100%" alt="Deep Learning from Scratch">
@@ -37,11 +36,6 @@
       <a href="https://github.com/huggingface/lerobot/pull/2792"><img src="./assets/button-lerobot-pr.svg" width="49%" alt="Open merged LeRobot pull request 2792"></a>
     </td>
   </tr>
-</table>
-
-## RESEARCH BUILDS // 04
-
-<table width="100%">
   <tr>
     <td width="50%" valign="top">
       <a href="https://github.com/satoshinji2992/agentskill-LSRH">
