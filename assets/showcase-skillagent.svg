@@ -30,7 +30,7 @@
 <rect width="590" height="300" rx="18" fill="transparent" filter="url(#grain)"/>
 <rect width="10" height="300" rx="5" fill="#cf9caf"/>
 <path d="M34 54H260M272 26V274" stroke="#303744"/>
-<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="0.75">04 / RESEARCH PAPER</text>
+<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="0.75">RESEARCH PAPER</text>
 <text x="34" y="112" fill="#f3eef1" font-family="Georgia,serif" font-size="37" font-weight="700" text-anchor="start" letter-spacing="0">SkillAgent</text>
 <text x="34" y="151" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="26" font-weight="700" text-anchor="start" letter-spacing="2">LSRH</text>
 <text x="34" y="186" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0.3">MULTIMODAL · HYPERGRAPH</text>

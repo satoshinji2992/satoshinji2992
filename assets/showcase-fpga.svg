@@ -30,42 +30,42 @@
 <rect width="590" height="300" rx="18" fill="transparent" filter="url(#grain)"/>
 <rect width="10" height="300" rx="5" fill="#cf9caf"/>
 <path d="M34 54H260M272 26V274" stroke="#303744"/>
-<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="0.75">07 / DIGITAL SYSTEMS</text>
+<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="0.75">DIGITAL SYSTEMS</text>
 <text x="34" y="112" fill="#f3eef1" font-family="Georgia,serif" font-size="39" font-weight="700" text-anchor="start" letter-spacing="0">FPGA</text>
 <text x="34" y="151" fill="#f3eef1" font-family="Georgia,serif" font-size="39" font-weight="700" text-anchor="start" letter-spacing="0">CPU</text>
-<text x="34" y="186" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0.25">RV32I · PIPELINE · CACHE</text>
+<text x="34" y="186" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0.25">RV32I · FIVE-STAGE PIPELINE</text>
 <text x="34" y="220" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0">SystemVerilog / BRAM / UART</text>
-<text x="34" y="243" fill="#89919f" font-family="Inter,Segoe UI,sans-serif" font-size="11" font-weight="400" text-anchor="start" letter-spacing="0">single-cycle → five-stage</text>
+<text x="34" y="243" fill="#89919f" font-family="Inter,Segoe UI,sans-serif" font-size="11" font-weight="400" text-anchor="start" letter-spacing="0">instruction + data paths</text>
 <text x="34" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="start" letter-spacing="0">★ 0 · 12 Jul 2026</text>
-<g fill="#151b25" stroke="#3a4351">
-<rect x="294" y="54" width="94" height="22" rx="6"/><rect x="402" y="54" width="147" height="22" rx="6"/>
-</g>
-<text x="306" y="69" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="700" text-anchor="start" letter-spacing="0">RV32I CORE</text>
-<text x="539" y="69" fill="#78d6c6" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="700" text-anchor="end" letter-spacing="0">INSTRUCTION BUS  /  32-BIT</text>
-<g class="flow" fill="none" stroke="#8f6d7c">
-<path d="M300 108H560M300 207H560"/>
-<path d="M300 114V201M560 114V201" stroke-dasharray="3 5"/>
-</g>
-<g fill="#151b25" stroke="#3a4351">
-<rect x="294" y="126" width="45" height="40" rx="7"/><rect x="349" y="84" width="45" height="40" rx="7"/><rect x="404" y="126" width="45" height="40" rx="7"/><rect x="459" y="84" width="45" height="40" rx="7"/><rect x="514" y="126" width="45" height="40" rx="7"/>
-<rect x="305" y="225" width="68" height="33" rx="7"/><rect x="393" y="225" width="68" height="33" rx="7"/><rect x="481" y="225" width="68" height="33" rx="7"/>
+<rect x="289" y="47" width="271" height="219" rx="11" fill="#080b10" stroke="#465061" stroke-width="2"/>
+<path d="M299 84H550" stroke="#303744"/>
+<text x="302" y="73" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="start" letter-spacing="0">RV32I CORE / RTL</text>
+<text x="548" y="73" fill="#78d6c6" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="end" letter-spacing="0">50 MHZ</text>
+<rect x="299" y="96" width="251" height="109" rx="8" fill="#151b25" stroke="#3a4351"/>
+<path class="flow" d="M307 118H542M307 190H542" stroke="#596273" fill="none"/>
+<g fill="#202936" stroke="#596273">
+<rect x="306" y="137" width="41" height="40" rx="5"/><rect x="354" y="137" width="41" height="40" rx="5"/><rect x="402" y="137" width="41" height="40" rx="5"/><rect x="450" y="137" width="41" height="40" rx="5"/><rect x="498" y="137" width="41" height="40" rx="5"/>
 </g>
 <g class="shimmer" fill="#cf9caf">
-<rect style="animation-delay:0.00s" x="301" y="142" width="31" height="7" rx="3"/><rect style="animation-delay:0.18s" x="356" y="100" width="31" height="7" rx="3"/><rect style="animation-delay:0.36s" x="411" y="142" width="31" height="7" rx="3"/><rect style="animation-delay:0.54s" x="466" y="100" width="31" height="7" rx="3"/><rect style="animation-delay:0.72s" x="521" y="142" width="31" height="7" rx="3"/>
+<rect style="animation-delay:0.00s" x="311" y="142" width="31" height="5" rx="2"/><rect style="animation-delay:0.18s" x="359" y="142" width="31" height="5" rx="2"/><rect style="animation-delay:0.36s" x="407" y="142" width="31" height="5" rx="2"/><rect style="animation-delay:0.54s" x="455" y="142" width="31" height="5" rx="2"/><rect style="animation-delay:0.72s" x="503" y="142" width="31" height="5" rx="2"/>
 </g>
-<g class="pulse" fill="#cf9caf">
-<circle style="animation-delay:0.00s" cx="300" cy="115" r="4"/><circle style="animation-delay:0.20s" cx="355" cy="181" r="4"/><circle style="animation-delay:0.40s" cx="410" cy="115" r="4"/><circle style="animation-delay:0.60s" cx="465" cy="181" r="4"/><circle style="animation-delay:0.80s" cx="520" cy="115" r="4"/>
+<g class="flow" stroke="#8f6d7c" stroke-width="1.5">
+<path d="M347 157H354"/><path d="M395 157H402"/><path d="M443 157H450"/><path d="M491 157H498"/>
 </g>
-<g fill="#cf9caf" opacity=".75">
-<path d="M294 91h-8M294 101h-8M294 111h-8M294 121h-8M294 131h-8M294 141h-8M294 151h-8M294 161h-8M294 171h-8M294 181h-8"/>
-<path d="M560 91h8M560 101h8M560 111h8M560 121h8M560 131h8M560 141h8M560 151h8M560 161h8M560 171h8M560 181h8"/>
+<text x="326" y="164" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0">IF</text>
+<text x="374" y="164" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0">ID</text>
+<text x="422" y="164" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0">EX</text>
+<text x="470" y="164" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0">MEM</text>
+<text x="518" y="164" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0">WB</text>
+<g class="pulse" fill="#78d6c6">
+<circle style="animation-delay:0.00s" cx="318" cy="188" r="3"/><circle style="animation-delay:0.20s" cx="366" cy="188" r="3"/><circle style="animation-delay:0.40s" cx="414" cy="188" r="3"/><circle style="animation-delay:0.60s" cx="462" cy="188" r="3"/><circle style="animation-delay:0.80s" cx="510" cy="188" r="3"/>
 </g>
-<text x="316" y="151" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0">IF</text>
-<text x="371" y="109" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0">ID</text>
-<text x="426" y="151" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0">EX</text>
-<text x="481" y="109" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0">MEM</text>
-<text x="536" y="151" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0">WB</text>
-<text x="339" y="246" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0">BRAM</text>
-<text x="427" y="246" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0">I-CACHE</text>
-<text x="515" y="246" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0">UART</text>
+<path d="M326 205V222M422 205V222M518 205V222" stroke="#8f6d7c" class="flow"/>
+<g fill="#151b25" stroke="#3a4351">
+<rect x="299" y="228" width="77" height="27" rx="6"/><rect x="386" y="228" width="77" height="27" rx="6"/><rect x="473" y="228" width="77" height="27" rx="6"/>
+</g>
+<text x="337" y="246" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0">BRAM</text>
+<text x="424" y="246" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0">I-CACHE</text>
+<text x="511" y="246" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0">UART MMIO</text>
+<text x="299" y="274" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="0">32-BIT INSTRUCTION / DATA PATH</text>
 </svg>

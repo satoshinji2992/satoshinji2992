@@ -30,7 +30,7 @@
 <rect width="1200" height="360" rx="18" fill="transparent" filter="url(#grain)"/>
 <rect x="0" y="0" width="13" height="360" rx="6" fill="#cf9caf"/>
 <path d="M48 62H520M48 296H520M560 34V326" stroke="#303744"/>
-<text x="48" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="15" font-weight="700" text-anchor="start" letter-spacing="1.5">01 / TUTORIAL</text>
+<text x="48" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="15" font-weight="700" text-anchor="start" letter-spacing="1.5">TUTORIAL</text>
 <text x="48" y="128" fill="#f3eef1" font-family="Georgia,serif" font-size="59" font-weight="700" text-anchor="start" letter-spacing="0">Deep Learning</text>
 <text x="48" y="190" fill="#f3eef1" font-family="Georgia,serif" font-size="53" font-weight="700" text-anchor="start" letter-spacing="0">FROM SCRATCH</text>
 <text x="50" y="232" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="16" font-weight="500" text-anchor="start" letter-spacing="0.7">GRADIENTS   →   RESNET   →   TRANSFORMER</text>

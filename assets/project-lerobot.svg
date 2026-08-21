@@ -30,21 +30,56 @@
 <rect width="590" height="300" rx="18" fill="transparent" filter="url(#grain)"/>
 <rect width="10" height="300" rx="5" fill="#cf9caf"/>
 <path d="M34 54H260M272 26V274" stroke="#303744"/>
-<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">03 / ROBOT LEARNING</text>
+<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">ROBOT LEARNING</text>
 <text x="34" y="123" fill="#f3eef1" font-family="Georgia,serif" font-size="46" font-weight="700" text-anchor="start" letter-spacing="0">LeRobot</text>
-<text x="34" y="157" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="700" text-anchor="start" letter-spacing="0.5">UPSTREAM CONTRIBUTION</text>
-<text x="34" y="190" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="500" text-anchor="start" letter-spacing="0">OBSERVE  →  REPRESENT  →  ACT</text>
+<text x="34" y="157" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="start" letter-spacing="0.5">VLA / UPSTREAM CONTRIBUTION</text>
+<text x="34" y="190" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="start" letter-spacing="0">CAMERA + LANGUAGE  →  ACTION</text>
+<text x="34" y="224" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="500" text-anchor="start" letter-spacing="0">robot policy · joint control · hardware</text>
 <text x="34" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="500" text-anchor="start" letter-spacing="0">★ 0 · 20 Jan 2026</text>
-<g fill="none" stroke="#596273">
-<rect x="294" y="82" width="78" height="132" rx="8"/><rect x="390" y="82" width="78" height="132" rx="8"/><rect x="486" y="82" width="78" height="132" rx="8"/>
-<path class="flow" d="M372 148H390M468 148H486"/>
-<path d="M311 128L329 111 352 142 329 162 311 128M503 172L521 154 543 165"/>
+<rect x="289" y="47" width="271" height="219" rx="11" fill="#080b10" stroke="#465061" stroke-width="2"/>
+<path d="M299 84H550" stroke="#303744"/>
+<text x="302" y="73" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="start" letter-spacing="0.5">REAL-ROBOT LOOP</text>
+<text x="548" y="73" fill="#78d6c6" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="end" letter-spacing="0">20 HZ</text>
+<g fill="#151b25" stroke="#3a4351">
+<rect x="299" y="95" width="121" height="121" rx="8"/>
+<rect x="430" y="95" width="120" height="121" rx="8"/>
 </g>
-<g fill="#cf9caf">
-<circle class="pulse" style="animation-delay:0.00s" cx="311" cy="128" r="5"/><circle class="pulse" style="animation-delay:0.18s" cx="329" cy="111" r="5"/><circle class="pulse" style="animation-delay:0.36s" cx="352" cy="142" r="5"/><circle class="pulse" style="animation-delay:0.54s" cx="329" cy="162" r="5"/><circle class="pulse" style="animation-delay:0.72s" cx="503" cy="172" r="5"/><circle class="pulse" style="animation-delay:0.90s" cx="521" cy="154" r="5"/><circle class="pulse" style="animation-delay:1.08s" cx="543" cy="165" r="5"/>
-<rect class="shimmer" style="animation-delay:0.00s" x="405" y="113" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.10s" x="418" y="113" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.20s" x="431" y="113" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.30s" x="444" y="113" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.40s" x="405" y="126" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.50s" x="418" y="126" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.60s" x="431" y="126" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.70s" x="444" y="126" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.80s" x="405" y="139" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:0.90s" x="418" y="139" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.00s" x="431" y="139" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.10s" x="444" y="139" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.20s" x="405" y="152" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.30s" x="418" y="152" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.40s" x="431" y="152" width="8" height="8" rx="1"/><rect class="shimmer" style="animation-delay:1.50s" x="444" y="152" width="8" height="8" rx="1"/>
+<path class="flow" d="M420 155H430" stroke="#8f6d7c" fill="none"/>
+<text x="359" y="110" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0">CAMERA + ROBOT ARM</text>
+<rect x="309" y="119" width="33" height="21" rx="4" fill="none" stroke="#596273" stroke-width="2"/>
+<circle cx="325" cy="129" r="7" fill="none" stroke="#78d6c6" stroke-width="2"/>
+<circle cx="325" cy="129" r="3" fill="none" stroke="#78d6c6" stroke-width="1.5"/>
+<g fill="none" stroke="#cf9caf" stroke-width="3">
+<rect x="308" y="197" width="51" height="9" rx="4.5" stroke="#596273"/>
+<rect x="321" y="174" width="16" height="27" rx="8"/>
+<rect x="329" y="173" width="39" height="14" rx="7" transform="rotate(-55 329 180)"/>
+<rect x="351" y="141" width="34" height="14" rx="7" transform="rotate(28 351 148)"/>
+<rect x="381" y="157" width="31" height="14" rx="7" transform="rotate(-54 381 164)"/>
 </g>
-<text x="333" y="237" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="middle" letter-spacing="0">OBSERVE</text>
-<text x="429" y="237" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="middle" letter-spacing="0">REPRESENT</text>
-<text x="525" y="237" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="middle" letter-spacing="0">ACT</text>
+<g fill="#151b25" stroke="#f3eef1" stroke-width="2">
+<circle cx="329" cy="197" r="8"/><circle cx="329" cy="180" r="8"/>
+<circle cx="351" cy="148" r="8"/><circle cx="381" cy="164" r="8"/><circle cx="399" cy="139" r="7"/>
+</g>
+<g fill="none" stroke="#78d6c6" stroke-width="2">
+<circle cx="329" cy="197" r="3"/><circle cx="329" cy="180" r="3"/>
+<circle cx="351" cy="148" r="3"/><circle cx="381" cy="164" r="3"/><circle cx="399" cy="139" r="2.5"/>
+</g>
+<g fill="none" stroke="#78d6c6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<rect x="397" y="134" width="17" height="9" rx="4.5" transform="rotate(-45 399 139)"/>
+<path d="M410 128l8-7 6 1M410 131l9 7 6-2"/>
+</g>
+<text x="359" y="211" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="0">ROBOT MANIPULATOR</text>
+<text x="490" y="110" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="700" text-anchor="middle" letter-spacing="0">VLA CONTROL</text>
+<g fill="#202936" stroke="#596273">
+<rect x="439" y="119" width="45" height="20" rx="4"/><rect x="496" y="119" width="45" height="20" rx="4"/>
+<rect x="458" y="158" width="64" height="31" rx="6"/>
+</g>
+<text x="461" y="133" fill="#78d6c6" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="0">VISION</text>
+<text x="518" y="133" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="0">LANGUAGE</text>
+<text x="490" y="178" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0">VLA POLICY</text>
+<path d="M461 139v11M518 139v11M490 189v8" stroke="#8f6d7c" class="flow"/>
+<text x="490" y="210" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="0">JOINT TARGETS  q₁ … q₆</text>
+<path d="M299 236H550" stroke="#303744"/>
+<text x="302" y="253" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="start" letter-spacing="0">CAMERA / PROPRIOCEPTION</text>
+<text x="541" y="253" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="700" text-anchor="end" letter-spacing="0">ACTION CHUNK</text>
 </svg>

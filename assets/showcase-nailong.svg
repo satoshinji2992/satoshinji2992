@@ -30,38 +30,47 @@
 <rect width="590" height="300" rx="18" fill="transparent" filter="url(#grain)"/>
 <rect width="10" height="300" rx="5" fill="#cf9caf"/>
 <path d="M34 54H260M272 26V274" stroke="#303744"/>
-<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="0.75">06 / EMBEDDED 3D GAME</text>
-<text x="34" y="111" fill="#f3eef1" font-family="Georgia,serif" font-size="37" font-weight="700" text-anchor="start" letter-spacing="0">naiLong</text>
-<text x="34" y="151" fill="#f3eef1" font-family="Georgia,serif" font-size="37" font-weight="700" text-anchor="start" letter-spacing="0">Racing</text>
-<text x="34" y="186" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0.25">OPENVELA  ·  LVGL  ·  SDL</text>
-<text x="34" y="223" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="start" letter-spacing="0.25">PURE C GAME CORE / PORTABLE VIEW</text>
+<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="0.75">EMBEDDED 3D GAME</text>
+<text x="34" y="106" fill="#f3eef1" font-family="Georgia,serif" font-size="37" font-weight="700" text-anchor="start" letter-spacing="0">naiLong</text>
+<text x="34" y="146" fill="#f3eef1" font-family="Georgia,serif" font-size="35" font-weight="700" text-anchor="start" letter-spacing="0">RACING</text>
+<text x="34" y="181" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="0.45">EMBEDDED 3D GAME</text>
+<text x="34" y="216" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="700" text-anchor="start" letter-spacing="0.2">C  ·  LVGL  ·  SDL  ·  OPENVELA</text>
+<text x="34" y="247" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="start" letter-spacing="0">portable game loop / UI runtime</text>
 <text x="34" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="start" letter-spacing="0">★ 5 · 01 Jul 2026</text>
+<rect x="289" y="46" width="271" height="219" rx="11" fill="#080b10" stroke="#465061" stroke-width="2"/>
+<rect x="298" y="55" width="253" height="192" rx="6" fill="#111923" stroke="#303744"/>
+<path d="M308 84H541" stroke="#303744"/>
+<text x="309" y="74" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="start" letter-spacing="0.5">RACE / 02</text>
+<text x="540" y="74" fill="#78d6c6" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="end" letter-spacing="0">P 01   082 KM/H</text>
+<path d="M309 105H540" stroke="#596273" stroke-width="1"/>
+<path d="M398 105H452L542 238H306Z" fill="#171e29" stroke="#596273" stroke-width="1.5"/>
+<path d="M398 105L306 238M452 105L542 238" stroke="#8f6d7c" stroke-width="1.5"/>
+<path class="flow" d="M425 110V124M425 137V154M425 168V190M425 204V232" stroke="#cf9caf" stroke-width="2"/>
+<path d="M382 116L348 238M468 116L502 238" stroke="#596273" stroke-dasharray="5 9"/>
+<g class="shimmer" fill="#cf9caf">
+<path d="M391 121h9l-5 7h-9zM450 121h9l5 7h-9z"/>
+<path d="M366 153h13l-8 10h-13zM477 153h13l8 10h-13z"/>
+<path d="M337 195h18l-11 13h-18zM493 195h18l11 13h-18z"/>
+</g>
+<g class="pulse" fill="#78d6c6">
+<circle cx="316" cy="105" r="3"/><circle cx="534" cy="105" r="3"/>
+</g>
+<g class="float">
+<path d="M398 214L409 205H441L452 214 459 237H391Z" fill="#cf9caf" stroke="#f3eef1" stroke-width="1.5"/>
+<path d="M408 207h34l-6 12h-22z" fill="#182331" stroke="#78d6c6"/>
+<path d="M398 225h54" stroke="#f3eef1" stroke-width="1.5"/>
+<circle cx="403" cy="239" r="5" fill="#080b10" stroke="#78d6c6" stroke-width="2"/>
+<circle cx="447" cy="239" r="5" fill="#080b10" stroke="#78d6c6" stroke-width="2"/>
+</g>
 <g fill="#151b25" stroke="#3a4351">
-<rect x="296" y="54" width="76" height="24" rx="6"/><rect x="478" y="54" width="78" height="24" rx="6"/>
+<rect x="307" y="94" width="46" height="17" rx="4"/><rect x="493" y="94" width="47" height="17" rx="4"/>
 </g>
-<text x="306" y="70" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="700" text-anchor="start" letter-spacing="0">TRACK 01</text>
-<text x="546" y="70" fill="#78d6c6" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="700" text-anchor="end" letter-spacing="0">SPEED  082</text>
-<g class="flow" fill="none" stroke="#596273" opacity=".9">
-<path d="M304 86L548 86M292 244L560 244M337 86L375 244M515 86L477 244"/>
-<path d="M365 116L422 244M490 116L435 244"/>
-</g>
-<path class="flow" d="M420 90V242" stroke="#cf9caf" stroke-width="2" stroke-dasharray="3 9"/>
-<path class="signal" d="M425 100L454 244H396Z" fill="#cf9caf" opacity=".18"/>
-<g class="float" fill="#cf9caf">
-<path d="M421 171l24 0 12 22-48 0z"/>
-<circle cx="420" cy="196" r="5"/><circle cx="451" cy="196" r="5"/>
-</g>
-<g class="pulse" fill="#cf9caf">
-<circle cx="304" cy="86" r="5"/><circle cx="548" cy="86" r="5"/>
-<circle cx="292" cy="244" r="5"/><circle cx="560" cy="244" r="5"/>
-</g>
-<g fill="none" stroke="#78d6c6" opacity=".7">
-<path d="M315 230h18M507 230h18"/><path d="M324 225v10M516 225v10"/>
-</g>
+<text x="330" y="106" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="600" text-anchor="middle" letter-spacing="0">LAP 02/03</text>
+<text x="516" y="106" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="0">BOOST 74%</text>
 <g fill="#151b25" stroke="#3a4351">
-<rect x="300" y="259" width="91" height="22" rx="5"/><rect x="405" y="259" width="91" height="22" rx="5"/><rect x="510" y="259" width="50" height="22" rx="5"/>
+<rect x="299" y="252" width="77" height="22" rx="5"/><rect x="384" y="252" width="77" height="22" rx="5"/><rect x="469" y="252" width="77" height="22" rx="5"/>
 </g>
-<text x="345" y="274" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="0">OPENVELA</text>
-<text x="450" y="274" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="0">LVGL</text>
-<text x="535" y="274" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="0">SDL</text>
+<text x="337" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="0">OPENVELA</text>
+<text x="422" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="0">LVGL UI</text>
+<text x="507" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="0">SDL</text>
 </svg>

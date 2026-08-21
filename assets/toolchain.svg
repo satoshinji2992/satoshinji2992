@@ -34,7 +34,7 @@
 <text x="40" y="160" fill="#f3eef1" font-family="Georgia,serif" font-size="38" font-weight="700" text-anchor="start" letter-spacing="0">Trace it.</text>
 <text x="40" y="201" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0">TEST  →  PROFILE  →  SHIP</text>
 <path class="flow" d="M385 181H1128" stroke="#8f6d7c" fill="none"/>
-<text x="375" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">01 / LEARNING</text>
+<text x="375" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">LEARNING</text>
 <rect x="375" y="66" width="235" height="93" rx="11" fill="#151b25" stroke="#3a4351"/>
 <circle class="pulse" style="animation-delay:0.00s" cx="394" cy="87" r="4" fill="#cf9caf"/>
 <text x="409" y="91" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">PyTorch</text>
@@ -46,7 +46,7 @@
 <text x="409" y="145" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">Transformers</text>
 <rect class="shimmer" style="animation-delay:0.36s" x="525" y="134" width="72" height="7" rx="3" fill="#8f6d7c"/>
 <circle class="pulse" style="animation-delay:0.00s" cx="383" cy="181" r="6" fill="#78d6c6"/>
-<text x="655" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">02 / EMBODIED</text>
+<text x="655" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">EMBODIED</text>
 <rect x="655" y="66" width="235" height="93" rx="11" fill="#151b25" stroke="#3a4351"/>
 <circle class="pulse" style="animation-delay:0.50s" cx="674" cy="87" r="4" fill="#cf9caf"/>
 <text x="689" y="91" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">LeRobot</text>
@@ -58,7 +58,7 @@
 <text x="689" y="145" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">ROS</text>
 <rect class="shimmer" style="animation-delay:0.86s" x="805" y="134" width="72" height="7" rx="3" fill="#8f6d7c"/>
 <circle class="pulse" style="animation-delay:0.50s" cx="663" cy="181" r="6" fill="#78d6c6"/>
-<text x="935" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">03 / SYSTEMS</text>
+<text x="935" y="48" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">SYSTEMS</text>
 <rect x="935" y="66" width="235" height="93" rx="11" fill="#151b25" stroke="#3a4351"/>
 <circle class="pulse" style="animation-delay:1.00s" cx="954" cy="87" r="4" fill="#cf9caf"/>
 <text x="969" y="91" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0">Python</text>

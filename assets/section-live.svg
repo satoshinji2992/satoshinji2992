@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="62" viewBox="0 0 1200 62" role="img" aria-label="Live profile">
+<defs><linearGradient id="section-bg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#111722"/><stop offset=".72" stop-color="#0d121a"/><stop offset="1" stop-color="#151a24"/></linearGradient></defs>
+<style>.section-rule{stroke:#3a4351}.section-accent{fill:#cf9caf}.section-index{fill:#cf9caf}.section-label{fill:#edf0f5}.section-meta{fill:#89919f}</style>
+<rect x="0" y="3" width="1200" height="52" rx="10" fill="url(#section-bg)" stroke="#303744"/>
+<rect x="0" y="3" width="6" height="52" rx="3" class="section-accent"/>
+<path d="M20 51H1180" class="section-rule" stroke-width="1"/>
+<path d="M20 51H210" stroke="#cf9caf" stroke-width="1.5"/>
+<text x="22" y="37" class="section-index" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" font-weight="700" letter-spacing="1.2">03 /</text>
+<text x="78" y="38" class="section-label" font-family="Inter,Segoe UI,sans-serif" font-size="26" font-weight="700" letter-spacing=".3">LIVE PROFILE</text>
+<text x="1176" y="36" text-anchor="end" class="section-meta" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="700" letter-spacing="1">AUTO-REFRESHED</text>
+<circle cx="1188" cy="36" r="3" fill="#78d6c6"/>
+<path d="M1110 12v7M1122 12v7M1134 12v7" stroke="#596273" stroke-width="2"/>
+</svg>

@@ -30,7 +30,7 @@
 <rect width="590" height="300" rx="18" fill="transparent" filter="url(#grain)"/>
 <rect width="10" height="300" rx="5" fill="#cf9caf"/>
 <path d="M34 54H260M272 26V274" stroke="#303744"/>
-<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">02 / COMPUTER VISION</text>
+<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1">COMPUTER VISION</text>
 <text x="34" y="111" fill="#f3eef1" font-family="Georgia,serif" font-size="41" font-weight="700" text-anchor="start" letter-spacing="0">Seiyuu</text>
 <text x="34" y="153" fill="#f3eef1" font-family="Georgia,serif" font-size="41" font-weight="700" text-anchor="start" letter-spacing="0">MATCH</text>
 <text x="34" y="190" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="500" text-anchor="start" letter-spacing="0">EMBED  →  COMPARE  →  RANK</text>
