@@ -3,10 +3,26 @@
 </p>
 
 <p align="center">
-  <a href="#selected-work--07"><img src="./assets/nav-selected.svg" width="32%" alt="Selected work"></a>
   <a href="#currently-exploring"><img src="./assets/nav-research.svg" width="32%" alt="Research interests"></a>
+  <a href="#selected-work--07"><img src="./assets/nav-selected.svg" width="32%" alt="Selected work"></a>
   <a href="#live-profile"><img src="./assets/nav-live.svg" width="32%" alt="Live activity"></a>
 </p>
+
+## CURRENTLY EXPLORING
+
+<p align="center">
+  <img src="./assets/research-map.svg?v=layout-2" width="100%" alt="Animated map of current research interests">
+</p>
+
+<details>
+<summary><strong>Research areas as text</strong></summary>
+
+1. **Embodied Intelligence** — Agents that perceive, reason, and act in the physical world.
+2. **Vision-Language-Action** — Connecting visual understanding, language-conditioned goals, and control.
+3. **Robot Learning** — Imitation learning, reinforcement learning, datasets, and sim-to-real systems.
+4. **Multimodal Agents** — Memory, planning, retrieval, and reusable skill representations.
+
+</details>
 
 ## SELECTED WORK // 07
 
@@ -91,22 +107,6 @@
 <sub>Auto-refreshed 2026-08-21 14:44 UTC · live GitHub API</sub>
 </details>
 <!-- LIVE_PROFILE:END -->
-
-## CURRENTLY EXPLORING
-
-<p align="center">
-  <img src="./assets/research-map.svg?v=layout-2" width="100%" alt="Animated map of current research interests">
-</p>
-
-<details>
-<summary><strong>Research areas as text</strong></summary>
-
-1. **Embodied Intelligence** — Agents that perceive, reason, and act in the physical world.
-2. **Vision-Language-Action** — Connecting visual understanding, language-conditioned goals, and control.
-3. **Robot Learning** — Imitation learning, reinforcement learning, datasets, and sim-to-real systems.
-4. **Multimodal Agents** — Memory, planning, retrieval, and reusable skill representations.
-
-</details>
 
 ## TOOLS I ACTUALLY USE
 
