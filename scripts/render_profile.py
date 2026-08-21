@@ -117,6 +117,55 @@ def summarize_event(event: dict[str, Any], username: str) -> dict[str, str] | No
     }
 
 
+def collect_showcase_item(item: dict[str, Any], username: str, token: str | None) -> dict[str, Any]:
+    """Collect one showcase, allowing a single visual to represent several repos."""
+    repo_names = list(item.get("repos") or ([item["repo"]] if item.get("repo") else []))
+    snapshots: list[dict[str, Any]] = []
+    unavailable: list[str] = []
+    for repo_name in repo_names:
+        try:
+            snapshots.append(
+                api_get(
+                    f"/repos/{urllib.parse.quote(username)}/{urllib.parse.quote(repo_name)}",
+                    token,
+                )
+            )
+        except urllib.error.HTTPError as exc:
+            # A private repository is intentionally still a valid showcase. Keep
+            # its configured snapshot while allowing the public cards to refresh.
+            if exc.code in (403, 404):
+                unavailable.append(repo_name)
+                continue
+            raise
+
+    pushed_values = [
+        snapshot.get("pushed_at") or snapshot.get("updated_at")
+        for snapshot in snapshots
+        if snapshot.get("pushed_at") or snapshot.get("updated_at")
+    ]
+    pushed_at = max(pushed_values, key=parse_date) if pushed_values else item.get("fallback_pushed_at")
+    if not snapshots:
+        return {
+            **item,
+            "repo": item.get("repo") or (repo_names[0] if repo_names else ""),
+            "repos": repo_names,
+            "pushed_at": item.get("fallback_pushed_at"),
+            "stars": item.get("fallback_stars", 0),
+            "fork": False,
+            "unavailable_repos": unavailable,
+        }
+
+    return {
+        **item,
+        "repo": item.get("repo") or (repo_names[0] if repo_names else ""),
+        "repos": repo_names,
+        "pushed_at": pushed_at,
+        "stars": sum(int(snapshot.get("stargazers_count", 0)) for snapshot in snapshots),
+        "fork": all(bool(snapshot.get("fork", False)) for snapshot in snapshots),
+        "unavailable_repos": unavailable,
+    }
+
+
 def collect_live_data(config: dict[str, Any], username: str, token: str | None) -> dict[str, Any]:
     user = api_get(f"/users/{urllib.parse.quote(username)}", token)
     all_repos = api_get(
@@ -146,6 +195,11 @@ def collect_live_data(config: dict[str, Any], username: str, token: str | None) 
             }
         )
 
+    showcases = [
+        collect_showcase_item(item, username, token)
+        for item in config.get("showcases", [])
+    ]
+
     events = api_get(
         f"/users/{urllib.parse.quote(username)}/events/public?per_page=100",
         token,
@@ -171,6 +225,7 @@ def collect_live_data(config: dict[str, Any], username: str, token: str | None) 
         "followers": int(user.get("followers", 0)),
         "total_stars": total_stars,
         "projects": projects,
+        "showcases": showcases,
         "activity": activity or config["fallback_activity"],
         "live": True,
     }
@@ -186,9 +241,21 @@ def collect_fallback_data(config: dict[str, Any]) -> dict[str, Any]:
         }
         for item in config["projects"]
     ]
+    showcases = [
+        {
+            **item,
+            "repo": item.get("repo") or (item.get("repos") or [""])[0],
+            "repos": list(item.get("repos") or ([item["repo"]] if item.get("repo") else [])),
+            "pushed_at": item.get("fallback_pushed_at"),
+            "stars": item.get("fallback_stars", 0),
+            "fork": False,
+        }
+        for item in config.get("showcases", [])
+    ]
     return {
         **config["fallback"],
         "projects": projects,
+        "showcases": showcases,
         "activity": config["fallback_activity"],
         "live": False,
     }
@@ -361,6 +428,247 @@ def render_seiyuu_card(item: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def render_skillagent_card(item: dict[str, Any]) -> str:
+    lines = svg_frame(590, 300, "SkillAgent multimodal hypergraph latent-space paper card")
+    lines += [
+        '<rect width="10" height="300" rx="5" fill="#cf9caf"/>',
+        '<path d="M34 54H260M272 26V274" stroke="#303744"/>',
+        svg_text(34, 40, "04 / RESEARCH PAPER", 11, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.75),
+        svg_text(34, 112, "SkillAgent", 34, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(34, 151, "LSRH", 24, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=2),
+        svg_text(34, 186, "MULTIMODAL · HYPERGRAPH", 10, "#a8afbb", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.3),
+        svg_text(34, 214, "structure selects", 14, "#edf0f5", 600),
+        svg_text(34, 239, "latent programs preserve content", 11, "#89919f"),
+        svg_text(34, 267, f'★ {item.get("stars", 0)} · {compact_date(item.get("pushed_at"))}',
+                 10, "#89919f", 500, "ui-monospace,SFMono-Regular,Consolas,monospace"),
+        '<circle cx="420" cy="150" r="115" fill="url(#glow)"/>',
+        '<g fill="#151b25" stroke="#3a4351">',
+        '<rect x="294" y="56" width="58" height="22" rx="6"/><rect x="370" y="56" width="58" height="22" rx="6"/><rect x="446" y="56" width="58" height="22" rx="6"/>',
+        '</g>',
+        svg_text(323, 71, "VISION", 7, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(399, 71, "TEXT", 7, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(475, 71, "STATE", 7, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        '<g class="flow" fill="none" stroke="#8f6d7c" opacity=".72">',
+        '<path d="M323 78V92M399 78V90M475 78V94"/>',
+        '<path d="M300 92L350 128 400 90 450 128 510 94M300 220L350 184 400 220 450 184 510 220"/>',
+        '<path d="M350 128L350 184M400 90L400 220M450 128L450 184M520 150H550"/>',
+        '</g>',
+        '<g fill="#cf9caf">',
+        ''.join(
+            f'<circle class="pulse" style="animation-delay:{i*.13:.2f}s" cx="{x}" cy="{y}" r="5"/>'
+            for i, (x, y) in enumerate([
+                (300, 92), (350, 128), (400, 90), (450, 128), (510, 94),
+                (300, 220), (350, 184), (400, 220), (450, 184), (510, 220),
+            ])
+        ),
+        '</g>',
+        '<g class="float">',
+        '<rect x="335" y="127" width="32" height="88" rx="8" fill="#151b25" stroke="#cf9caf"/>',
+        '<rect x="384" y="108" width="32" height="128" rx="8" fill="#151b25" stroke="#cf9caf"/>',
+        '<rect x="433" y="127" width="32" height="88" rx="8" fill="#151b25" stroke="#cf9caf"/>',
+        '</g>',
+        '<g fill="#cf9caf">',
+        ''.join(
+            f'<rect class="shimmer" style="animation-delay:{(r*2+c)*.15:.2f}s" x="{393 + c*10}" y="{126 + r*17}" width="7" height="7" rx="2"/>'
+            for r in range(6) for c in range(2)
+        ),
+        '</g>',
+        svg_text(351, 231, "GRAPH", 8, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(400, 252, "LATENT", 8, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(449, 231, "ACTION", 8, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        '<g class="signal">',
+        '<rect x="510" y="127" width="60" height="50" rx="8" fill="#151b25" stroke="#3a4351"/>',
+        svg_text(540, 148, "SKILL", 8, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(540, 163, "PROGRAM", 8, "#edf0f5", 650,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        '</g>',
+        svg_text(302, 282, "STRUCTURE  →  LATENT  →  ACTION", 9, "#89919f", 500,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace"),
+        '</svg>',
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def render_electronics_card(item: dict[str, Any]) -> str:
+    lines = svg_frame(590, 300, "H_ball and servo electronics competition project card")
+    lines += [
+        '<rect width="10" height="300" rx="5" fill="#cf9caf"/>',
+        '<path d="M34 54H260M272 26V274" stroke="#303744"/>',
+        svg_text(34, 40, item.get("kicker", "05 / ELECTRONICS COMPETITION"), 11, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.65),
+        svg_text(34, 113, "H_ball", 37, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(34, 151, "+ servo", 30, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(34, 186, "VISION  →  UART  →  CONTROL", 10, "#a8afbb", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.35),
+        svg_text(34, 223, "MAIXCAM · STM32 · SENSORS", 10, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.35),
+        svg_text(34, 267, f'2 REPOS · ★ {item.get("stars", 0)} · {compact_date(item.get("pushed_at"))}',
+                 10, "#89919f", 500, "ui-monospace,SFMono-Regular,Consolas,monospace"),
+        '<g class="flow" fill="none" stroke="#8f6d7c">',
+        '<path d="M304 144H350M402 144H438M352 122H366M438 122H452"/>',
+        '<path d="M350 155H366M438 155H452" stroke-dasharray="3 4"/>',
+        '</g>',
+        '<g fill="#151b25" stroke="#3a4351">',
+        '<rect x="294" y="88" width="58" height="112" rx="9"/>',
+        '<rect x="366" y="81" width="72" height="126" rx="9"/>',
+        '<rect x="452" y="91" width="108" height="98" rx="9"/>',
+        '<path d="M300 102h-8M300 118h-8M300 134h-8M300 150h-8M300 166h-8M300 182h-8"/>',
+        '<path d="M432 96h9M432 112h9M432 128h9M432 144h9M432 160h9M432 176h9M432 192h9"/>',
+        '</g>',
+        '<g class="pulse" fill="#cf9caf">',
+        '<circle cx="323" cy="118" r="10"/><circle cx="323" cy="146" r="6"/><circle cx="323" cy="174" r="6"/>',
+        '</g>',
+        '<g class="shimmer" fill="#cf9caf">',
+        '<circle cx="392" cy="112" r="5"/><circle cx="412" cy="112" r="5"/>',
+        '<circle cx="392" cy="132" r="5"/><circle cx="412" cy="132" r="5"/>',
+        '<circle cx="392" cy="152" r="5"/><circle cx="412" cy="152" r="5"/>',
+        '<circle cx="392" cy="172" r="5"/><circle cx="412" cy="172" r="5"/>',
+        '</g>',
+        '<g class="float" fill="none" stroke="#cf9caf">',
+        '<circle cx="500" cy="140" r="25"/><path d="M500 140l18-12M500 140v18M500 140h-18"/>',
+        '<path d="M466 169h18l5-12 7 24 7-19 7 12h20" stroke-dasharray="4 3"/>',
+        '</g>',
+        svg_text(323, 104, "LENS", 7, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(402, 101, "UART", 7, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(506, 109, "PWM", 7, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(323, 218, "CAM", 9, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(402, 231, "MCU", 9, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(506, 211, "SERVO", 9, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        '</svg>',
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def render_nailong_card(item: dict[str, Any]) -> str:
+    lines = svg_frame(590, 300, "naiLongRacing embedded 3D game project card")
+    lines += [
+        '<rect width="10" height="300" rx="5" fill="#cf9caf"/>',
+        '<path d="M34 54H260M272 26V274" stroke="#303744"/>',
+        svg_text(34, 40, item.get("kicker", "06 / EMBEDDED 3D GAME"), 11, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.75),
+        svg_text(34, 111, "naiLong", 34, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(34, 151, "Racing", 34, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(34, 186, "OPENVELA  ·  LVGL  ·  SDL", 10, "#a8afbb", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.25),
+        svg_text(34, 223, "PURE C GAME CORE / PORTABLE VIEW", 9, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.25),
+        svg_text(34, 267, f'★ {item.get("stars", 0)} · {compact_date(item.get("pushed_at"))}',
+                 10, "#89919f", 500, "ui-monospace,SFMono-Regular,Consolas,monospace"),
+        '<g fill="#151b25" stroke="#3a4351">',
+        '<rect x="296" y="54" width="76" height="24" rx="6"/><rect x="478" y="54" width="78" height="24" rx="6"/>',
+        '</g>',
+        svg_text(306, 70, "TRACK 01", 7, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace"),
+        svg_text(546, 70, "SPEED  082", 7, "#78d6c6", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="end"),
+        '<g class="flow" fill="none" stroke="#596273" opacity=".9">',
+        '<path d="M304 86L548 86M292 244L560 244M337 86L375 244M515 86L477 244"/>',
+        '<path d="M365 116L422 244M490 116L435 244"/>',
+        '</g>',
+        '<path class="flow" d="M420 90V242" stroke="#cf9caf" stroke-width="2" stroke-dasharray="3 9"/>',
+        '<path class="signal" d="M425 100L454 244H396Z" fill="#cf9caf" opacity=".18"/>',
+        '<g class="float" fill="#cf9caf">',
+        '<path d="M421 171l24 0 12 22-48 0z"/>',
+        '<circle cx="420" cy="196" r="5"/><circle cx="451" cy="196" r="5"/>',
+        '</g>',
+        '<g class="pulse" fill="#cf9caf">',
+        '<circle cx="304" cy="86" r="5"/><circle cx="548" cy="86" r="5"/>',
+        '<circle cx="292" cy="244" r="5"/><circle cx="560" cy="244" r="5"/>',
+        '</g>',
+        '<g fill="none" stroke="#78d6c6" opacity=".7">',
+        '<path d="M315 230h18M507 230h18"/><path d="M324 225v10M516 225v10"/>',
+        '</g>',
+        '<g fill="#151b25" stroke="#3a4351">',
+        '<rect x="300" y="259" width="91" height="22" rx="5"/><rect x="405" y="259" width="91" height="22" rx="5"/><rect x="510" y="259" width="50" height="22" rx="5"/>',
+        '</g>',
+        svg_text(345, 274, "OPENVELA", 8, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(450, 274, "LVGL", 8, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(535, 274, "SDL", 8, "#89919f", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        '</svg>',
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def render_fpga_card(item: dict[str, Any]) -> str:
+    lines = svg_frame(590, 300, "FPGA RISC-V CPU project card")
+    lines += [
+        '<rect width="10" height="300" rx="5" fill="#cf9caf"/>',
+        '<path d="M34 54H260M272 26V274" stroke="#303744"/>',
+        svg_text(34, 40, "07 / DIGITAL SYSTEMS", 11, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.75),
+        svg_text(34, 112, "FPGA", 36, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(34, 151, "CPU", 36, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(34, 186, "RV32I · PIPELINE · CACHE", 10, "#a8afbb", 600,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", spacing=.25),
+        svg_text(34, 220, "SystemVerilog / BRAM / UART", 11, "#edf0f5", 600),
+        svg_text(34, 243, "single-cycle → five-stage", 10, "#89919f"),
+        svg_text(34, 267, f'★ {item.get("stars", 0)} · {compact_date(item.get("pushed_at"))}',
+                 10, "#89919f", 500, "ui-monospace,SFMono-Regular,Consolas,monospace"),
+        '<g fill="#151b25" stroke="#3a4351">',
+        '<rect x="294" y="54" width="94" height="22" rx="6"/><rect x="402" y="54" width="147" height="22" rx="6"/>',
+        '</g>',
+        svg_text(306, 69, "RV32I CORE", 7, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace"),
+        svg_text(539, 69, "INSTRUCTION BUS  /  32-BIT", 7, "#78d6c6", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="end"),
+        '<g class="flow" fill="none" stroke="#8f6d7c">',
+        '<path d="M300 108H560M300 207H560"/>',
+        '<path d="M300 114V201M560 114V201" stroke-dasharray="3 5"/>',
+        '</g>',
+        '<g fill="#151b25" stroke="#3a4351">',
+        ''.join(f'<rect x="{294+i*55}" y="{126 if i%2 == 0 else 84}" width="45" height="40" rx="7"/>' for i in range(5)),
+        '<rect x="305" y="225" width="68" height="33" rx="7"/><rect x="393" y="225" width="68" height="33" rx="7"/><rect x="481" y="225" width="68" height="33" rx="7"/>',
+        '</g>',
+        '<g class="shimmer" fill="#cf9caf">',
+        ''.join(f'<rect style="animation-delay:{i*.18:.2f}s" x="{301+i*55}" y="{142 if i%2 == 0 else 100}" width="31" height="7" rx="3"/>' for i in range(5)),
+        '</g>',
+        '<g class="pulse" fill="#cf9caf">',
+        ''.join(f'<circle style="animation-delay:{i*.2:.2f}s" cx="{300+i*55}" cy="{115 if i%2 == 0 else 181}" r="4"/>' for i in range(5)),
+        '</g>',
+        '<g fill="#cf9caf" opacity=".75">',
+        '<path d="M294 91h-8M294 101h-8M294 111h-8M294 121h-8M294 131h-8M294 141h-8M294 151h-8M294 161h-8M294 171h-8M294 181h-8"/>',
+        '<path d="M560 91h8M560 101h8M560 111h8M560 121h8M560 131h8M560 141h8M560 151h8M560 161h8M560 171h8M560 181h8"/>',
+        '</g>',
+        svg_text(316, 151, "IF", 9, "#edf0f5", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(371, 109, "ID", 9, "#edf0f5", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(426, 151, "EX", 9, "#edf0f5", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(481, 109, "MEM", 9, "#edf0f5", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(536, 151, "WB", 9, "#edf0f5", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(339, 246, "BRAM", 8, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(427, 246, "I-CACHE", 8, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        svg_text(515, 246, "UART", 8, "#cf9caf", 700,
+                 "ui-monospace,SFMono-Regular,Consolas,monospace", anchor="middle"),
+        '</svg>',
+    ]
+    return "\n".join(lines) + "\n"
+
+
 def render_profile_svg(config: dict[str, Any], data: dict[str, Any]) -> str:
     lines = svg_frame(1200, 360, "Live GitHub profile metrics")
     lines += [
@@ -503,9 +811,48 @@ def render_toolchain() -> str:
     return "\n".join(lines) + "\n"
 
 
+def render_link_button(label: str, width: int = 590) -> str:
+    """Render a card-width action control that remains clickable when wrapped in an anchor."""
+    height = 38
+    lines = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
+        f'viewBox="0 0 {width} {height}" role="img" aria-label="{safe_text(label)}">',
+        '<defs><linearGradient id="linkbg" x1="0" y1="0" x2="1" y2="1">'
+        '<stop offset="0" stop-color="#171d27"/><stop offset="1" stop-color="#202733"/>'
+        '</linearGradient></defs>',
+        f'<rect x="1" y="1" width="{width-2}" height="{height-2}" rx="9" fill="url(#linkbg)" stroke="#3a4351" stroke-width="2"/>',
+        '<rect x="14" y="14" width="9" height="9" rx="2" fill="#cf9caf"/>',
+        f'<text x="34" y="25" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" '
+        f'font-size="15" font-weight="700" letter-spacing=".2">{safe_text(label)}</text>',
+        f'<path d="M{width-30} 13l6 6-6 6" fill="none" stroke="#cf9caf" stroke-width="2" '
+        'stroke-linecap="round" stroke-linejoin="round"/>',
+        '</svg>',
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def render_nav_item(number: str, label: str) -> str:
+    """Render a borderless editorial index item for the README directory."""
+    width, height = 280, 52
+    return "\n".join([
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
+        f'viewBox="0 0 {width} {height}" role="img" aria-label="{safe_text(label)}">',
+        '<style>.nav-label{fill:#edf0f5;stroke:#0b0e14;stroke-width:2;paint-order:stroke fill;stroke-linejoin:round}'
+        '.nav-index{stroke:#0b0e14;stroke-width:1.5;paint-order:stroke fill}.nav-rule{stroke:#737d8c}</style>',
+        '<rect x="0" y="11" width="3" height="30" rx="1.5" fill="#cf9caf"/>',
+        '<path class="nav-rule" d="M0 50H280" stroke-width="1.5"/>',
+        f'<text class="nav-index" x="14" y="18" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" '
+        f'font-size="10" font-weight="700" letter-spacing="1.1">{safe_text(number)}</text>',
+        f'<text class="nav-label" x="14" y="40" font-family="Inter,Segoe UI,sans-serif" '
+        f'font-size="15" font-weight="700" letter-spacing=".45">{safe_text(label.upper())}</text>',
+        '</svg>',
+    ]) + "\n"
+
+
 def write_svg_assets(config: dict[str, Any], data: dict[str, Any]) -> None:
     ASSETS_PATH.mkdir(parents=True, exist_ok=True)
     projects = {item["repo"]: item for item in data["projects"]}
+    showcases = {item["id"]: item for item in data.get("showcases", [])}
     outputs = {
         "project-deep-learning.svg": render_deep_learning_card(
             projects["quickly_access_to_deeplearning"]
@@ -515,6 +862,25 @@ def write_svg_assets(config: dict[str, Any], data: dict[str, Any]) -> None:
         "profile-metrics.svg": render_profile_svg(config, data),
         "research-map.svg": render_research_map(),
         "toolchain.svg": render_toolchain(),
+        "showcase-skillagent.svg": render_skillagent_card(showcases["skillagent"]),
+        "showcase-electronics.svg": render_electronics_card(showcases["electronics"]),
+        "showcase-nailong.svg": render_nailong_card(showcases["nailong"]),
+        "showcase-fpga.svg": render_fpga_card(showcases["fpga-cpu"]),
+        "button-skillagent.svg": render_link_button("Open agentskill-LSRH →"),
+        "button-hball.svg": render_link_button("Open H_ball →", 286),
+        "button-servo.svg": render_link_button("Open servo →", 286),
+        "button-nailong.svg": render_link_button("Open naiLongRacing / openvela →"),
+        "button-fpga.svg": render_link_button("Open fpga_cpu →"),
+        "button-deep-repo.svg": render_link_button("Open repository →", 286),
+        "button-deep-tutorial.svg": render_link_button("Interactive tutorial ↗", 286),
+        "button-seiyuu-site.svg": render_link_button("Visit website ↗", 286),
+        "button-seiyuu-source.svg": render_link_button("Open source →", 286),
+        "button-lerobot-repo.svg": render_link_button("Open repository →", 286),
+        "button-lerobot-pr.svg": render_link_button("Merged PR #2792 ↗", 286),
+        "nav-selected.svg": render_nav_item("01", "Selected work"),
+        "nav-builds.svg": render_nav_item("02", "Research builds"),
+        "nav-research.svg": render_nav_item("03", "Research interests"),
+        "nav-live.svg": render_nav_item("04", "Live activity"),
     }
     for filename, content in outputs.items():
         (ASSETS_PATH / filename).write_text(content, encoding="utf-8")

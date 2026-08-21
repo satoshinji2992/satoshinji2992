@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="590" height="300" viewBox="0 0 590 300" role="img" aria-label="naiLongRacing embedded 3D game project card">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#0b0e14"/><stop offset="1" stop-color="#11151d"/>
+</linearGradient>
+<radialGradient id="glow"><stop stop-color="#c89bad" stop-opacity=".14"/><stop offset="1" stop-color="#c89bad" stop-opacity="0"/></radialGradient>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="11"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .055 0"/><feBlend in="SourceGraphic" mode="screen"/></filter>
+<style>
+@keyframes pulse{0%,100%{opacity:.42;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}
+@keyframes flow{to{stroke-dashoffset:-42}}
+@keyframes shimmer{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes radar{0%{opacity:.8;transform:scale(.72)}75%,100%{opacity:0;transform:scale(1.18)}}
+@keyframes bar{0%,100%{transform:scaleX(.45);opacity:.5}50%{transform:scaleX(1);opacity:1}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
+@keyframes signal{0%,100%{opacity:.28}45%,55%{opacity:1}}
+.pulse{animation:pulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.flow{stroke-dasharray:7 10;animation:flow 2.2s linear infinite}
+.shimmer{animation:shimmer 2.8s ease-in-out infinite}
+.radar{animation:radar 3.2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.bar{animation:bar 3s ease-in-out infinite;transform-box:fill-box;transform-origin:left center}
+.orbit{animation:orbit 18s linear infinite;transform-box:fill-box;transform-origin:center}
+.float{animation:float 4.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.signal{animation:signal 2.6s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.pulse,.flow,.shimmer,.radar,.bar,.orbit,.float,.signal{animation:none!important}}
+</style>
+</defs>
+<rect width="590" height="300" rx="18" fill="url(#bg)"/>
+<rect x="1" y="1" width="588" height="298" rx="17" fill="none" stroke="#303744" stroke-width="2"/>
+<rect width="590" height="300" rx="18" fill="transparent" filter="url(#grain)"/>
+<rect width="10" height="300" rx="5" fill="#cf9caf"/>
+<path d="M34 54H260M272 26V274" stroke="#303744"/>
+<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="0.75">06 / EMBEDDED 3D GAME</text>
+<text x="34" y="111" fill="#f3eef1" font-family="Georgia,serif" font-size="37" font-weight="700" text-anchor="start" letter-spacing="0">naiLong</text>
+<text x="34" y="151" fill="#f3eef1" font-family="Georgia,serif" font-size="37" font-weight="700" text-anchor="start" letter-spacing="0">Racing</text>
+<text x="34" y="186" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0.25">OPENVELA  ·  LVGL  ·  SDL</text>
+<text x="34" y="223" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="700" text-anchor="start" letter-spacing="0.25">PURE C GAME CORE / PORTABLE VIEW</text>
+<text x="34" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="start" letter-spacing="0">★ 5 · 01 Jul 2026</text>
+<g fill="#151b25" stroke="#3a4351">
+<rect x="296" y="54" width="76" height="24" rx="6"/><rect x="478" y="54" width="78" height="24" rx="6"/>
+</g>
+<text x="306" y="70" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="700" text-anchor="start" letter-spacing="0">TRACK 01</text>
+<text x="546" y="70" fill="#78d6c6" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="700" text-anchor="end" letter-spacing="0">SPEED  082</text>
+<g class="flow" fill="none" stroke="#596273" opacity=".9">
+<path d="M304 86L548 86M292 244L560 244M337 86L375 244M515 86L477 244"/>
+<path d="M365 116L422 244M490 116L435 244"/>
+</g>
+<path class="flow" d="M420 90V242" stroke="#cf9caf" stroke-width="2" stroke-dasharray="3 9"/>
+<path class="signal" d="M425 100L454 244H396Z" fill="#cf9caf" opacity=".18"/>
+<g class="float" fill="#cf9caf">
+<path d="M421 171l24 0 12 22-48 0z"/>
+<circle cx="420" cy="196" r="5"/><circle cx="451" cy="196" r="5"/>
+</g>
+<g class="pulse" fill="#cf9caf">
+<circle cx="304" cy="86" r="5"/><circle cx="548" cy="86" r="5"/>
+<circle cx="292" cy="244" r="5"/><circle cx="560" cy="244" r="5"/>
+</g>
+<g fill="none" stroke="#78d6c6" opacity=".7">
+<path d="M315 230h18M507 230h18"/><path d="M324 225v10M516 225v10"/>
+</g>
+<g fill="#151b25" stroke="#3a4351">
+<rect x="300" y="259" width="91" height="22" rx="5"/><rect x="405" y="259" width="91" height="22" rx="5"/><rect x="510" y="259" width="50" height="22" rx="5"/>
+</g>
+<text x="345" y="274" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="0">OPENVELA</text>
+<text x="450" y="274" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="0">LVGL</text>
+<text x="535" y="274" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="0">SDL</text>
+</svg>

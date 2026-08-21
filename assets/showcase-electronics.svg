@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="590" height="300" viewBox="0 0 590 300" role="img" aria-label="H_ball and servo electronics competition project card">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#0b0e14"/><stop offset="1" stop-color="#11151d"/>
+</linearGradient>
+<radialGradient id="glow"><stop stop-color="#c89bad" stop-opacity=".14"/><stop offset="1" stop-color="#c89bad" stop-opacity="0"/></radialGradient>
+<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="11"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .055 0"/><feBlend in="SourceGraphic" mode="screen"/></filter>
+<style>
+@keyframes pulse{0%,100%{opacity:.42;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}
+@keyframes flow{to{stroke-dashoffset:-42}}
+@keyframes shimmer{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes radar{0%{opacity:.8;transform:scale(.72)}75%,100%{opacity:0;transform:scale(1.18)}}
+@keyframes bar{0%,100%{transform:scaleX(.45);opacity:.5}50%{transform:scaleX(1);opacity:1}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
+@keyframes signal{0%,100%{opacity:.28}45%,55%{opacity:1}}
+.pulse{animation:pulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.flow{stroke-dasharray:7 10;animation:flow 2.2s linear infinite}
+.shimmer{animation:shimmer 2.8s ease-in-out infinite}
+.radar{animation:radar 3.2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.bar{animation:bar 3s ease-in-out infinite;transform-box:fill-box;transform-origin:left center}
+.orbit{animation:orbit 18s linear infinite;transform-box:fill-box;transform-origin:center}
+.float{animation:float 4.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.signal{animation:signal 2.6s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.pulse,.flow,.shimmer,.radar,.bar,.orbit,.float,.signal{animation:none!important}}
+</style>
+</defs>
+<rect width="590" height="300" rx="18" fill="url(#bg)"/>
+<rect x="1" y="1" width="588" height="298" rx="17" fill="none" stroke="#303744" stroke-width="2"/>
+<rect width="590" height="300" rx="18" fill="transparent" filter="url(#grain)"/>
+<rect width="10" height="300" rx="5" fill="#cf9caf"/>
+<path d="M34 54H260M272 26V274" stroke="#303744"/>
+<text x="34" y="40" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="700" text-anchor="start" letter-spacing="0.65">05 / ELECTRONICS COMPETITION</text>
+<text x="34" y="113" fill="#f3eef1" font-family="Georgia,serif" font-size="40" font-weight="700" text-anchor="start" letter-spacing="0">H_ball</text>
+<text x="34" y="151" fill="#f3eef1" font-family="Georgia,serif" font-size="32" font-weight="700" text-anchor="start" letter-spacing="0">+ servo</text>
+<text x="34" y="186" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0.35">VISION  →  UART  →  CONTROL</text>
+<text x="34" y="223" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="700" text-anchor="start" letter-spacing="0.35">MAIXCAM · STM32 · SENSORS</text>
+<text x="34" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="start" letter-spacing="0">2 REPOS · ★ 2 · 01 Aug 2026</text>
+<g class="flow" fill="none" stroke="#8f6d7c">
+<path d="M304 144H350M402 144H438M352 122H366M438 122H452"/>
+<path d="M350 155H366M438 155H452" stroke-dasharray="3 4"/>
+</g>
+<g fill="#151b25" stroke="#3a4351">
+<rect x="294" y="88" width="58" height="112" rx="9"/>
+<rect x="366" y="81" width="72" height="126" rx="9"/>
+<rect x="452" y="91" width="108" height="98" rx="9"/>
+<path d="M300 102h-8M300 118h-8M300 134h-8M300 150h-8M300 166h-8M300 182h-8"/>
+<path d="M432 96h9M432 112h9M432 128h9M432 144h9M432 160h9M432 176h9M432 192h9"/>
+</g>
+<g class="pulse" fill="#cf9caf">
+<circle cx="323" cy="118" r="10"/><circle cx="323" cy="146" r="6"/><circle cx="323" cy="174" r="6"/>
+</g>
+<g class="shimmer" fill="#cf9caf">
+<circle cx="392" cy="112" r="5"/><circle cx="412" cy="112" r="5"/>
+<circle cx="392" cy="132" r="5"/><circle cx="412" cy="132" r="5"/>
+<circle cx="392" cy="152" r="5"/><circle cx="412" cy="152" r="5"/>
+<circle cx="392" cy="172" r="5"/><circle cx="412" cy="172" r="5"/>
+</g>
+<g class="float" fill="none" stroke="#cf9caf">
+<circle cx="500" cy="140" r="25"/><path d="M500 140l18-12M500 140v18M500 140h-18"/>
+<path d="M466 169h18l5-12 7 24 7-19 7 12h20" stroke-dasharray="4 3"/>
+</g>
+<text x="323" y="104" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="600" text-anchor="middle" letter-spacing="0">LENS</text>
+<text x="402" y="101" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="0">UART</text>
+<text x="506" y="109" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="8" font-weight="700" text-anchor="middle" letter-spacing="0">PWM</text>
+<text x="323" y="218" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="600" text-anchor="middle" letter-spacing="0">CAM</text>
+<text x="402" y="231" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="600" text-anchor="middle" letter-spacing="0">MCU</text>
+<text x="506" y="211" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" font-weight="600" text-anchor="middle" letter-spacing="0">SERVO</text>
+</svg>

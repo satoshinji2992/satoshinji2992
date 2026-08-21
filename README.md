@@ -3,11 +3,10 @@
 </p>
 
 <p align="center">
-  <a href="#selected-work--03">Selected work</a>
-  ·
-  <a href="#currently-exploring">Research interests</a>
-  ·
-  <a href="#live-profile">Live activity</a>
+  <a href="#selected-work--03"><img src="./assets/nav-selected.svg" width="24%" alt="Selected work"></a>
+  <a href="#research-builds--04"><img src="./assets/nav-builds.svg" width="24%" alt="Research builds"></a>
+  <a href="#currently-exploring"><img src="./assets/nav-research.svg" width="24%" alt="Research interests"></a>
+  <a href="#live-profile"><img src="./assets/nav-live.svg" width="24%" alt="Live activity"></a>
 </p>
 
 ## SELECTED WORK // 03
@@ -17,25 +16,65 @@
 </a>
 
 <p align="center">
-  <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><strong>Repository →</strong></a>
-  · <a href="https://satoshinji2992.github.io/quickly_access_to_deeplearning/"><strong>Interactive tutorial ↗</strong></a>
+  <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><img src="./assets/button-deep-repo.svg" width="49%" alt="Open deep learning repository"></a>
+  <a href="https://satoshinji2992.github.io/quickly_access_to_deeplearning/"><img src="./assets/button-deep-tutorial.svg" width="49%" alt="Open interactive deep learning tutorial"></a>
 </p>
 
-<table>
+<table width="100%">
   <tr>
     <td width="50%" valign="top">
       <a href="https://seiyuumatch.org">
         <img src="./assets/project-seiyuumatch.svg?v=layout-2" width="100%" alt="SeiyuuMatch production website">
       </a><br>
-      <a href="https://seiyuumatch.org"><strong>Visit website ↗</strong></a>
-      · <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>Source →</strong></a>
+      <a href="https://seiyuumatch.org"><img src="./assets/button-seiyuu-site.svg" width="49%" alt="Visit SeiyuuMatch website"></a>
+      <a href="https://github.com/satoshinji2992/SeiyuuMatch"><img src="./assets/button-seiyuu-source.svg" width="49%" alt="Open SeiyuuMatch source"></a>
     </td>
     <td width="50%" valign="top">
       <a href="https://github.com/satoshinji2992/lerobot">
         <img src="./assets/project-lerobot.svg?v=layout-2" width="100%" alt="LeRobot upstream contribution">
       </a><br>
-      <a href="https://github.com/satoshinji2992/lerobot"><strong>Repository →</strong></a>
-      · <a href="https://github.com/huggingface/lerobot/pull/2792"><strong>Merged PR #2792 ↗</strong></a>
+      <a href="https://github.com/satoshinji2992/lerobot"><img src="./assets/button-lerobot-repo.svg" width="49%" alt="Open LeRobot repository"></a>
+      <a href="https://github.com/huggingface/lerobot/pull/2792"><img src="./assets/button-lerobot-pr.svg" width="49%" alt="Open merged LeRobot pull request 2792"></a>
+    </td>
+  </tr>
+</table>
+
+## RESEARCH BUILDS // 04
+
+<table width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://github.com/satoshinji2992/agentskill-LSRH">
+        <img src="./assets/showcase-skillagent.svg" width="100%" alt="SkillAgent multimodal hypergraph latent-space research paper">
+      </a><br>
+      <a href="https://github.com/satoshinji2992/agentskill-LSRH">
+        <img src="./assets/button-skillagent.svg" width="100%" alt="Open agentskill-LSRH">
+      </a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://github.com/satoshinji2992/H_ball">
+        <img src="./assets/showcase-electronics.svg" width="100%" alt="H_ball and servo electronics competition projects">
+      </a><br>
+      <a href="https://github.com/satoshinji2992/H_ball"><img src="./assets/button-hball.svg" width="49%" alt="Open H_ball"></a>
+      <a href="https://github.com/satoshinji2992/servo"><img src="./assets/button-servo.svg" width="49%" alt="Open servo"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://github.com/satoshinji2992/naiLongRacing/tree/openvela">
+        <img src="./assets/showcase-nailong.svg" width="100%" alt="naiLongRacing embedded 3D game on OpenVela">
+      </a><br>
+      <a href="https://github.com/satoshinji2992/naiLongRacing/tree/openvela">
+        <img src="./assets/button-nailong.svg" width="100%" alt="Open naiLongRacing OpenVela branch">
+      </a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://github.com/satoshinji2992/fpga_cpu">
+        <img src="./assets/showcase-fpga.svg" width="100%" alt="FPGA RISC-V CPU in SystemVerilog">
+      </a><br>
+      <a href="https://github.com/satoshinji2992/fpga_cpu">
+        <img src="./assets/button-fpga.svg" width="100%" alt="Open fpga_cpu">
+      </a>
     </td>
   </tr>
 </table>
@@ -51,9 +90,9 @@
 <table><tr><td><strong>Status</strong></td><td><strong>Repositories</strong></td><td><strong>Stars</strong></td><td><strong>Followers</strong></td></tr>
 <tr><td>EXPERIMENTING</td><td>22</td><td>43</td><td>2</td></tr></table>
 <table><tr><td width="52%" valign="top"><strong>PROJECT PULSE</strong>
-<p><code>01</code> <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><strong>Deep Learning Tutorial</strong></a><br><sub>tutorial · ★ 26 · updated 20 Aug 2026</sub></p><p><code>02</code> <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>SeiyuuMatch</strong></a><br><sub>production website · ★ 5 · updated 04 Jun 2026</sub></p><p><code>03</code> <a href="https://github.com/satoshinji2992/lerobot"><strong>LeRobot</strong></a><br><sub>upstream contribution · ★ 0 · updated 20 Jan 2026</sub></p>
+<p><code>01</code> <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><strong>Deep Learning Tutorial</strong></a><br><sub>tutorial · ★ 0 · updated 20 Aug 2026</sub></p><p><code>02</code> <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>SeiyuuMatch</strong></a><br><sub>production website · ★ 0 · updated 04 Jun 2026</sub></p><p><code>03</code> <a href="https://github.com/satoshinji2992/lerobot"><strong>LeRobot</strong></a><br><sub>upstream contribution · ★ 0 · updated 20 Jan 2026</sub></p>
 </td><td width="48%" valign="top"><strong>RECENT ACTIVITY</strong>
-<p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · closed a pull request</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · commented on an issue</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · pushed 1 commit</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · pushed 1 commit</sub></p>
+<p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · refined the tutorial overview</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · added an interactive residual-block component</sub></p><p>● <strong>SeiyuuMatch</strong><br><sub>04 Jun 2026 · updated the production website</sub></p><p>● <strong>LeRobot</strong><br><sub>20 Jan 2026 · merged an async-inference device fix upstream</sub></p>
 </td></tr></table>
 <sub>Auto-refreshed 2026-08-21 03:17 UTC · live GitHub API</sub>
 </details>
