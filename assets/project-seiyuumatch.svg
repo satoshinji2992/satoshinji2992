@@ -35,7 +35,7 @@
 <text x="34" y="153" fill="#f3eef1" font-family="Georgia,serif" font-size="41" font-weight="700" text-anchor="start" letter-spacing="0">MATCH</text>
 <text x="34" y="190" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="500" text-anchor="start" letter-spacing="0">EMBED  →  COMPARE  →  RANK</text>
 <text x="34" y="226" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="700" text-anchor="start" letter-spacing="0.4">PRODUCTION WEBSITE</text>
-<text x="34" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="500" text-anchor="start" letter-spacing="0">★ 5 · 04 Jun 2026</text>
+<text x="34" y="267" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" font-weight="500" text-anchor="start" letter-spacing="0">★ 4 · 04 Jun 2026</text>
 <g fill="none" stroke="#8f6d7c">
 <circle cx="350" cy="143" r="34"/><circle class="radar" cx="350" cy="143" r="57"/><circle class="radar" style="animation-delay:1.6s" cx="350" cy="143" r="80"/>
 <path d="M325 120L367 105 381 151 346 174 318 151Z"/>
