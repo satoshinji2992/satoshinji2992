@@ -33,19 +33,33 @@
   ],
   "showcases": [
     {
-      "id": "skillagent",
-      "repo": "agentskill-LSRH",
-      "label": "SkillAgent",
+      "id": "autokeeper",
+      "repo": "autokeeper",
+      "label": "AutoKeeper",
+      "kicker": "OPEN-SOURCE AGENT SYSTEM",
+      "kind": "LangGraph · multi-agent harness",
+      "summary": "An AI keeper for Call of Cthulhu 7e: a keeper, an arbiter, a director and NPC agents share one model-agnostic harness, while a rule engine settles every die.",
+      "link": "https://github.com/satoshinji2992/autokeeper",
+      "fallback_pushed_at": "2026-10-19T08:55:00Z",
+      "fallback_stars": 1
+    },
+    {
+      "id": "compskill",
+      "repo": "compskill-review",
+      "label": "CompSkill",
       "kicker": "RESEARCH PAPER",
-      "kind": "multimodal hypergraph · latent space",
-      "summary": "A structure-aware skill agent that separates reusable structure from task content and compiles both into compact latent programs.",
-      "link": "https://github.com/satoshinji2992/agentskill-LSRH",
-      "fallback_pushed_at": "2026-08-13T17:58:46Z",
+      "kind": "skill retrieval · execution feedback",
+      "summary": "Compiles execution experience into skill retrieval, so an agent picks skills by what actually worked on its executor rather than by description similarity.",
+      "link": "https://anonymous.4open.science/r/compskill-review-CCEB/",
+      "fallback_pushed_at": "2026-10-13T00:00:00Z",
       "fallback_stars": 0
     },
     {
       "id": "electronics",
-      "repos": ["H_ball", "servo"],
+      "repos": [
+        "H_ball",
+        "servo"
+      ],
       "label": "H_ball + servo",
       "kicker": "ELECTRONICS COMPETITION",
       "kind": "vision · embedded control",

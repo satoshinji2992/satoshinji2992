@@ -25,7 +25,16 @@
 
 </details>
 
-<h2 id="selected-work--07"><img src="./assets/section-02-selected.svg" width="100%" alt="02 Selected work · 07 projects"></h2>
+<h2 id="selected-work--07"><img src="./assets/section-02-selected.svg" width="100%" alt="02 Selected work · 08 projects"></h2>
+
+<a href="https://github.com/satoshinji2992/autokeeper">
+  <img src="./assets/showcase-autokeeper.svg" width="100%" alt="AutoKeeper: a multi-agent AI keeper for Call of Cthulhu 7e built on LangGraph">
+</a>
+
+<p align="center">
+  <a href="https://github.com/satoshinji2992/autokeeper"><img src="./assets/button-autokeeper-repo.svg" width="49%" alt="Open AutoKeeper repository"></a>
+  <a href="https://github.com/satoshinji2992/autokeeper/releases/latest"><img src="./assets/button-autokeeper-release.svg" width="49%" alt="Open the latest AutoKeeper release"></a>
+</p>
 
 <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning">
   <img src="./assets/project-deep-learning.svg?v=restored-1" width="100%" alt="Deep Learning from Scratch">
@@ -55,11 +64,11 @@
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <a href="https://github.com/satoshinji2992/agentskill-LSRH">
-        <img src="./assets/showcase-skillagent.svg" width="100%" alt="SkillAgent multimodal hypergraph latent-space research paper">
+      <a href="https://anonymous.4open.science/r/compskill-review-CCEB/">
+        <img src="./assets/showcase-compskill.svg" width="100%" alt="CompSkill: compiling execution experience into skill retrieval, research paper under review">
       </a><br>
-      <a href="https://github.com/satoshinji2992/agentskill-LSRH">
-        <img src="./assets/button-skillagent.svg?v=actions-2" width="100%" alt="Open agentskill-LSRH">
+      <a href="https://anonymous.4open.science/r/compskill-review-CCEB/">
+        <img src="./assets/button-compskill.svg" width="100%" alt="Open CompSkill code and model (anonymous review)">
       </a>
     </td>
     <td width="50%" valign="top">
@@ -94,7 +103,7 @@
 
 <!-- LIVE_PROFILE:START -->
 <p align="center">
-  <img src="./assets/profile-metrics.svg?v=202610200738" width="100%" alt="Live GitHub profile metrics">
+  <img src="./assets/profile-metrics.svg?v=202610201202" width="100%" alt="Live GitHub profile metrics">
 </p>
 <details>
 <summary><strong>Accessible live data</strong></summary>
@@ -105,7 +114,7 @@
 </td><td width="48%" valign="top"><strong>RECENT ACTIVITY</strong>
 <p>● <strong>autokeeper</strong><br><sub>18 Oct 2026 · pushed 1 commit</sub></p><p>● <strong>autokeeper</strong><br><sub>19 Oct 2026 · pushed 1 commit</sub></p><p>● <strong>autokeeper</strong><br><sub>17 Oct 2026 · pushed 1 commit</sub></p><p>● <strong>autokeeper</strong><br><sub>19 Oct 2026 · published a release</sub></p>
 </td></tr></table>
-<sub>Auto-refreshed 2026-10-20 07:38 UTC · live GitHub API</sub>
+<sub>Auto-refreshed 2026-10-20 12:02 UTC · live GitHub API</sub>
 </details>
 <!-- LIVE_PROFILE:END -->
 
