@@ -535,19 +535,21 @@ def render_compskill_card(item: dict[str, Any]) -> str:
 
 
 def render_autokeeper_card(item: dict[str, Any]) -> str:
-    """A Cthulhu rising from the sea behind a ring of R'lyeh glyphs."""
-    lines = svg_frame(1200, 360, "AutoKeeper: an AI keeper for Call of Cthulhu, drawn as Cthulhu rising")
+    """The game's own title screen (pixel Cthulhu) in the right panel.
+
+    GitHub blocks external references inside SVG images, so the cover is
+    embedded as a data URI."""
+    import base64
+    cover = base64.b64encode((ASSETS_PATH / "autokeeper-cover.jpg").read_bytes()).decode("ascii")
+    lines = svg_frame(1200, 360, "AutoKeeper: an AI keeper for Call of Cthulhu, with its pixel-art title screen")
     mono = MONO
     pink, dim, ink = "#cf9caf", "#89919f", "#edf0f5"
-    tentacles = [
-        "M818 196C792 228 804 262 780 288C770 299 758 296 762 284",
-        "M836 204C826 240 842 270 828 300",
-        "M858 208C860 246 878 270 868 304C866 312 876 314 880 306",
-        "M884 208C894 246 916 262 914 300",
-        "M904 202C924 232 948 248 948 282C948 294 960 296 962 286",
-        "M920 192C948 214 980 222 990 256",
-    ]
-    glyphs = "ᚦ ᛟ ᚱ ᛉ ᛏ ᚲ ᛗ ᛞ"
+    lines.insert(-3, '<clipPath id="cover"><rect x="580" y="22" width="598" height="316" rx="12"/></clipPath>'
+                     '<linearGradient id="fade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0d1118"/>'
+                     '<stop offset=".18" stop-color="#0d1118" stop-opacity="0"/><stop offset=".85" stop-color="#0d1118" stop-opacity="0"/>'
+                     '<stop offset="1" stop-color="#0d1118" stop-opacity=".55"/></linearGradient>'
+                     '<linearGradient id="sink" x1="0" y1="0" x2="0" y2="1"><stop offset=".78" stop-color="#0d1118" stop-opacity="0"/>'
+                     '<stop offset=".9" stop-color="#0d1118" stop-opacity=".92"/><stop offset="1" stop-color="#0d1118"/></linearGradient>')
     lines += [
         '<rect x="0" y="0" width="13" height="360" rx="6" fill="#cf9caf"/>',
         '<path d="M48 62H520M48 296H520M560 34V326" stroke="#303744"/>',
@@ -556,49 +558,11 @@ def render_autokeeper_card(item: dict[str, Any]) -> str:
         svg_text(48, 186, "Call of Cthulhu 7e", 30, pink, 700, mono, spacing=1),
         svg_text(50, 232, "LANGGRAPH   ·   MULTI-AGENT   ·   HARNESS", 15, "#a8afbb", 500, mono, spacing=.7),
         svg_text(48, 268, "agents tell the story, the rule engine rolls the dice", 16, ink, 600),
-        svg_text(48, 327, "Claude · Codex · DeepSeek · Ollama, even fully offline", 14, dim),
-        '<circle cx="870" cy="168" r="160" fill="url(#glow)"/>',
-        # ring of cyclopean marks
-        '<g class="orbit" opacity=".7">',
-        '<circle cx="870" cy="160" r="132" fill="none" stroke="#3a4351" stroke-dasharray="2 7"/>',
-        ''.join(
-            (lambda x, y, k: (
-                f'<path d="M{x-5} {y+4}L{x} {y-5}L{x+5} {y+4}Z" fill="none" stroke="#8f6d7c"/>' if k % 3 == 0 else
-                f'<circle cx="{x}" cy="{y}" r="3" fill="none" stroke="#8f6d7c"/>' if k % 3 == 1 else
-                f'<path d="M{x-4} {y-4}L{x+4} {y+4}M{x+4} {y-4}L{x-4} {y+4}" stroke="#8f6d7c"/>'
-            ))(round(870 + 132 * __import__("math").cos(k * 0.5236)), round(160 + 132 * __import__("math").sin(k * 0.5236)), k)
-            for k in range(12)
-        ),
-        '</g>',
-        # sunken monoliths of R'lyeh
-        '<g fill="#121720" stroke="#2c3440">',
-        '<path d="M640 300L652 228L676 222L688 300Z"/><path d="M694 300L700 254L722 250L730 300Z"/>',
-        '<path d="M1014 300L1024 242L1050 236L1060 300Z"/><path d="M1068 300L1080 212L1104 206L1112 300Z"/>',
-        '</g>',
-        # wings
-        '<path d="M800 150C760 118 724 120 700 96C720 140 744 168 790 182Z" fill="#151b25" stroke="#3a4351"/>',
-        '<path d="M940 150C980 118 1016 120 1040 96C1020 140 996 168 950 182Z" fill="#151b25" stroke="#3a4351"/>',
-        # head
-        '<g class="float">',
-        '<path d="M870 66C826 66 800 104 802 146C803 178 826 202 870 206C914 202 937 178 938 146C940 104 914 66 870 66Z" fill="#151b25" stroke="#cf9caf" stroke-width="1.6"/>',
-        '<path d="M826 112C846 122 852 136 846 152M914 112C894 122 888 136 894 152" fill="none" stroke="#3a4351"/>',
-        '<path d="M830 126Q848 118 862 128M878 128Q892 118 910 126" fill="none" stroke="#cf9caf" stroke-width="1.4"/>',
-        '<path d="M842 84Q870 74 898 84M832 100Q870 88 908 100" fill="none" stroke="#2c3440"/>',
-        '<ellipse class="pulse" cx="848" cy="138" rx="9" ry="5" fill="#cf9caf"/>',
-        '<ellipse class="pulse" style="animation-delay:.3s" cx="892" cy="138" rx="9" ry="5" fill="#cf9caf"/>',
-        '</g>',
-        # tentacles
-        ''.join(
-            f'<path class="float" style="animation-delay:{i*.35:.2f}s" d="{d}" fill="none" stroke="{pink if i % 2 else "#8f6d7c"}" stroke-width="{4.5 - abs(2.5 - i)*0.6:.1f}" stroke-linecap="round"/>'
-            for i, d in enumerate(tentacles)
-        ),
-        # sea
-        '<g class="flow" fill="none" stroke="#3a4351" stroke-width="1.5">',
-        '<path d="M600 300Q630 290 660 300T720 300T780 300T840 300T900 300T960 300T1020 300T1080 300T1140 300"/>',
-        '<path d="M630 314Q660 304 690 314T750 314T810 314T870 314T930 314T990 314T1050 314T1110 314"/>',
-        '</g>',
-        svg_text(600, 344, "PH'NGLUI MGLW'NAFH CTHULHU R'LYEH WGAH'NAGL FHTAGN", 10, dim, 500, mono, spacing=.6),
-        svg_text(1138, 344, f'★ {item.get("stars", 0)} · {compact_date(item.get("pushed_at"))}', 12, dim, 500, mono, anchor="end"),
+        svg_text(48, 327, f'Claude · Codex · DeepSeek · Ollama   ★ {item.get("stars", 0)} · {compact_date(item.get("pushed_at"))}', 14, dim),
+        f'<image href="data:image/jpeg;base64,{cover}" x="580" y="22" width="598" height="316" preserveAspectRatio="xMidYMid slice" clip-path="url(#cover)"/>',
+        '<rect x="580" y="22" width="598" height="316" rx="12" fill="url(#fade)"/>',
+        '<rect x="580" y="22" width="598" height="316" rx="12" fill="url(#sink)"/>',
+        '<rect x="580" y="22" width="598" height="316" rx="12" fill="none" stroke="#3a4351"/>',
         '</svg>',
     ]
     return "\n".join(lines) + "\n"
