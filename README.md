@@ -108,13 +108,13 @@
 <details>
 <summary><strong>Accessible live data</strong></summary>
 <table><tr><td><strong>Status</strong></td><td><strong>Repositories</strong></td><td><strong>Stars</strong></td><td><strong>Followers</strong></td></tr>
-<tr><td>EXPERIMENTING</td><td>23</td><td>45</td><td>4</td></tr></table>
+<tr><td>EXPERIMENTING</td><td>22</td><td>—</td><td>—</td></tr></table>
 <table><tr><td width="52%" valign="top"><strong>PROJECT PULSE</strong>
-<p><code>01</code> <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><strong>Deep Learning Tutorial</strong></a><br><sub>tutorial · ★ 28 · updated 22 Sep 2026</sub></p><p><code>02</code> <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>SeiyuuMatch</strong></a><br><sub>production website · ★ 4 · updated 04 Jun 2026</sub></p><p><code>03</code> <a href="https://github.com/satoshinji2992/lerobot"><strong>LeRobot</strong></a><br><sub>upstream contribution · ★ 0 · updated 20 Jan 2026</sub></p>
+<p><code>01</code> <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><strong>Deep Learning Tutorial</strong></a><br><sub>tutorial · ★ 0 · updated 20 Aug 2026</sub></p><p><code>02</code> <a href="https://github.com/satoshinji2992/SeiyuuMatch"><strong>SeiyuuMatch</strong></a><br><sub>production website · ★ 0 · updated 04 Jun 2026</sub></p><p><code>03</code> <a href="https://github.com/satoshinji2992/lerobot"><strong>LeRobot</strong></a><br><sub>upstream contribution · ★ 0 · updated 20 Jan 2026</sub></p>
 </td><td width="48%" valign="top"><strong>RECENT ACTIVITY</strong>
-<p>● <strong>autokeeper</strong><br><sub>18 Oct 2026 · pushed 1 commit</sub></p><p>● <strong>autokeeper</strong><br><sub>19 Oct 2026 · pushed 1 commit</sub></p><p>● <strong>autokeeper</strong><br><sub>17 Oct 2026 · pushed 1 commit</sub></p><p>● <strong>autokeeper</strong><br><sub>19 Oct 2026 · published a release</sub></p>
+<p>● <strong>Deep Learning Tutorial</strong><br><sub>20 Aug 2026 · refined the tutorial overview</sub></p><p>● <strong>Deep Learning Tutorial</strong><br><sub>19 Aug 2026 · added an interactive residual-block component</sub></p><p>● <strong>SeiyuuMatch</strong><br><sub>04 Jun 2026 · updated the production website</sub></p><p>● <strong>LeRobot</strong><br><sub>20 Jan 2026 · merged an async-inference device fix upstream</sub></p>
 </td></tr></table>
-<sub>Auto-refreshed 2026-10-20 12:38 UTC · live GitHub API</sub>
+<sub>Auto-refreshed 2026-10-20 12:38 UTC · fallback snapshot</sub>
 </details>
 <!-- LIVE_PROFILE:END -->
 
