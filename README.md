@@ -36,6 +36,14 @@
   <a href="https://github.com/satoshinji2992/autokeeper/releases/latest"><img src="./assets/button-autokeeper-release.svg" width="49%" alt="Open the latest AutoKeeper release"></a>
 </p>
 
+<a href="https://anonymous.4open.science/r/compskill-review-CCEB/">
+  <img src="./assets/showcase-compskill.svg" width="100%" alt="CompSkill: compact keys, KeyOpt calibration and an experience hypergraph around one skill key, research paper under review">
+</a>
+
+<p align="center">
+  <a href="https://anonymous.4open.science/r/compskill-review-CCEB/"><img src="./assets/button-compskill.svg" width="49%" alt="Open CompSkill code and model (anonymous review)"></a>
+</p>
+
 <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning">
   <img src="./assets/project-deep-learning.svg?v=restored-1" width="100%" alt="Deep Learning from Scratch">
 </a>
@@ -64,22 +72,12 @@
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <a href="https://anonymous.4open.science/r/compskill-review-CCEB/">
-        <img src="./assets/showcase-compskill.svg" width="100%" alt="CompSkill: compiling execution experience into skill retrieval, research paper under review">
-      </a><br>
-      <a href="https://anonymous.4open.science/r/compskill-review-CCEB/">
-        <img src="./assets/button-compskill.svg" width="100%" alt="Open CompSkill code and model (anonymous review)">
-      </a>
-    </td>
-    <td width="50%" valign="top">
       <a href="https://github.com/satoshinji2992/H_ball">
         <img src="./assets/showcase-electronics.svg" width="100%" alt="H_ball and servo electronics competition projects">
       </a><br>
       <a href="https://github.com/satoshinji2992/H_ball"><img src="./assets/button-hball.svg?v=actions-2" width="49%" alt="Open H_ball"></a>
       <a href="https://github.com/satoshinji2992/servo"><img src="./assets/button-servo.svg?v=actions-2" width="49%" alt="Open servo"></a>
     </td>
-  </tr>
-  <tr>
     <td width="50%" valign="top">
       <a href="https://github.com/satoshinji2992/naiLongRacing/tree/openvela">
         <img src="./assets/showcase-nailong.svg?v=cards-3" width="100%" alt="naiLongRacing embedded 3D game on OpenVela">
@@ -88,12 +86,14 @@
         <img src="./assets/button-nailong.svg?v=actions-2" width="100%" alt="Open naiLongRacing OpenVela branch">
       </a>
     </td>
-    <td width="50%" valign="top">
+  </tr>
+  <tr>
+    <td colspan="2" align="center" valign="top">
       <a href="https://github.com/satoshinji2992/fpga_cpu">
-        <img src="./assets/showcase-fpga.svg?v=cards-3" width="100%" alt="FPGA RISC-V CPU in SystemVerilog">
+        <img src="./assets/showcase-fpga.svg?v=cards-3" width="50%" alt="FPGA RISC-V CPU in SystemVerilog">
       </a><br>
       <a href="https://github.com/satoshinji2992/fpga_cpu">
-        <img src="./assets/button-fpga.svg?v=actions-2" width="100%" alt="Open fpga_cpu">
+        <img src="./assets/button-fpga.svg?v=actions-2" width="50%" alt="Open fpga_cpu">
       </a>
     </td>
   </tr>
@@ -103,7 +103,7 @@
 
 <!-- LIVE_PROFILE:START -->
 <p align="center">
-  <img src="./assets/profile-metrics.svg?v=202610201203" width="100%" alt="Live GitHub profile metrics">
+  <img src="./assets/profile-metrics.svg?v=202610201222" width="100%" alt="Live GitHub profile metrics">
 </p>
 <details>
 <summary><strong>Accessible live data</strong></summary>
@@ -114,7 +114,7 @@
 </td><td width="48%" valign="top"><strong>RECENT ACTIVITY</strong>
 <p>● <strong>autokeeper</strong><br><sub>18 Oct 2026 · pushed 1 commit</sub></p><p>● <strong>autokeeper</strong><br><sub>19 Oct 2026 · pushed 1 commit</sub></p><p>● <strong>autokeeper</strong><br><sub>17 Oct 2026 · pushed 1 commit</sub></p><p>● <strong>autokeeper</strong><br><sub>19 Oct 2026 · published a release</sub></p>
 </td></tr></table>
-<sub>Auto-refreshed 2026-10-20 12:03 UTC · live GitHub API</sub>
+<sub>Auto-refreshed 2026-10-20 12:22 UTC · live GitHub API</sub>
 </details>
 <!-- LIVE_PROFILE:END -->
 

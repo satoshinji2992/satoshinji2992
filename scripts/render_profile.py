@@ -469,86 +469,136 @@ def render_seiyuu_card(item: dict[str, Any]) -> str:
 
 
 def render_compskill_card(item: dict[str, Any]) -> str:
-    lines = svg_frame(590, 300, "CompSkill skill retrieval from execution experience paper card")
+    """Abstract of the paper's Figure 3: four modules around one skill key, a
+    retrieval path on top and the between-rounds feedback loop underneath."""
+    lines = svg_frame(1200, 360, "CompSkill: compact keys, KeyOpt calibration, experience hypergraph and a frozen actor around one skill key")
     mono = MONO
+    pink, dim, ink, box = "#cf9caf", "#89919f", "#edf0f5", "#151b25"
+    modules = [  # (number, label, sub, x, y)
+        ("1", "COMPACT KEYS", "4096-d → 512-d", 600, 108),
+        ("2", "KEYOPT", "matched wins", 600, 206),
+        ("3", "HYPERGRAPH", "attributed events", 978, 108),
+        ("4", "FROZEN ACTOR", "original doc only", 978, 206),
+    ]
     lines += [
-        '<rect width="10" height="300" rx="5" fill="#cf9caf"/>',
-        '<path d="M34 54H260M272 26V274" stroke="#303744"/>',
-        svg_text(34, 40, "RESEARCH PAPER · UNDER REVIEW", 11, "#cf9caf", 700, mono, spacing=.75),
-        svg_text(34, 112, "CompSkill", 34, "#f3eef1", 700, "Georgia,serif"),
-        svg_text(34, 151, "ACL ARR", 24, "#cf9caf", 700, mono, spacing=2),
-        svg_text(34, 186, "SKILL RETRIEVAL · FEEDBACK", 10, "#a8afbb", 600, mono, spacing=.3),
-        svg_text(34, 214, "rank skills by what worked", 14, "#edf0f5", 600),
-        svg_text(34, 239, "ToolQA Hit@1  63.0% → 79.8%", 11, "#89919f"),
-        svg_text(34, 267, "first author · 4 benchmarks", 10, "#89919f", 500, mono),
-        '<circle cx="420" cy="150" r="115" fill="url(#glow)"/>',
-        '<g fill="#151b25" stroke="#3a4351">',
-        '<rect x="294" y="56" width="70" height="22" rx="6"/><rect x="376" y="56" width="70" height="22" rx="6"/><rect x="458" y="56" width="90" height="22" rx="6"/>',
-        '</g>',
-        svg_text(329, 71, "QUERY", 7, "#cf9caf", 700, mono, anchor="middle"),
-        svg_text(411, 71, "785 SKILLS", 7, "#cf9caf", 700, mono, anchor="middle"),
-        svg_text(503, 71, "EXECUTOR LOG", 7, "#cf9caf", 700, mono, anchor="middle"),
-        '<g class="flow" fill="none" stroke="#8f6d7c" opacity=".72">',
-        '<path d="M329 78V100M411 78V100M503 78V100M300 100H548"/>',
-        '<path d="M424 210V236M520 150H556"/>',
-        '</g>',
-        svg_text(300, 120, "SEMANTIC", 7, "#89919f", 600, mono),
-        svg_text(424, 120, "KEYOPT", 7, "#89919f", 600, mono),
-        '<g>',
+        '<rect x="0" y="0" width="13" height="360" rx="6" fill="#cf9caf"/>',
+        '<path d="M48 62H520M48 296H520M560 34V326" stroke="#303744"/>',
+        svg_text(48, 48, "RESEARCH PAPER · UNDER REVIEW", 14, pink, 700, mono, spacing=1.5),
+        svg_text(48, 128, "CompSkill", 55, "#f3eef1", 700, "Georgia,serif"),
+        svg_text(48, 186, "experience → retrieval", 28, pink, 700, mono, spacing=.5),
+        svg_text(50, 232, "KEYS   ·   KEYOPT   ·   HYPERGRAPH   ·   REVIEW", 15, "#a8afbb", 500, mono, spacing=.7),
+        svg_text(48, 268, "rank skills by what actually worked on this executor", 16, ink, 600),
+        svg_text(48, 327, "first author · ToolQA Hit@1 63.0% → 79.8%", 14, dim),
+        '<circle cx="850" cy="182" r="150" fill="url(#glow)"/>',
+        # retrieval path along the top
+        '<g class="flow" fill="none" stroke="#8f6d7c" opacity=".75"><path d="M612 64H1110"/></g>',
         ''.join(
-            f'<rect x="300" y="{128 + i*16}" width="{w1}" height="9" rx="3" fill="#2a3240"/>'
-            f'<rect class="bar" style="animation-delay:{i*.25:.2f}s" x="424" y="{128 + i*16}" width="{w2}" height="9" rx="3" fill="#cf9caf"/>'
-            for i, (w1, w2) in enumerate([(104, 46), (92, 88), (80, 30), (66, 58), (50, 18)])
+            f'<rect x="{x-50}" y="52" width="100" height="24" rx="7" fill="{box}" stroke="#3a4351"/>'
+            + svg_text(x, 68, t, 9, pink if i in (0, 4) else ink, 700, mono, anchor="middle")
+            for i, (x, t) in enumerate([(640, "TASK x"), (758, "TOP-10"), (876, "SCORE S"), (994, "6 + ≤4"), (1104, "ACTOR")])
         ),
+        # modules
+        ''.join(
+            f'<rect x="{x}" y="{y}" width="160" height="62" rx="10" fill="{box}" stroke="#3a4351"/>'
+            f'<circle cx="{x+20}" cy="{y+20}" r="9" fill="none" stroke="{pink}"/>'
+            + svg_text(x + 20, y + 24, n, 9, pink, 700, mono, anchor="middle")
+            + svg_text(x + 36, y + 25, label, 10, ink, 700, mono)
+            + svg_text(x + 20, y + 47, sub, 9, dim, 500, mono)
+            for n, label, sub, x, y in modules
+        ),
+        # links from modules to the key
+        '<g class="flow" fill="none" stroke="#8f6d7c" opacity=".75">',
+        '<path d="M760 139H790M760 237H790M938 139H908M938 237H908"/>',
         '</g>',
+        # the skill key in the centre
         '<g class="float">',
-        '<rect x="384" y="236" width="80" height="26" rx="7" fill="#151b25" stroke="#cf9caf"/>',
+        '<rect x="790" y="114" width="118" height="150" rx="12" fill="#151b25" stroke="#cf9caf" stroke-width="1.5"/>',
         '</g>',
-        svg_text(424, 253, "HYPERGRAPH", 7, "#edf0f5", 650, mono, anchor="middle"),
-        '<g class="signal">',
-        '<rect x="530" y="125" width="44" height="50" rx="8" fill="#151b25" stroke="#3a4351"/>',
-        svg_text(552, 146, "TOP", 8, "#cf9caf", 700, mono, anchor="middle"),
-        svg_text(552, 161, "SKILL", 8, "#edf0f5", 650, mono, anchor="middle"),
-        '</g>',
-        svg_text(302, 282, "DESCRIPTION  +  OUTCOMES  →  CHOICE", 9, "#89919f", 500, mono),
+        svg_text(849, 136, "SKILL KEY", 10, pink, 700, mono, anchor="middle", spacing=1),
+        ''.join(
+            f'<rect class="shimmer" style="animation-delay:{(r*6+c)*.07:.2f}s" x="{804 + c*15}" y="{150 + r*14}" width="10" height="9" rx="2" fill="{pink if c < 4 else "#8f6d7c"}"/>'
+            for r in range(5) for c in range(6)
+        ),
+        svg_text(849, 236, "k⁰ + Δk ; b", 11, ink, 650, mono, anchor="middle"),
+        svg_text(849, 254, "one inner product", 8, dim, 500, mono, anchor="middle"),
+        # between-rounds loop along the bottom
+        '<g class="flow" fill="none" stroke="#8f6d7c" opacity=".75"><path d="M1110 296H612"/><path d="M1058 268V284M640 284V268"/></g>',
+        ''.join(
+            f'<rect x="{x-48}" y="284" width="96" height="24" rx="7" fill="{box}" stroke="#3a4351"/>'
+            + svg_text(x, 300, t, 9, ink, 650, mono, anchor="middle")
+            for x, t in [(1058, "OUTCOMES"), (948, "RECORD"), (848, "FILTER"), (748, "FIT"), (648, "PUBLISH")]
+        ),
+        svg_text(1138, 334, "between rounds · support tasks only", 11, dim, 500, mono, anchor="end"),
         '</svg>',
     ]
     return "\n".join(lines) + "\n"
 
 
 def render_autokeeper_card(item: dict[str, Any]) -> str:
-    lines = svg_frame(1200, 360, "AutoKeeper multi-agent Call of Cthulhu keeper card")
+    """A Cthulhu rising from the sea behind a ring of R'lyeh glyphs."""
+    lines = svg_frame(1200, 360, "AutoKeeper: an AI keeper for Call of Cthulhu, drawn as Cthulhu rising")
     mono = MONO
-    agents = [("KEEPER", 690, 96), ("ARBITER", 850, 96), ("DIRECTOR", 1010, 96),
-              ("NPCS", 690, 262), ("PLAYERS", 850, 262), ("WORLD", 1010, 262)]
+    pink, dim, ink = "#cf9caf", "#89919f", "#edf0f5"
+    tentacles = [
+        "M818 196C792 228 804 262 780 288C770 299 758 296 762 284",
+        "M836 204C826 240 842 270 828 300",
+        "M858 208C860 246 878 270 868 304C866 312 876 314 880 306",
+        "M884 208C894 246 916 262 914 300",
+        "M904 202C924 232 948 248 948 282C948 294 960 296 962 286",
+        "M920 192C948 214 980 222 990 256",
+    ]
+    glyphs = "ᚦ ᛟ ᚱ ᛉ ᛏ ᚲ ᛗ ᛞ"
     lines += [
         '<rect x="0" y="0" width="13" height="360" rx="6" fill="#cf9caf"/>',
         '<path d="M48 62H520M48 296H520M560 34V326" stroke="#303744"/>',
-        svg_text(48, 48, "OPEN-SOURCE AGENT SYSTEM", 14, "#cf9caf", 700, mono, spacing=1.5),
+        svg_text(48, 48, "OPEN-SOURCE AGENT SYSTEM", 14, pink, 700, mono, spacing=1.5),
         svg_text(48, 128, "AutoKeeper", 55, "#f3eef1", 700, "Georgia,serif"),
-        svg_text(48, 186, "Call of Cthulhu 7e", 30, "#cf9caf", 700, mono, spacing=1),
+        svg_text(48, 186, "Call of Cthulhu 7e", 30, pink, 700, mono, spacing=1),
         svg_text(50, 232, "LANGGRAPH   ·   MULTI-AGENT   ·   HARNESS", 15, "#a8afbb", 500, mono, spacing=.7),
-        svg_text(48, 268, "agents tell the story, the rule engine rolls the dice", 16, "#edf0f5", 600),
-        svg_text(48, 327, "Claude · Codex · DeepSeek · Ollama, even fully offline", 14, "#89919f"),
-        '<circle cx="850" cy="178" r="150" fill="url(#glow)"/>',
-        '<g class="flow" fill="none" stroke="#8f6d7c" opacity=".7">',
-        ''.join(f'<path d="M{x} {y + (20 if y < 180 else -20)}L850 {158 if y < 180 else 198}"/>' for _, x, y in agents),
-        '<path d="M960 178H1060"/>',
+        svg_text(48, 268, "agents tell the story, the rule engine rolls the dice", 16, ink, 600),
+        svg_text(48, 327, "Claude · Codex · DeepSeek · Ollama, even fully offline", 14, dim),
+        '<circle cx="870" cy="168" r="160" fill="url(#glow)"/>',
+        # ring of cyclopean marks
+        '<g class="orbit" opacity=".7">',
+        '<circle cx="870" cy="160" r="132" fill="none" stroke="#3a4351" stroke-dasharray="2 7"/>',
+        ''.join(
+            (lambda x, y, k: (
+                f'<path d="M{x-5} {y+4}L{x} {y-5}L{x+5} {y+4}Z" fill="none" stroke="#8f6d7c"/>' if k % 3 == 0 else
+                f'<circle cx="{x}" cy="{y}" r="3" fill="none" stroke="#8f6d7c"/>' if k % 3 == 1 else
+                f'<path d="M{x-4} {y-4}L{x+4} {y+4}M{x+4} {y-4}L{x-4} {y+4}" stroke="#8f6d7c"/>'
+            ))(round(870 + 132 * __import__("math").cos(k * 0.5236)), round(160 + 132 * __import__("math").sin(k * 0.5236)), k)
+            for k in range(12)
+        ),
         '</g>',
-        '<g fill="#151b25" stroke="#3a4351">',
-        ''.join(f'<rect x="{x-62}" y="{y-20}" width="124" height="40" rx="9"/>' for _, x, y in agents),
+        # sunken monoliths of R'lyeh
+        '<g fill="#121720" stroke="#2c3440">',
+        '<path d="M640 300L652 228L676 222L688 300Z"/><path d="M694 300L700 254L722 250L730 300Z"/>',
+        '<path d="M1014 300L1024 242L1050 236L1060 300Z"/><path d="M1068 300L1080 212L1104 206L1112 300Z"/>',
         '</g>',
-        ''.join(svg_text(x, y + 5, name, 12, "#cf9caf", 700, mono, anchor="middle") for name, x, y in agents),
+        # wings
+        '<path d="M800 150C760 118 724 120 700 96C720 140 744 168 790 182Z" fill="#151b25" stroke="#3a4351"/>',
+        '<path d="M940 150C980 118 1016 120 1040 96C1020 140 996 168 950 182Z" fill="#151b25" stroke="#3a4351"/>',
+        # head
         '<g class="float">',
-        '<rect x="740" y="154" width="220" height="48" rx="11" fill="#151b25" stroke="#cf9caf"/>',
+        '<path d="M870 66C826 66 800 104 802 146C803 178 826 202 870 206C914 202 937 178 938 146C940 104 914 66 870 66Z" fill="#151b25" stroke="#cf9caf" stroke-width="1.6"/>',
+        '<path d="M826 112C846 122 852 136 846 152M914 112C894 122 888 136 894 152" fill="none" stroke="#3a4351"/>',
+        '<path d="M830 126Q848 118 862 128M878 128Q892 118 910 126" fill="none" stroke="#cf9caf" stroke-width="1.4"/>',
+        '<path d="M842 84Q870 74 898 84M832 100Q870 88 908 100" fill="none" stroke="#2c3440"/>',
+        '<ellipse class="pulse" cx="848" cy="138" rx="9" ry="5" fill="#cf9caf"/>',
+        '<ellipse class="pulse" style="animation-delay:.3s" cx="892" cy="138" rx="9" ry="5" fill="#cf9caf"/>',
         '</g>',
-        svg_text(850, 184, "HARNESS", 15, "#edf0f5", 700, mono, anchor="middle", spacing=2),
-        '<g class="orbit">',
-        '<polygon points="1092,148 1118,163 1118,193 1092,208 1066,193 1066,163" fill="#151b25" stroke="#cf9caf" stroke-width="1.5"/>',
+        # tentacles
+        ''.join(
+            f'<path class="float" style="animation-delay:{i*.35:.2f}s" d="{d}" fill="none" stroke="{pink if i % 2 else "#8f6d7c"}" stroke-width="{4.5 - abs(2.5 - i)*0.6:.1f}" stroke-linecap="round"/>'
+            for i, d in enumerate(tentacles)
+        ),
+        # sea
+        '<g class="flow" fill="none" stroke="#3a4351" stroke-width="1.5">',
+        '<path d="M600 300Q630 290 660 300T720 300T780 300T840 300T900 300T960 300T1020 300T1080 300T1140 300"/>',
+        '<path d="M630 314Q660 304 690 314T750 314T810 314T870 314T930 314T990 314T1050 314T1110 314"/>',
         '</g>',
-        svg_text(1092, 184, "d10", 13, "#cf9caf", 700, mono, anchor="middle"),
-        svg_text(600, 326, "NARRATE  →  RULE  →  RESOLVE", 13, "#89919f", 500, mono),
-        svg_text(1138, 326, f'★ {item.get("stars", 0)} · {compact_date(item.get("pushed_at"))}', 13, "#89919f", 500, mono, anchor="end"),
+        svg_text(600, 344, "PH'NGLUI MGLW'NAFH CTHULHU R'LYEH WGAH'NAGL FHTAGN", 10, dim, 500, mono, spacing=.6),
+        svg_text(1138, 344, f'★ {item.get("stars", 0)} · {compact_date(item.get("pushed_at"))}', 12, dim, 500, mono, anchor="end"),
         '</svg>',
     ]
     return "\n".join(lines) + "\n"
@@ -984,7 +1034,7 @@ def write_svg_assets(config: dict[str, Any], data: dict[str, Any]) -> None:
         "showcase-electronics.svg": render_electronics_card(showcases["electronics"]),
         "showcase-nailong.svg": render_nailong_card(showcases["nailong"]),
         "showcase-fpga.svg": render_fpga_card(showcases["fpga-cpu"]),
-        "button-compskill.svg": render_link_button("Code & model (anonymous review) ↗", 590, 76, 22),
+        "button-compskill.svg": render_link_button("Anonymous code ↗", 286),
         "button-autokeeper-repo.svg": render_link_button("Open repository →", 286),
         "button-autokeeper-release.svg": render_link_button("Latest release ↗", 286),
         "button-hball.svg": render_link_button("Open H_ball →", 286, 76, 22),

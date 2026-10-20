@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="AutoKeeper multi-agent Call of Cthulhu keeper card">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="AutoKeeper: an AI keeper for Call of Cthulhu, drawn as Cthulhu rising">
 <defs>
 <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
 <stop offset="0" stop-color="#0b0e14"/><stop offset="1" stop-color="#11151d"/>
@@ -36,23 +36,30 @@
 <text x="50" y="232" fill="#a8afbb" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="16" font-weight="500" text-anchor="start" letter-spacing="0.7">LANGGRAPH   ·   MULTI-AGENT   ·   HARNESS</text>
 <text x="48" y="268" fill="#edf0f5" font-family="Inter,Segoe UI,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0">agents tell the story, the rule engine rolls the dice</text>
 <text x="48" y="327" fill="#89919f" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0">Claude · Codex · DeepSeek · Ollama, even fully offline</text>
-<circle cx="850" cy="178" r="150" fill="url(#glow)"/>
-<g class="flow" fill="none" stroke="#8f6d7c" opacity=".7">
-<path d="M690 116L850 158"/><path d="M850 116L850 158"/><path d="M1010 116L850 158"/><path d="M690 242L850 198"/><path d="M850 242L850 198"/><path d="M1010 242L850 198"/>
-<path d="M960 178H1060"/>
+<circle cx="870" cy="168" r="160" fill="url(#glow)"/>
+<g class="orbit" opacity=".7">
+<circle cx="870" cy="160" r="132" fill="none" stroke="#3a4351" stroke-dasharray="2 7"/>
+<path d="M997 164L1002 155L1007 164Z" fill="none" stroke="#8f6d7c"/><circle cx="984" cy="226" r="3" fill="none" stroke="#8f6d7c"/><path d="M932 270L940 278M940 270L932 278" stroke="#8f6d7c"/><path d="M865 296L870 287L875 296Z" fill="none" stroke="#8f6d7c"/><circle cx="804" cy="274" r="3" fill="none" stroke="#8f6d7c"/><path d="M752 222L760 230M760 222L752 230" stroke="#8f6d7c"/><path d="M733 164L738 155L743 164Z" fill="none" stroke="#8f6d7c"/><circle cx="756" cy="94" r="3" fill="none" stroke="#8f6d7c"/><path d="M800 42L808 50M808 42L800 50" stroke="#8f6d7c"/><path d="M865 32L870 23L875 32Z" fill="none" stroke="#8f6d7c"/><circle cx="936" cy="46" r="3" fill="none" stroke="#8f6d7c"/><path d="M980 90L988 98M988 90L980 98" stroke="#8f6d7c"/>
 </g>
-<g fill="#151b25" stroke="#3a4351">
-<rect x="628" y="76" width="124" height="40" rx="9"/><rect x="788" y="76" width="124" height="40" rx="9"/><rect x="948" y="76" width="124" height="40" rx="9"/><rect x="628" y="242" width="124" height="40" rx="9"/><rect x="788" y="242" width="124" height="40" rx="9"/><rect x="948" y="242" width="124" height="40" rx="9"/>
+<g fill="#121720" stroke="#2c3440">
+<path d="M640 300L652 228L676 222L688 300Z"/><path d="M694 300L700 254L722 250L730 300Z"/>
+<path d="M1014 300L1024 242L1050 236L1060 300Z"/><path d="M1068 300L1080 212L1104 206L1112 300Z"/>
 </g>
-<text x="690" y="101" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0">KEEPER</text><text x="850" y="101" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0">ARBITER</text><text x="1010" y="101" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0">DIRECTOR</text><text x="690" y="267" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0">NPCS</text><text x="850" y="267" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0">PLAYERS</text><text x="1010" y="267" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0">WORLD</text>
+<path d="M800 150C760 118 724 120 700 96C720 140 744 168 790 182Z" fill="#151b25" stroke="#3a4351"/>
+<path d="M940 150C980 118 1016 120 1040 96C1020 140 996 168 950 182Z" fill="#151b25" stroke="#3a4351"/>
 <g class="float">
-<rect x="740" y="154" width="220" height="48" rx="11" fill="#151b25" stroke="#cf9caf"/>
+<path d="M870 66C826 66 800 104 802 146C803 178 826 202 870 206C914 202 937 178 938 146C940 104 914 66 870 66Z" fill="#151b25" stroke="#cf9caf" stroke-width="1.6"/>
+<path d="M826 112C846 122 852 136 846 152M914 112C894 122 888 136 894 152" fill="none" stroke="#3a4351"/>
+<path d="M830 126Q848 118 862 128M878 128Q892 118 910 126" fill="none" stroke="#cf9caf" stroke-width="1.4"/>
+<path d="M842 84Q870 74 898 84M832 100Q870 88 908 100" fill="none" stroke="#2c3440"/>
+<ellipse class="pulse" cx="848" cy="138" rx="9" ry="5" fill="#cf9caf"/>
+<ellipse class="pulse" style="animation-delay:.3s" cx="892" cy="138" rx="9" ry="5" fill="#cf9caf"/>
 </g>
-<text x="850" y="184" fill="#edf0f5" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="16" font-weight="700" text-anchor="middle" letter-spacing="2">HARNESS</text>
-<g class="orbit">
-<polygon points="1092,148 1118,163 1118,193 1092,208 1066,193 1066,163" fill="#151b25" stroke="#cf9caf" stroke-width="1.5"/>
+<path class="float" style="animation-delay:0.00s" d="M818 196C792 228 804 262 780 288C770 299 758 296 762 284" fill="none" stroke="#8f6d7c" stroke-width="3.0" stroke-linecap="round"/><path class="float" style="animation-delay:0.35s" d="M836 204C826 240 842 270 828 300" fill="none" stroke="#cf9caf" stroke-width="3.6" stroke-linecap="round"/><path class="float" style="animation-delay:0.70s" d="M858 208C860 246 878 270 868 304C866 312 876 314 880 306" fill="none" stroke="#8f6d7c" stroke-width="4.2" stroke-linecap="round"/><path class="float" style="animation-delay:1.05s" d="M884 208C894 246 916 262 914 300" fill="none" stroke="#cf9caf" stroke-width="4.2" stroke-linecap="round"/><path class="float" style="animation-delay:1.40s" d="M904 202C924 232 948 248 948 282C948 294 960 296 962 286" fill="none" stroke="#8f6d7c" stroke-width="3.6" stroke-linecap="round"/><path class="float" style="animation-delay:1.75s" d="M920 192C948 214 980 222 990 256" fill="none" stroke="#cf9caf" stroke-width="3.0" stroke-linecap="round"/>
+<g class="flow" fill="none" stroke="#3a4351" stroke-width="1.5">
+<path d="M600 300Q630 290 660 300T720 300T780 300T840 300T900 300T960 300T1020 300T1080 300T1140 300"/>
+<path d="M630 314Q660 304 690 314T750 314T810 314T870 314T930 314T990 314T1050 314T1110 314"/>
 </g>
-<text x="1092" y="184" fill="#cf9caf" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="0">d10</text>
-<text x="600" y="326" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" font-weight="500" text-anchor="start" letter-spacing="0">NARRATE  →  RULE  →  RESOLVE</text>
-<text x="1138" y="326" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" font-weight="500" text-anchor="end" letter-spacing="0">★ 1 · 19 Oct 2026</text>
+<text x="600" y="344" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="11" font-weight="500" text-anchor="start" letter-spacing="0.6">PH&#x27;NGLUI MGLW&#x27;NAFH CTHULHU R&#x27;LYEH WGAH&#x27;NAGL FHTAGN</text>
+<text x="1138" y="344" fill="#89919f" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="13" font-weight="500" text-anchor="end" letter-spacing="0">★ 1 · 19 Oct 2026</text>
 </svg>
