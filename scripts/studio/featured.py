@@ -49,6 +49,17 @@ def crossfade(name: str, count: int, index: int, fade: float = 1.6) -> str:
     return f"@keyframes {name}{{" + "".join(f"{num(p)}%{{opacity:{o}}}" for p, o in stops) + "}"
 
 
+def handover(name: str, count: int, index: int, fade: float = 1.2) -> str:
+    """Like crossfade, but the outgoing item is gone before the next one appears (for text)."""
+    seg = 100 / count
+    s, e = index * seg, (index + 1) * seg
+    if index == 0:
+        stops = [(0, 1), (e - 2 * fade, 1), (e - fade, 0), (100, 0)]
+    else:
+        stops = [(0, 0), (s, 0), (s + fade, 1), (e - 2 * fade, 1), (e - fade, 0), (100, 0)]
+    return f"@keyframes {name}{{" + "".join(f"{num(p)}%{{opacity:{o}}}" for p, o in stops) + "}"
+
+
 def meta_stars(svg: Svg, x: float, y: float, stars: int, color: str, size: float = 18, face: str = "italic") -> tuple[str, float]:
     """A drawn star and a count; returns the markup and the x after it."""
     r = size * 0.34
@@ -171,8 +182,9 @@ def autokeeper(data: dict) -> str:
     for i, (_, label) in enumerate(AK_FRAMES):
         hidden = ' opacity="0"' if i else ""
         reel = f"Reel {ROMAN[i + 1]}"
+        svg.style(handover(f"akc{i}", len(AK_FRAMES), i), f".akc{i}{{animation:akc{i} {AK_LOOP}s linear infinite}}")
         svg.add(
-            f'<g class="ak{i}"{hidden}>'
+            f'<g class="akc{i}"{hidden}>'
             + svg.text(sx + 2, 553, reel, "allsc", 15, pal.accent, tracking=2.4)
             + svg.text(sx + 2 + measure(reel, "allsc", 15, 2.4) + 16, 553, label, "italic", 21, pal.ink)
             + "</g>"
@@ -184,7 +196,7 @@ def autokeeper(data: dict) -> str:
         hidden = ' opacity="0"' if i else ""
         svg.add(
             svg.text(nx, 553, numeral, "allsc", 16, pal.line, tracking=1.5)
-            + f'<g class="ak{i}"{hidden}>' + svg.text(nx, 553, numeral, "allsc", 16, GOLD, tracking=1.5) + "</g>"
+            + f'<g class="akc{i}"{hidden}>' + svg.text(nx, 553, numeral, "allsc", 16, GOLD, tracking=1.5) + "</g>"
         )
         nx -= 18
     plate.close(1, corner="tl")
