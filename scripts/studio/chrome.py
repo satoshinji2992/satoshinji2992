@@ -15,7 +15,7 @@ TAGLINE = ["Agents", "·", "Reinforcement", "learning", "·", "Robotics"]
 
 def header(data: dict) -> str:
     w, h = 1600, 560
-    svg = Svg(w, h, "Qi Shen: agents, reinforcement learning, robotics")
+    svg = Svg(w, h, "Agents, reinforcement learning, robotics")
     svg.add(f'<image href="{data_uri(SRC / "header-clean.webp")}" width="{w}" height="{h}"/>')
 
     # A slow light passing over the torn paper strip, clipped to its traced outline.
@@ -48,7 +48,7 @@ def header(data: dict) -> str:
         crosshair(52, 488, 9, "#5b5856", 1, 'class="breathe" style="animation-delay:1.4s"'),
     )
 
-    # The tagline, word by word, then a caret and a small plate label.
+    # The tagline, word by word, then a caret.
     size, x, y = 45, 74, 392
     space = measure(" ", "serif-m", size)
     for i, word in enumerate(TAGLINE):
@@ -60,7 +60,6 @@ def header(data: dict) -> str:
         f'<rect class="caret" x="{num(x + 2)}" y="{num(y - cap_height("serif-m", size) - 4)}" width="2" '
         f'height="{num(cap_height("serif-m", size) + 10)}" fill="#a99a9f"/></g>'
     )
-    svg.add(f'<g class="fade" {delay(1.3)}>' + svg.text(76, 448, "QI SHEN  ·  BUPT  ·  BEIJING", "mono-b", 17, "#776e71", tracking=5) + "</g>")
 
     # Dust drifting through the light.
     rng = random.Random(7)

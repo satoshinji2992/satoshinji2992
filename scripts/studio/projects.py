@@ -470,7 +470,7 @@ def fpga(data: dict) -> str:
 
 PRIZE_ROWS = [
     ("2026", "RoboMaster University League", "National 2nd"),
-    ("2026", "Mathematical Modeling Contest", "National 2nd"),
+    ("2026", "CUMCM · Math Modeling", "National 2nd"),
     ("2026", "Electronics Design Contest · H", "Provincial 2nd"),
     ("2025", "Electronics Design Contest · E", "Provincial 3rd"),
 ]
@@ -479,7 +479,7 @@ PRIZE_ROWS = [
 def prizes(data: dict) -> str:
     pal = PRIZES
     ink, rose, paper = "#2a2124", "#a3566a", pal.accent3
-    svg = Svg(W, H, "Prizes: RoboMaster University League and mathematical modeling national second prizes; electronics design contest provincial prizes")
+    svg = Svg(W, H, "Prizes: national second prizes in the RoboMaster University League and CUMCM; electronics design contest provincial prizes")
     plate = Plate(svg, pal, rx=16)
     plate.open()
     rosette = "".join(
@@ -496,7 +496,7 @@ def prizes(data: dict) -> str:
         f'<rect x="62" y="58" width="476" height="260" fill="none" stroke="{rose}" stroke-width=".6" opacity=".45"/>'
         + f'<g class="rise" {delay(0.2)}>'
         + svg.text(80, 104, "Prizes", "serif", 38, ink)
-        + svg.text(520, 100, "BUPT  ·  2025 – 2026", "mono-b", 11, rose, "end", tracking=1.8)
+        + svg.text(520, 100, "2025 – 2026", "mono-b", 11, rose, "end", tracking=1.8)
         + "</g>"
         + f'<path class="draw" {delay(0.4)} d="M80 118H520" pathLength="1" stroke="{rose}" stroke-width="1.2"/>'
     )
@@ -504,7 +504,9 @@ def prizes(data: dict) -> str:
         y = 160 + i * 42
         name_end = 128 + measure(name, "serif-m", 21)
         level_start = 520 - measure(level, "italic", 20)
-        leader = f'<path d="M{num(name_end + 10)} {y - 4}H{num(level_start - 10)}" stroke="{rose}" stroke-width="1.4" stroke-dasharray="1 5" stroke-linecap="round" opacity=".55"/>'
+        leader = ""
+        if level_start - name_end > 40:
+            leader = f'<path d="M{num(name_end + 10)} {y - 4}H{num(level_start - 10)}" stroke="{rose}" stroke-width="1.4" stroke-dasharray="1 5" stroke-linecap="round" opacity=".55"/>'
         svg.add(
             f'<g class="rise" {delay(0.45 + i * 0.12)}>'
             + svg.text(80, y, year, "mono-b", 12, "#8a6a71", tracking=1)

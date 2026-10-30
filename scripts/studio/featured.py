@@ -213,7 +213,7 @@ def compskill(data: dict) -> str:
 
     # Left column: title and results.
     x = 64
-    svg.add(kicker(svg, x, 88, "PAPER  ·  CODE  ·  WEIGHTS", red))
+    svg.add(kicker(svg, x, 88, "FIRST-AUTHOR PAPER  ·  CODE", red))
     size = fit("CompSkill", "serif", 92, 356)
     svg.add(f'<g class="rise" {delay(0.15)}>' + svg.text(x - 4, 176, "CompSkill", "serif", size, ink) + "</g>")
     svg.add(
@@ -440,11 +440,11 @@ def deep_learning(data: dict) -> str:
         + "</g>"
     )
 
-    # The chalk note: adopted for a BUPT elective.
+    # The chalk note: adopted for a university elective.
     svg.add(
         f'<g class="fade" {delay(1.0)}>'
         + svg.text(978, 128, "adopted as the textbook", "italic", 30, pink, "middle")
-        + svg.text(978, 164, "for a BUPT elective course", "italic", 30, pink, "middle")
+        + svg.text(978, 164, "for a university elective", "italic", 30, pink, "middle")
         + "</g>",
         f'<path class="draw" {delay(1.3)} d="{sketch_loop(978, 140, 176, 56, seed=7)}" pathLength="1" fill="none" '
         f'stroke="{pink}" stroke-width="2" opacity=".8" {chalk_dash}/>',
