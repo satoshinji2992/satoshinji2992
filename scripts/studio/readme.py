@@ -75,10 +75,10 @@ def link_width(card: Card) -> int:
 
 
 SECTION_META = [
-    "AGENTS  ·  RESEARCH  ·  TEACHING",
-    "WEB  ·  ROBOTS  ·  HARDWARE",
-    "REFRESHED DAILY",
-    "WHAT EACH TOOL WAS FOR",
+    "agents, research and teaching",
+    "the web, robots and hardware",
+    "kept daily by GitHub Actions",
+    "and what each was used for",
 ]
 
 
@@ -92,12 +92,16 @@ def build(data: dict) -> tuple[dict[str, str], str]:
         "seiyuumatch": projects.seiyuumatch, "lerobot": projects.lerobot, "hball": projects.hball,
         "nailong": projects.nailong, "fpga": projects.fpga, "prizes": projects.prizes,
     }
+    if not data.get("release"):
+        # No published release: drop the release button rather than link to an empty page.
+        for card in FEATURED:
+            card.links = [link for link in card.links if "/releases/" not in link.href]
     for card in FEATURED + PROJECTS:
         files[f"card-{card.name}.svg"] = renderers[card.name](data)
         for link in card.links:
             files[button_file(card, link)] = button(link.label, card.pal, BUTTON_WIDTHS[link_width(card)])
-    files["pulse.svg"] = pulse.pulse(data)
-    files["toolkit.svg"] = pulse.toolkit(data)
+    files["almanac.svg"] = pulse.almanac(data)
+    files["instruments.svg"] = pulse.instruments(data)
     return files, readme(files, data)
 
 
@@ -166,14 +170,14 @@ def readme(files: dict[str, str], data: dict) -> str:
     section(2)
     out += [
         '<p align="center">',
-        f'  {img(files, "pulse.svg", "100%", "Contributions over the last year, recent activity, languages and the latest AutoKeeper release")}',
+        f'  {img(files, "almanac.svg", "100%", "Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release")}',
         "</p>",
         "",
     ]
     section(3)
     out += [
         '<p align="center">',
-        f'  {img(files, "toolkit.svg", "100%", "Toolkit: the tools behind these projects and what each was used for")}',
+        f'  {img(files, "instruments.svg", "100%", "Instruments: the tools behind these projects and what each was used for")}',
         "</p>",
         "",
         '<p align="center">',
@@ -189,7 +193,9 @@ def text_version(data: dict) -> list[str]:
     release = data.get("release") or {}
     cal = data["calendar"]
     rows = [
-        f"- **AutoKeeper**: Call of Cthulhu 7e with an AI keeper, terminal or browser. Latest release {release.get('tag', '')}. [Repository]({GH}/autokeeper)",
+        f"- **AutoKeeper**: Call of Cthulhu 7e with an AI keeper, terminal or browser."
+        + (f" Latest release {release['tag']}." if release.get("tag") else "")
+        + f" [Repository]({GH}/autokeeper)",
         f"- **CompSkill**: compiling execution experience for skill retrieval; first-author paper, code and compressor weights. [Repository]({GH}/CompSkill)",
         f"- **From y = ax + b to MiniMind**: an open deep learning textbook, adopted for a university elective. [Repository]({GH}/quickly_access_to_deeplearning)",
         "- **SeiyuuMatch**: face retrieval over 119 voice actors. [seiyuumatch.org](https://seiyuumatch.org)",
@@ -198,6 +204,6 @@ def text_version(data: dict) -> list[str]:
         f"- **naiLongRacing**: a pseudo-3D racer in C on openvela. [openvela branch]({GH}/naiLongRacing/tree/openvela)",
         f"- **FPGA CPU**: RV32IM five-stage pipeline on a Spartan-6 board. [fpga_cpu]({GH}/fpga_cpu)",
         "- **Prizes**: RoboMaster University League and CUMCM (China Undergraduate Mathematical Contest in Modeling), national 2nd (2026); electronics design contest, provincial 2nd (2026) and 3rd (2025).",
-        f"- **Pulse**: {cal['total']} contributions in the last year; {data['stars']} stars across {data['public_repos']} public repositories.",
+        f"- **Almanac**: {cal['total']} contributions in the last year; {data['stars']} stars across {data['public_repos']} public repositories.",
     ]
     return ["<details>", "<summary>Text version</summary>", "", *rows, "", "</details>", ""]

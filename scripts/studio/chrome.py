@@ -6,9 +6,9 @@ import json
 import math
 import random
 
-from .data import short_date
+from .data import long_date
 from .svg import SRC, Svg, cap_height, data_uri, delay, measure, num
-from .theme import PAGE, crosshair, grain, polyline, torn_rect
+from .theme import GOLD, PAGE, crosshair, frame, grain, polyline, torn_rect
 
 TAGLINE = ["Agents", "·", "Reinforcement", "learning", "·", "Robotics"]
 
@@ -94,31 +94,29 @@ def arc(cx: float, cy: float, r: float, start: float, end: float) -> str:
 NAV = [
     ("I", "Featured", "featured"),
     ("II", "Projects", "projects"),
-    ("III", "Pulse", "pulse"),
-    ("IV", "Toolkit", "toolkit"),
+    ("III", "Almanac", "almanac"),
+    ("IV", "Instruments", "instruments"),
 ]
 
 
 def nav(index: int) -> str:
     numeral, label, _ = NAV[index]
     pal = PAGE
-    w, h = 400, 80
+    w, h = 400, 84
     svg = Svg(w, h, f"{numeral}. {label}")
     svg.style(
-        "@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}",
-        f".bob{{animation:bob 1.6s ease-in-out {num(1 + index * 0.15)}s 3 both}}",
+        "@keyframes bob{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}",
+        f".bob{{animation:bob 1.8s ease-in-out {num(1 + index * 0.15)}s 3 both}}",
     )
-    numeral_w = measure(numeral, "italic", 38)
+    numeral_w = measure(numeral, "italic", 40)
+    hand_x, hand_y = w - 34, 40
     svg.add(
-        f'<rect x=".5" y=".5" width="{w - 1}" height="{h - 1}" rx="12" fill="{pal.bg}" stroke="{pal.line}"/>',
-        grain(svg, 0, 0, w, h, 0.4),
-        f'<g class="fade" {delay(index * 0.1)}>' + svg.text(24, 50, numeral, "italic", 38, pal.accent) + "</g>",
-        f'<g class="fade" {delay(0.1 + index * 0.1)}>'
-        + svg.text(24 + numeral_w + 16, 48, label.upper(), "mono-b", 21, pal.ink, tracking=2.6)
-        + "</g>",
-        f'<g class="bob">' + svg.text(w - 24, 49, "↓", "mono-b", 22, pal.dim, "end") + "</g>",
-        f'<rect x="24" y="63" width="{w - 48}" height="1" fill="{pal.line}"/>',
-        f'<rect class="grow" {delay(0.3 + index * 0.12)} x="24" y="62" width="56" height="2.5" fill="{pal.accent}"/>',
+        f'<rect width="{w}" height="{h}" rx="10" fill="{pal.bg}"/>',
+        grain(svg, 0, 0, w, h, 0.5),
+        frame(w, h, 10, pal.line, GOLD, 6),
+        f'<g class="fade" {delay(index * 0.1)}>' + svg.text(26, 55, numeral, "italic", 40, GOLD) + "</g>",
+        f'<g class="fade" {delay(0.1 + index * 0.1)}>' + svg.text(26 + numeral_w + 14, 53, label, "allsc", 24, pal.ink, tracking=2.2) + "</g>",
+        f'<g class="bob">' + svg.text(hand_x, hand_y + 10, "☞", "serif", 32, GOLD, "middle", attrs='opacity=".8"') + "</g>",
     )
     return svg.render()
 
@@ -128,54 +126,55 @@ def section(index: int, meta: str) -> str:
     pal = PAGE
     w, h = 1200, 112
     svg = Svg(w, h, f"{numeral}. {title}")
-    numeral_w = measure(numeral, "italic", 30)
-    title_w = measure(title, "serif", 40)
+    numeral_w = measure(numeral, "italic", 32)
+    title_w = measure(title, "serif", 42)
     scrap_w = 48 + numeral_w + 16 + title_w
-    scrap = torn_rect(22, 26, scrap_w, 60, 3.2, seed=40 + index, edges="lr")
-    paper = svg.uid("paper")
+    scrap = torn_rect(24, 26, scrap_w, 60, 3.2, seed=40 + index, edges="lr")
+    paper, clip = svg.uid("paper"), svg.uid("scrap")
     svg.define(
-        f'<linearGradient id="{paper}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9b9998"/>'
-        '<stop offset="1" stop-color="#7f7d7c"/></linearGradient>'
+        f'<linearGradient id="{paper}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a3a09d"/>'
+        '<stop offset="1" stop-color="#85817c"/></linearGradient>',
+        f'<clipPath id="{clip}"><path d="{scrap}"/></clipPath>',
     )
-    clip = svg.uid("scrap")
-    svg.define(f'<clipPath id="{clip}"><path d="{scrap}"/></clipPath>')
-    line_x = 22 + scrap_w + 28
-    meta_w = measure(meta, "mono-b", 12, 2.4)
-    ticks = "".join(f"M{num(x)} 56v5" for x in range(int(line_x) + 40, int(w - 40 - meta_w - 30), 40))
+    line_x = 24 + scrap_w + 30
+    meta_w = measure(meta, "italic", 22)
+    end_x = w - 44 - meta_w - 26
     svg.add(
-        f'<rect x=".5" y=".5" width="{w - 1}" height="{h - 1}" rx="14" fill="{pal.bg}" stroke="{pal.line}"/>',
-        grain(svg, 0, 0, w, h, 0.4),
+        f'<rect width="{w}" height="{h}" rx="12" fill="{pal.bg}"/>',
+        grain(svg, 0, 0, w, h, 0.5),
+        frame(w, h, 12, pal.line, GOLD, 7),
         f'<g class="fade" {delay(0.05)}><path d="{scrap}" transform="translate(3 4)" fill="#000" opacity=".45"/>'
         f'<path d="{scrap}" fill="url(#{paper})"/><g clip-path="url(#{clip})">{grain(svg, 0, 0, w, h, 0.9)}</g>'
-        + svg.text(46, 68, numeral, "italic", 30, "#2a2626")
-        + svg.text(46 + numeral_w + 16, 69, title, "serif", 40, "#171414")
+        + svg.text(48, 69, numeral, "italic", 32, "#2a2626")
+        + svg.text(48 + numeral_w + 16, 70, title, "serif", 42, "#171414")
         + "</g>",
-        f'<path class="draw" {delay(0.25)} pathLength="1" d="M{num(line_x)} 56H{num(w - 40 - meta_w - 24)}" stroke="{pal.line}" stroke-width="1.2" fill="none"/>',
-        f'<path class="fade" {delay(0.9)} d="{ticks}" stroke="{pal.line}" stroke-width="1.2"/>',
-        f'<g class="fade" {delay(0.6)}>' + svg.text(w - 40, 60, meta, "mono-b", 12, pal.dim, "end", tracking=2.4) + "</g>",
+        f'<path class="draw" {delay(0.25)} pathLength="1" d="M{num(line_x)} 57H{num(end_x)}" stroke="{GOLD}" stroke-opacity=".45" stroke-width="1.3" fill="none"/>',
+        f'<g class="fade" {delay(0.9)}>' + svg.text((line_x + end_x) / 2, 64, "❦", "serif", 22, GOLD, "middle") + "</g>",
+        f'<g class="fade" {delay(0.6)}>' + svg.text(w - 44, 64, meta, "italic", 22, pal.dim, "end") + "</g>",
     )
     return svg.render()
 
 
 def footer(data: dict) -> str:
     pal = PAGE
-    w, h = 1200, 150
+    w, h = 1200, 156
     svg = Svg(w, h, "Refreshed daily by GitHub Actions")
-    strip = torn_rect(-10, 40, w + 20, 50, 5, seed=12, edges="tb")
+    strip = torn_rect(-10, 38, w + 20, 54, 5, seed=12, edges="tb")
     paper, clip = svg.uid("paper"), svg.uid("strip")
     svg.define(
-        f'<linearGradient id="{paper}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6d6b6a"/>'
-        '<stop offset=".55" stop-color="#8d8b8a"/><stop offset="1" stop-color="#6a6867"/></linearGradient>',
+        f'<linearGradient id="{paper}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#76736f"/>'
+        '<stop offset=".55" stop-color="#9a9691"/><stop offset="1" stop-color="#726f6b"/></linearGradient>',
         f'<clipPath id="{clip}"><path d="{strip}"/></clipPath>',
     )
-    refreshed = short_date(data["refreshed"] + "T00:00:00Z").upper()
+    refreshed = long_date(data["refreshed"] + "T00:00:00Z")
     svg.add(
-        f'<rect x=".5" y=".5" width="{w - 1}" height="{h - 1}" rx="14" fill="{pal.bg}" stroke="{pal.line}"/>',
+        f'<rect width="{w}" height="{h}" rx="12" fill="{pal.bg}"/>',
         f'<path d="{strip}" transform="translate(0 4)" fill="#000" opacity=".5"/>',
         f'<path d="{strip}" fill="url(#{paper})"/>',
         f'<g clip-path="url(#{clip})">{grain(svg, 0, 0, w, h, 0.9)}</g>',
-        svg.text(40, 71, f"SATOSHINJI2992  ·  REFRESHED {refreshed} BY GITHUB ACTIONS", "mono-b", 13, "#1b1919", tracking=2.6),
-        svg.text(w - 40, 71, "↑  BACK TO TOP", "mono-b", 13, "#1b1919", "end", tracking=2.6),
-        svg.text(40, 126, "SET IN CORMORANT GARAMOND AND JETBRAINS MONO  ·  DRAWN BY A STANDARD-LIBRARY PYTHON SCRIPT", "mono", 11, pal.dim, tracking=1.8),
+        svg.text(44, 73, f"satoshinji2992 · refreshed {refreshed} by GitHub Actions", "allsc", 18, "#1b1919", tracking=2.2),
+        svg.text(w - 44, 73, "Back to top ↑", "allsc", 18, "#1b1919", "end", tracking=2.2),
+        svg.text(w / 2, 132, "Set in Cormorant Garamond; drawn by a standard-library Python script.", "italic", 20, pal.dim, "middle"),
+        frame(w, h, 12, pal.line, GOLD, 7),
     )
     return svg.render()

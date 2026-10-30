@@ -158,11 +158,7 @@
         1
       ]
     ],
-    "release": {
-      "tag": "v0.0.6.5",
-      "published_at": "2026-10-28T06:26:57Z",
-      "url": "https://github.com/satoshinji2992/autokeeper/releases/tag/v0.0.6.5"
-    },
+    "release": null,
     "calendar": {
       "total": 1053,
       "start": "2025-10-26",

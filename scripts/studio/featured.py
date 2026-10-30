@@ -4,17 +4,21 @@ from __future__ import annotations
 
 import random
 
-from .data import short_date
-from .svg import SRC, Svg, cap_height, data_uri, delay, fit, measure, num, wrap
+from .data import long_date
+from .svg import SRC, Svg, data_uri, delay, fit, measure, num, wrap
 from .theme import (
     AUTOKEEPER,
     COMPSKILL,
     DEEP,
+    FLICKER,
+    GOLD,
+    ROMAN,
     Plate,
     arrow,
     bullet_lines,
     grain,
     kicker,
+    ornament_rule,
     seal,
     sketch_line,
     sketch_loop,
@@ -23,13 +27,13 @@ from .theme import (
 )
 
 AK_FRAMES = [
-    ("title", "TITLE SCREEN"),
-    ("library", "INVESTIGATION"),
-    ("map", "TOWN MAP"),
-    ("combat", "COMBAT"),
-    ("styles", "PICTURE STYLES"),
+    ("title", "the title screen"),
+    ("library", "reading old papers in the library"),
+    ("map", "the town map"),
+    ("combat", "a fight, rolled by the rules"),
+    ("styles", "four ways to draw a picture"),
 ]
-AK_LOOP = 25  # seconds; five frames of five seconds
+AK_LOOP = 25  # seconds; five reels of five seconds
 
 
 def crossfade(name: str, count: int, index: int, fade: float = 1.6) -> str:
@@ -45,73 +49,63 @@ def crossfade(name: str, count: int, index: int, fade: float = 1.6) -> str:
     return f"@keyframes {name}{{" + "".join(f"{num(p)}%{{opacity:{o}}}" for p, o in stops) + "}"
 
 
-def meta_stars(svg: Svg, x: float, y: float, stars: int, color: str, size: float = 14) -> tuple[str, float]:
+def meta_stars(svg: Svg, x: float, y: float, stars: int, color: str, size: float = 18, face: str = "italic") -> tuple[str, float]:
     """A drawn star and a count; returns the markup and the x after it."""
-    r = size * 0.48
-    out = star(x + r, y - cap_height("mono-b", size) / 2, r, color) + svg.text(x + 2 * r + 7, y, str(stars), "mono-b", size, color)
-    return out, x + 2 * r + 7 + measure(str(stars), "mono-b", size)
+    r = size * 0.34
+    out = star(x + r, y - size * 0.3, r, color) + svg.text(x + 2 * r + 6, y, str(stars), face, size, color)
+    return out, x + 2 * r + 6 + measure(str(stars), face, size)
 
 
 def autokeeper(data: dict) -> str:
     pal = AUTOKEEPER
     w, h = 1200, 600
-    svg = Svg(w, h, "AutoKeeper: play Call of Cthulhu 7th edition with an AI keeper, in the terminal or the browser")
+    svg = Svg(w, h, "AutoKeeper: play Call of Cthulhu, seventh edition, with an AI keeper, in the terminal or the browser")
     plate = Plate(svg, pal)
     plate.open()
     glow = svg.uid("glow")
     svg.define(
-        f'<radialGradient id="{glow}" cx=".7" cy=".45" r=".65">'
-        '<stop offset="0" stop-color="#3b1612" stop-opacity=".7"/>'
+        f'<radialGradient id="{glow}" cx=".68" cy=".46" r=".62">'
+        '<stop offset="0" stop-color="#4a1d14" stop-opacity=".7"/>'
         f'<stop offset="1" stop-color="{pal.bg}" stop-opacity="0"/></radialGradient>'
     )
-    svg.add(f'<rect width="{w}" height="{h}" fill="url(#{glow})"/>')
-    svg.add(f'<g opacity=".17"><g class="spin" style="animation-duration:180s">{seal(386, 132, 104, pal.accent2)}</g></g>')
+    svg.style(FLICKER)
+    svg.add(f'<rect class="flicker" width="{w}" height="{h}" fill="url(#{glow})"/>')
+    svg.add(f'<g opacity=".2"><g class="spin" style="animation-duration:200s">{seal(390, 136, 110, GOLD, 0.8)}</g></g>')
 
-    x = 56
-    svg.add(kicker(svg, x, 88, "CALL OF CTHULHU 7E  ·  OPEN SOURCE", pal.accent))
-    size = fit("AutoKeeper", "serif", 94, 392)
+    x = 58
+    svg.add(kicker(svg, x, 90, "Call of Cthulhu · Seventh Edition", pal.accent))
+    size = fit("AutoKeeper", "serif", 92, 390)
     svg.add(f'<g class="rise" {delay(0.15)}>' + svg.text(x - 4, 172, "AutoKeeper", "serif", size, pal.ink) + "</g>")
-    tagline = wrap("Play Call of Cthulhu with an AI keeper, in the terminal or the browser.", "italic", 27, 392)
+    tagline = wrap("Play Call of Cthulhu with an AI keeper, in the terminal or the browser.", "italic", 27, 390)
     svg.add(f'<g class="rise" {delay(0.3)}>' + svg.lines(x, 218, tagline, 33, face="italic", size=27, fill="#cbbda4") + "</g>")
+    svg.add(ornament_rule(svg, x, 448, 284, GOLD, at=0.45))
     bullets = [
-        "LangGraph agents: keeper, NPCs, arbiter",
-        "7e rules by the book, physics dice",
+        "keeper, NPCs and arbiter as LangGraph agents",
+        "seventh-edition rules, physics-thrown dice",
         "true-colour ASCII art, procedural music",
-        "solo or online, terminal or browser",
+        "solo or online, in a terminal or a browser",
     ]
-    svg.add(bullet_lines(svg, x, 320, bullets, "#dccfb7", pal.accent2, size=15, leading=31, at=0.55))
-    svg.add(
-        f'<g class="fade" {delay(1.1)}>'
-        + svg.text(x, 470, "DEEPSEEK · CLAUDE · CODEX · OLLAMA", "mono-b", 12, pal.dim, tracking=2.2)
-        + "</g>"
-    )
+    svg.add(bullet_lines(svg, x, 332, bullets, "#dccfb6", GOLD, size=20, leading=32, at=0.6))
+    svg.add(f'<g class="fade" {delay(1.1)}>' + svg.text(x, 478, "DeepSeek · Claude · Codex · Ollama", "allsc", 15, pal.dim, tracking=2.2) + "</g>")
 
     release = data.get("release") or {}
-    tag = release.get("tag", "")
     repo = data["repos"].get("autokeeper", {})
-    meta = [f'<g class="fade" {delay(1.25)}>']
-    cx = x
-    if tag:
-        pill = measure(tag, "mono-b", 14, 1) + 30
-        meta.append(
-            f'<rect x="{cx}" y="514" width="{num(pill)}" height="34" rx="17" fill="none" stroke="{pal.accent2}" stroke-opacity=".8"/>'
-            + svg.text(cx + 15, 536, tag, "mono-b", 14, pal.accent2, tracking=1)
-        )
-        cx += pill + 16
-        meta.append(svg.text(cx, 536, f"released {short_date(release.get('published_at'))}", "mono", 13, pal.dim))
-        cx += measure(f"released {short_date(release.get('published_at'))}", "mono", 13) + 22
-    stars_markup, _ = meta_stars(svg, cx, 536, int(repo.get("stars", 0)), pal.dim, 13)
-    meta.append(stars_markup + "</g>")
-    svg.add("".join(meta))
+    if release:
+        line = f"Latest edition {release.get('tag', '')}, {long_date(release.get('published_at'))}"
+    else:
+        line = f"Last revised {long_date(repo.get('pushed_at'))}"
+    stars_markup = ""
+    if int(repo.get("stars", 0)):
+        stars_markup, _ = meta_stars(svg, x + measure(line, "italic", 20) + 22, 532, int(repo.get("stars", 0)), pal.dim, 20)
+    svg.add(f'<g class="fade" {delay(1.25)}>' + svg.text(x, 532, line, "italic", 20, "#c9b99d") + stars_markup + "</g>")
 
-    # Film strip and projected screenshots.
+    # A reel of screenshots in an old projector: sepia, scratches and a soft flicker.
     sx, sy, sw, sh = 476, 40, 690, 470
     ix, iy, iw, ih = 492, 90, 658, 370
-    strip = svg.uid("strip")
-    picture = svg.uid("picture")
+    strip, picture = svg.uid("strip"), svg.uid("picture")
     svg.define(
-        f'<clipPath id="{strip}"><rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="8"/></clipPath>',
-        f'<clipPath id="{picture}"><rect x="{ix}" y="{iy}" width="{iw}" height="{ih}" rx="3"/></clipPath>',
+        f'<clipPath id="{strip}"><rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="6"/></clipPath>',
+        f'<clipPath id="{picture}"><rect x="{ix}" y="{iy}" width="{iw}" height="{ih}" rx="2"/></clipPath>',
     )
     pitch = 26
     holes = "".join(
@@ -128,12 +122,12 @@ def autokeeper(data: dict) -> str:
         f".feed{{animation:feed {AK_LOOP}s linear infinite}}",
         "@keyframes drift{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}",
         f".drift{{animation:drift {AK_LOOP}s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 50%}}",
-        f"@keyframes roll{{from{{transform:translateY(0)}}to{{transform:translateY({ih + 90}px)}}}}",
-        ".roll{animation:roll 7s linear infinite}",
+        "@keyframes gate{0%,100%{opacity:1}23%{opacity:.9}41%{opacity:.97}62%{opacity:.88}80%{opacity:.96}}",
+        ".gate{animation:gate 2.6s steps(6) infinite}",
     )
     svg.add(
-        f'<rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="8" fill="#070504" stroke="#2a1d19"/>',
-        f'<g clip-path="url(#{strip})"><g class="feed" fill="#24191a">{holes}</g></g>',
+        f'<rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="6" fill="#080504" stroke="#2c1f1a"/>',
+        f'<g clip-path="url(#{strip})"><g class="feed" fill="#22181a">{holes}</g></g>',
     )
     frames = []
     for i, (name, _) in enumerate(AK_FRAMES):
@@ -143,258 +137,261 @@ def autokeeper(data: dict) -> str:
             f'<image class="ak{i}" href="{data_uri(SRC / "autokeeper" / f"{name}.jpg")}" x="{ix}" y="{iy}" '
             f'width="{iw}" height="{ih}" preserveAspectRatio="xMidYMid slice"{hidden}/>'
         )
-    scan, band, vignette = svg.uid("scan"), svg.uid("band"), svg.uid("vignette")
+    vignette = svg.uid("vignette")
     svg.define(
-        f'<pattern id="{scan}" width="4" height="4" patternUnits="userSpaceOnUse">'
-        '<rect width="4" height="1.5" fill="#000" opacity=".55"/></pattern>',
-        f'<linearGradient id="{band}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/>'
-        '<stop offset=".5" stop-color="#ffe9d0" stop-opacity=".07"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>',
-        f'<radialGradient id="{vignette}" cx=".5" cy=".5" r=".72"><stop offset=".55" stop-color="#000" stop-opacity="0"/>'
-        '<stop offset="1" stop-color="#000" stop-opacity=".62"/></radialGradient>',
+        f'<radialGradient id="{vignette}" cx=".5" cy=".5" r=".7"><stop offset=".5" stop-color="#000" stop-opacity="0"/>'
+        '<stop offset="1" stop-color="#140904" stop-opacity=".8"/></radialGradient>'
     )
+    rng = random.Random(1890)
+    scratches = []
+    for k in range(4):
+        sx0 = rng.uniform(ix + 40, ix + iw - 40)
+        period = rng.uniform(2.2, 5.5)
+        svg.style(
+            f"@keyframes scratch{k}{{0%,100%{{opacity:0;transform:translateX(0)}}"
+            f"{num(rng.uniform(5, 30))}%{{opacity:.5;transform:translateX({num(rng.uniform(-12, 12))}px)}}"
+            f"{num(rng.uniform(32, 40))}%{{opacity:0}}{num(rng.uniform(60, 80))}%{{opacity:.3;transform:translateX({num(rng.uniform(-30, 30))}px)}}"
+            f"{num(rng.uniform(82, 90))}%{{opacity:0}}}}"
+        )
+        scratches.append(
+            f'<path d="M{num(sx0)} {iy}L{num(sx0 + rng.uniform(-4, 4))} {iy + ih}" stroke="#f4e7cf" stroke-width="{num(rng.uniform(.5, 1.1))}" '
+            f'opacity="0" style="animation:scratch{k} {num(period)}s steps(1) infinite"/>'
+        )
     svg.add(
         f'<g clip-path="url(#{picture})"><rect x="{ix}" y="{iy}" width="{iw}" height="{ih}" fill="#000"/>'
-        f'<g class="drift">{"".join(frames)}</g>'
-        f'<rect x="{ix}" y="{iy}" width="{iw}" height="{ih}" fill="url(#{scan})" opacity=".4"/>'
-        f'<rect class="roll" x="{ix}" y="{iy - 90}" width="{iw}" height="90" fill="url(#{band})"/>'
-        f'<rect x="{ix}" y="{iy}" width="{iw}" height="{ih}" fill="url(#{vignette})"/></g>',
-        f'<rect x="{ix + .5}" y="{iy + .5}" width="{iw - 1}" height="{ih - 1}" rx="3" fill="none" stroke="#000" stroke-opacity=".6"/>',
+        f'<g class="gate"><g class="drift">{"".join(frames)}</g>'
+        f'<rect x="{ix}" y="{iy}" width="{iw}" height="{ih}" fill="#6e4a2a" opacity=".5" style="mix-blend-mode:color"/>'
+        f'<rect x="{ix}" y="{iy}" width="{iw}" height="{ih}" fill="#3a2414" opacity=".25" style="mix-blend-mode:multiply"/></g>'
+        + grain(svg, ix, iy, iw, ih, 1)
+        + "".join(scratches)
+        + f'<rect x="{ix}" y="{iy}" width="{iw}" height="{ih}" fill="url(#{vignette})"/></g>',
+        f'<rect x="{ix + .5}" y="{iy + .5}" width="{iw - 1}" height="{ih - 1}" rx="2" fill="none" stroke="#000" stroke-opacity=".6"/>',
     )
-    # Caption and progress, in step with the frames.
+    # Caption and reel numerals, in step with the frames.
     for i, (_, label) in enumerate(AK_FRAMES):
         hidden = ' opacity="0"' if i else ""
+        reel = f"Reel {ROMAN[i + 1]}"
         svg.add(
             f'<g class="ak{i}"{hidden}>'
-            + svg.text(sx + 2, 553, f"{i + 1:02d} / {len(AK_FRAMES):02d}", "mono-b", 13, pal.accent, tracking=2)
-            + svg.text(sx + 108, 553, label, "mono-b", 13, pal.ink, tracking=2.6)
+            + svg.text(sx + 2, 553, reel, "allsc", 15, pal.accent, tracking=2.4)
+            + svg.text(sx + 2 + measure(reel, "allsc", 15, 2.4) + 16, 553, label, "italic", 21, pal.ink)
             + "</g>"
         )
-    bar_w, gap = 50, 8
-    bx0 = sx + sw - len(AK_FRAMES) * bar_w - (len(AK_FRAMES) - 1) * gap
-    for i in range(len(AK_FRAMES)):
-        s, e = i * 20, (i + 1) * 20
-        stops = f"0%,{s}%{{transform:scaleX(0)}}" + (
-            "100%{transform:scaleX(1)}" if e >= 100 else f"{e}%,99.6%{{transform:scaleX(1)}}100%{{transform:scaleX(0)}}"
-        )
-        svg.style(
-            f"@keyframes akp{i}{{{stops}}}",
-            f".akp{i}{{animation:akp{i} {AK_LOOP}s linear infinite;transform-box:fill-box;transform-origin:0 50%}}",
-        )
-        bx = bx0 + i * (bar_w + gap)
+    nx = sx + sw
+    for i in reversed(range(len(AK_FRAMES))):
+        numeral = ROMAN[i + 1]
+        nx -= measure(numeral, "allsc", 16, 1.5)
+        hidden = ' opacity="0"' if i else ""
         svg.add(
-            f'<rect x="{bx}" y="547" width="{bar_w}" height="3" rx="1.5" fill="{pal.line}"/>'
-            f'<rect class="akp{i}" x="{bx}" y="547" width="{bar_w}" height="3" rx="1.5" fill="{pal.accent}"/>'
+            svg.text(nx, 553, numeral, "allsc", 16, pal.line, tracking=1.5)
+            + f'<g class="ak{i}"{hidden}>' + svg.text(nx, 553, numeral, "allsc", 16, GOLD, tracking=1.5) + "</g>"
         )
-    plate.close("01 / 09", corner="tl")
+        nx -= 18
+    plate.close(1, corner="tl")
     return svg.render()
 
 
 def compskill(data: dict) -> str:
     pal = COMPSKILL
-    ink, blue, red, lead = pal.ink, pal.accent2, pal.accent, "#6c665d"
+    ink, blue, red, lead, cell = pal.ink, pal.accent2, pal.accent, pal.dim, "#cbccce"
+    box = "#efe4c9"
     w, h = 1200, 640
-    svg = Svg(w, h, "CompSkill: compiling execution experience for skill retrieval")
+    svg = Svg(w, h, "CompSkill: compiling execution experience for skill retrieval; first-author paper")
     sheet = torn_rect(10, 18, 1180, 604, 5.5, seed=29, edges="tb")
-    clip, paper, dots = svg.uid("sheet"), svg.uid("paper"), svg.uid("dots")
+    clip, paper, burn = svg.uid("sheet"), svg.uid("paper"), svg.uid("burn")
     svg.define(
         f'<clipPath id="{clip}"><path d="{sheet}"/></clipPath>',
-        f'<linearGradient id="{paper}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1ebdf"/>'
-        '<stop offset=".6" stop-color="#e8e0cf"/><stop offset="1" stop-color="#ddd3bf"/></linearGradient>',
-        f'<pattern id="{dots}" width="24" height="24" patternUnits="userSpaceOnUse">'
-        '<circle cx="12" cy="12" r="1" fill="#6f7f93" opacity=".3"/></pattern>',
+        f'<linearGradient id="{paper}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eee3c8"/>'
+        '<stop offset=".6" stop-color="#e3d4b3"/><stop offset="1" stop-color="#d5c19b"/></linearGradient>',
+        f'<radialGradient id="{burn}" cx=".5" cy=".5" r=".75"><stop offset=".62" stop-color="#6b4a24" stop-opacity="0"/>'
+        '<stop offset="1" stop-color="#6b4a24" stop-opacity=".4"/></radialGradient>',
+    )
+    rng = random.Random(1897)
+    foxing = "".join(
+        f'<circle cx="{num(rng.uniform(30, 1170))}" cy="{num(rng.uniform(30, 610))}" r="{num(rng.uniform(4, 22))}" '
+        f'fill="#8a6234" opacity="{num(rng.uniform(.04, .11))}"/>'
+        for _ in range(22)
     )
     svg.add(
-        f'<path d="{sheet}" transform="translate(5 8)" fill="#000" opacity=".3"/>',
+        f'<path d="{sheet}" transform="translate(5 8)" fill="#000" opacity=".32"/>',
         f'<path d="{sheet}" fill="url(#{paper})"/>',
-        f'<g clip-path="url(#{clip})">',
-        f'<rect x="452" y="40" width="720" height="570" fill="url(#{dots})"/>',
+        f'<g clip-path="url(#{clip})">{foxing}',
         grain(svg, 0, 0, w, h, 0.85),
+        f'<rect width="{w}" height="{h}" fill="url(#{burn})"/>',
+        # A printer's double rule, set inside the torn edges.
+        f'<rect x="34" y="44" width="1132" height="552" fill="none" stroke="{ink}" stroke-opacity=".22"/>'
+        f'<rect x="38" y="48" width="1124" height="544" fill="none" stroke="{ink}" stroke-opacity=".12"/>',
     )
 
     # Left column: title and results.
-    x = 64
-    svg.add(kicker(svg, x, 88, "FIRST-AUTHOR PAPER  ·  CODE", red))
-    size = fit("CompSkill", "serif", 92, 356)
-    svg.add(f'<g class="rise" {delay(0.15)}>' + svg.text(x - 4, 176, "CompSkill", "serif", size, ink) + "</g>")
+    x = 66
+    svg.add(kicker(svg, x, 92, "First-author paper · Code", red))
+    size = fit("CompSkill", "serif", 92, 352)
+    svg.add(f'<g class="rise" {delay(0.15)}>' + svg.text(x - 4, 178, "CompSkill", "serif", size, ink) + "</g>")
     svg.add(
         f'<g class="rise" {delay(0.3)}>'
-        + svg.lines(x, 222, ["Compiling execution experience", "for skill retrieval"], 34, face="italic", size=28, fill="#3a352e")
+        + svg.lines(x, 224, ["Compiling execution experience", "for skill retrieval"], 34, face="italic", size=28, fill="#3e3124")
         + "</g>"
     )
     results = [
-        ("79.8%", "TOOLQA HIT@1 · BASELINE 63.0", "GPT-5.5 executor"),
-        ("70.9", "SKILLRET NDCG@10 · BASELINE 64.0", ""),
-        ("8×", "SMALLER KEYS · 4096 → 512-D", ""),
+        ("79.8%", "ToolQA hit@1 · baseline 63.0"),
+        ("70.9", "SkillRet NDCG@10 · baseline 64.0"),
+        ("8×", "smaller keys · 4096 → 512-d"),
     ]
-    for i, (value, caption, _) in enumerate(results):
-        y = 344 + i * 92
+    for i, (value, caption) in enumerate(results):
+        y = 348 + i * 92
         width = measure(value, "serif", 54)
         svg.add(
             f'<g class="rise" {delay(0.7 + i * 0.18)}>'
             + svg.text(x - 2, y, value, "serif", 54, ink)
-            + svg.text(x, y + 30, caption, "mono-b", 12, lead, tracking=1.6)
+            + svg.text(x, y + 30, caption, "allsc", 15, lead, tracking=1.6)
             + "</g>",
-            f'<path class="draw" {delay(1.3 + i * 0.2)} d="{sketch_line(x - 4, y + 9, x + width + 10, y + 7, seed=i + 3, amp=1.6)}" '
-            f'pathLength="1" fill="none" stroke="{red}" stroke-width="2.2" stroke-linecap="round" opacity=".85"/>',
+            f'<path class="draw" {delay(1.3 + i * 0.2)} d="{sketch_line(x - 4, y + 9, x + width + 10, y + 7, seed=i + 3, amp=1.4)}" '
+            f'pathLength="1" fill="none" stroke="{red}" stroke-width="1.9" stroke-linecap="round" opacity=".8"/>',
         )
     svg.add(
-        f'<path class="draw" {delay(0.4)} d="M430 64V588" pathLength="1" stroke="{blue}" stroke-width="1" '
-        'stroke-dasharray="6 5" opacity=".45" fill="none"/>'
+        f'<path class="draw" {delay(0.4)} d="M430 70V582" pathLength="1" stroke="{blue}" stroke-width="1.35" '
+        'stroke-dasharray="5 5" opacity=".45" fill="none"/>'
     )
 
-    # Test-time path along the top: task → ① → ② → ③ → ④.
+    # The test-time path along the top: task → ① → ② → ③ → ④.
     flow = [("task", ""), ("top-10", "1"), ("score S", "2"), ("6 + ≤4", "3"), ("actor", "4")]
     widths = [measure(label, "serif-m", 22) + (32 if number else 30) for label, number in flow]
-    left, right, y = 476, 1150, 108
+    left, right, y = 476, 1140, 112
     gap = (right - left - sum(widths)) / (len(flow) - 1)
     fx = left
-    stations = []
     for i, ((label, number), width) in enumerate(zip(flow, widths)):
-        parts = []
         if number:
-            parts.append(
-                f'<circle cx="{num(fx + 11)}" cy="{y - 7}" r="11" fill="none" stroke="{ink}" stroke-width="1.3"/>'
-                + svg.text(fx + 11, y - 2.5, number, "mono-b", 12, ink, "middle")
+            part = (
+                f'<circle cx="{num(fx + 11)}" cy="{y - 7}" r="11" fill="none" stroke="{ink}" stroke-width="1.45"/>'
+                + svg.text(fx + 11, y - 2, number, "serif-m", 14, ink, "middle")
+                + svg.text(fx + 30, y, label, "serif-m", 22, ink)
             )
-            parts.append(svg.text(fx + 30, y, label, "serif-m", 22, ink))
         else:
-            parts.append(
-                f'<path d="M{num(fx)} {y - 26}h{num(width)}v32h-{num(width - 22)}l-9 9v-9h-{num(13)}z" fill="#f6f1e6" '
-                f'stroke="{ink}" stroke-width="1.3" stroke-linejoin="round"/>'
+            part = (
+                f'<path d="M{num(fx)} {y - 26}h{num(width)}v32h-{num(width - 22)}l-9 9v-9h-13z" fill="{box}" '
+                f'stroke="{ink}" stroke-width="1.45" stroke-linejoin="round"/>'
                 + svg.text(fx + 14, y - 3, label, "italic", 22, ink)
             )
-        stations.append(f'<g class="fade" {delay(0.5 + i * 0.15)}>' + "".join(parts) + "</g>")
+        svg.add(f'<g class="fade" {delay(0.5 + i * 0.15)}>{part}</g>')
         if i < len(flow) - 1:
             ax = fx + width + 8
-            stations.append(arrow(ax, y - 7, ax + gap - 16, y - 7, ink, 1.3, 7, f'class="fade" {delay(0.6 + i * 0.15)}'))
+            svg.add(arrow(ax, y - 7, ax + gap - 16, y - 7, ink, 1, 7, f'class="fade" {delay(0.6 + i * 0.15)}'))
         fx += width + gap
-    svg.add(*stations)
     svg.style(
-        "@keyframes probe{0%{transform:translateX(0);opacity:0}6%{opacity:1}70%{transform:translateX(650px);opacity:1}"
-        "76%,100%{transform:translateX(650px);opacity:0}}",
-        ".probe{animation:probe 8s cubic-bezier(.45,0,.55,1) 2.5s infinite both}",
+        "@keyframes probe{0%{transform:translateX(0);opacity:0}6%{opacity:1}70%{transform:translateX(640px);opacity:1}"
+        "76%,100%{transform:translateX(640px);opacity:0}}",
+        ".probe{animation:probe 9s cubic-bezier(.45,0,.55,1) 2.5s infinite both}",
     )
     svg.add(
-        f'<path d="M482 130H1146" stroke="{blue}" stroke-width="1" stroke-dasharray="2 5" opacity=".55"/>',
-        f'<circle class="probe" cx="484" cy="130" r="5" fill="{red}"/>',
+        f'<path d="M482 134H1136" stroke="{blue}" stroke-width="1.35" stroke-dasharray="2 5" opacity=".5"/>',
+        f'<circle class="probe" cx="484" cy="134" r="4" fill="{red}"/>',
     )
 
-    # ① compact keys.
     def heading(xx: float, yy: float, number: str, text: str, at: float) -> str:
         return (
-            f'<g class="fade" {delay(at)}><circle cx="{num(xx + 10)}" cy="{num(yy - 7)}" r="10" fill="none" stroke="{ink}" stroke-width="1.2"/>'
-            + svg.text(xx + 10, yy - 2.6, number, "mono-b", 11, ink, "middle")
+            f'<g class="fade" {delay(at)}><circle cx="{num(xx + 10)}" cy="{num(yy - 7)}" r="10" fill="none" stroke="{ink}" stroke-width="1.45"/>'
+            + svg.text(xx + 10, yy - 2.5, number, "serif-m", 13, ink, "middle")
             + svg.text(xx + 28, yy, text, "serif-m", 21, ink)
             + "</g>"
         )
 
-    svg.add(heading(476, 184, "1", "compact keys", 1.0))
-    cells = "".join(
-        f'<rect x="{476 + c * 9}" y="204" width="9" height="15" fill="#c9d5e8" stroke="{blue}" stroke-width=".9"/>' for c in range(16)
-    )
-    short = "".join(
-        f'<rect x="{538 + c * 9}" y="290" width="9" height="15" fill="#c9d5e8" stroke="{blue}" stroke-width=".9"/>' for c in range(2)
-    )
+    # ① compact keys.
+    svg.add(heading(476, 188, "1", "compact keys", 1.0))
+    cells = "".join(f'<rect x="{476 + c * 9}" y="208" width="9" height="15" fill="{cell}" stroke="{blue}" stroke-width="1.25"/>' for c in range(16))
+    short = "".join(f'<rect x="{538 + c * 9}" y="294" width="9" height="15" fill="{cell}" stroke="{blue}" stroke-width="1.25"/>' for c in range(2))
     svg.add(
         f'<g class="fade" {delay(1.1)}>{cells}'
-        + svg.text(476, 240, "4096-d", "mono-b", 12, lead, tracking=0.6)
-        + f'<path d="M524 248H572L560 270H536Z" fill="none" stroke="{ink}" stroke-width="1.3" stroke-linejoin="round"/>'
-        + arrow(548, 222, 548, 244, ink, 1.2, 5)
-        + arrow(548, 272, 547, 287, ink, 1.2, 5)
+        + svg.text(476, 246, "4096-d", "italic", 17, lead)
+        + f'<path d="M524 252H572L560 274H536Z" fill="none" stroke="{ink}" stroke-width="1.45" stroke-linejoin="round"/>'
+        + arrow(548, 226, 548, 248, ink, 1, 5)
+        + arrow(548, 276, 547, 291, ink, 1, 5)
         + short
-        + svg.text(562, 302, "512-d", "mono-b", 12, lead, tracking=0.6)
+        + svg.text(562, 307, "512-d", "italic", 17, lead)
         + "</g>",
         f'<g class="fade" {delay(1.9)}>'
-        + svg.text(476, 352, "×8 fewer", "italic", 21, red)
-        + svg.text(476, 376, "coordinates", "italic", 21, red)
-        + f'<path d="M560 340C590 336 600 322 590 310" fill="none" stroke="{red}" stroke-width="1.4"/>'
+        + svg.text(476, 356, "×8 fewer", "italic", 21, red)
+        + svg.text(476, 380, "coordinates", "italic", 21, red)
+        + f'<path d="M560 344C590 340 600 326 590 314" fill="none" stroke="{red}" stroke-width="1.55"/>'
         + "</g>",
     )
 
     # ② KeyOpt calibration and the skill key.
-    svg.add(heading(664, 184, "2", "KeyOpt calibration", 1.2))
-    ox, oy = 690, 322
+    svg.add(heading(664, 188, "2", "KeyOpt calibration", 1.2))
+    ox, oy = 690, 326
     svg.add(
         f'<g class="fade" {delay(1.4)}>'
-        f'<circle cx="842" cy="240" r="28" fill="none" stroke="{blue}" stroke-width="1.1" stroke-dasharray="4 4"/>'
-        + arrow(ox, oy, 772, 210, ink, 1.6, 9)
-        + arrow(ox, oy, 840, 240, blue, 1.6, 9)
-        + arrow(ox, oy, 826, 220, red, 1.6, 9)
-        + svg.text(752, 206, "q", "italic", 22, ink)
-        + svg.text(852, 268, "k⁰", "italic", 22, blue)
-        + svg.text(818, 210, "k′", "italic", 22, red)
-        + f'<circle cx="{ox}" cy="{oy}" r="3" fill="{ink}"/>'
-        + svg.text(800, 298, "score change ≤ c", "italic", 19, lead)
+        f'<circle cx="842" cy="244" r="28" fill="none" stroke="{blue}" stroke-width="1.35" stroke-dasharray="4 4"/>'
+        + arrow(ox, oy, 772, 214, ink, 1.2, 9)
+        + arrow(ox, oy, 840, 244, blue, 1.2, 9)
+        + arrow(ox, oy, 826, 224, red, 1.2, 9)
+        + svg.text(752, 210, "q", "italic", 22, ink)
+        + svg.text(852, 272, "k⁰", "italic", 22, blue)
+        + svg.text(818, 214, "k′", "italic", 22, red)
+        + f'<circle cx="{ox}" cy="{oy}" r="2.6" fill="{ink}"/>'
+        + svg.text(800, 302, "score change ≤ c", "italic", 19, lead)
         + "</g>"
     )
-    key_cells = []
-    for c in range(20):
-        key_cells.append(
-            f'<rect x="{664 + c * 13}" y="352" width="13" height="18" fill="#c9d5e8" stroke="{blue}" stroke-width=".9"/>'
-        )
+    key_cells = "".join(f'<rect x="{664 + c * 13}" y="356" width="13" height="18" fill="{cell}" stroke="{blue}" stroke-width="1.25"/>' for c in range(20))
     svg.style(
         "@keyframes edit{0%,30%{opacity:.25}38%,62%{opacity:1}75%,100%{opacity:.25}}",
-        ".edit{animation:edit 8s ease-in-out 2.5s infinite both}",
+        ".edit{animation:edit 9s ease-in-out 2.5s infinite both}",
     )
     svg.add(
-        f'<g class="fade" {delay(1.6)}>{"".join(key_cells)}'
-        f'<rect class="edit" x="664" y="373" width="260" height="6" fill="{red}" opacity=".7"/>'
-        f'<rect x="930" y="352" width="18" height="18" fill="#f3ddd5" stroke="{red}" stroke-width="1.1"/>'
-        + svg.text(939, 366, "b", "italic", 17, red, "middle")
-        + svg.text(664, 408, "key = [k⁰ + Δk ; b]", "serif-m", 22, ink)
+        f'<g class="fade" {delay(1.6)}>{key_cells}'
+        f'<rect class="edit" x="664" y="377" width="260" height="5" fill="{red}" opacity=".7"/>'
+        f'<rect x="930" y="356" width="18" height="18" fill="#efd6c8" stroke="{red}" stroke-width="1.35"/>'
+        + svg.text(939, 370, "b", "italic", 17, red, "middle")
+        + svg.text(664, 412, "key = [k⁰ + Δk ; b]", "serif-m", 22, ink)
         + "</g>",
-        f'<g class="fade" {delay(2.1)}>' + svg.text(664, 436, "read with one inner product and a clip", "italic", 19, red) + "</g>",
+        f'<g class="fade" {delay(2.1)}>' + svg.text(664, 440, "read with one inner product and a clip", "italic", 19, red) + "</g>",
     )
 
-    # ③ experience hypergraph.
-    svg.add(heading(978, 184, "3", "hypergraph", 1.4))
-    nodes = [(996, 236), (1032, 214), (1050, 262), (1006, 290), (1092, 224), (1118, 270), (1080, 302)]
-    blob_a = "M984 230C990 200 1040 196 1062 222C1080 246 1060 300 1022 302C990 304 978 262 984 230Z"
-    blob_b = "M1040 252C1046 214 1100 198 1126 230C1140 262 1118 318 1080 314C1050 310 1036 284 1040 252Z"
+    # ③ the experience hypergraph.
+    svg.add(heading(978, 188, "3", "hypergraph", 1.4))
+    nodes = [(996, 240), (1032, 218), (1050, 266), (1006, 294), (1092, 228), (1118, 274), (1080, 306)]
+    blob_a = "M984 234C990 204 1040 200 1062 226C1080 250 1060 304 1022 306C990 308 978 266 984 234Z"
+    blob_b = "M1040 256C1046 218 1100 202 1126 234C1140 266 1118 322 1080 318C1050 314 1036 288 1040 256Z"
     svg.add(
         f'<g class="fade" {delay(1.7)}>'
-        f'<path d="{blob_a}" fill="{blue}" fill-opacity=".13" stroke="{blue}" stroke-width="1.1"/>'
-        f'<path d="{blob_b}" fill="{red}" fill-opacity=".1" stroke="{red}" stroke-width="1.1"/>'
-        f'<path d="M996 236L1032 214L1050 262L1006 290ZM1050 262L1092 224L1118 270L1080 302Z" fill="none" stroke="{ink}" stroke-width="1.1" opacity=".7"/>'
-        + "".join(f'<circle cx="{nx}" cy="{ny}" r="4.5" fill="{ink}"/>' for nx, ny in nodes)
-        + svg.text(978, 344, "attributed events", "mono-b", 12, lead, tracking=0.6)
-        + svg.text(978, 364, "task · executor · version", "mono", 12, lead)
+        f'<path d="{blob_a}" fill="{blue}" fill-opacity=".1" stroke="{blue}" stroke-width="1.35"/>'
+        f'<path d="{blob_b}" fill="{red}" fill-opacity=".08" stroke="{red}" stroke-width="1.35"/>'
+        f'<path d="M996 240L1032 218L1050 266L1006 294ZM1050 266L1092 228L1118 274L1080 306Z" fill="none" stroke="{ink}" stroke-width="1.35" opacity=".7"/>'
+        + "".join(f'<circle cx="{nx}" cy="{ny}" r="4" fill="{ink}"/>' for nx, ny in nodes)
+        + svg.text(978, 350, "attributed events", "italic", 18, lead)
+        + svg.text(978, 372, "task · executor · version", "allsc", 14.5, lead, tracking=1.2)
         + "</g>"
     )
 
     # Between rounds: publish ← fit ← filter ← record ← outcomes, fed by ④.
     svg.add(f'<g class="fade" {delay(2.0)}>' + svg.text(476, 486, "between rounds · support tasks only", "italic", 20, blue) + "</g>")
-    steps = ["PUBLISH", "FIT", "FILTER", "RECORD", "OUTCOMES"]
+    steps = ["Publish", "Fit", "Filter", "Record", "Outcomes"]
     bw, bgap, by = 84, 13, 504
-    svg.style(
-        "@keyframes back{to{stroke-dashoffset:22}}",
-        ".back{animation:back 1.6s linear infinite}",
-    )
+    svg.style("@keyframes back{to{stroke-dashoffset:22}}", ".back{animation:back 2.4s linear infinite}")
     for i, step in enumerate(steps):
         bx = 476 + i * (bw + bgap)
         svg.add(
-            f'<g class="fade" {delay(2.1 + i * 0.08)}><rect x="{bx}" y="{by}" width="{bw}" height="32" rx="4" fill="#f6f1e6" stroke="{ink}" stroke-width="1.2"/>'
-            + svg.text(bx + bw / 2, by + 21, step, "mono-b", 11.5, ink, "middle", tracking=1)
+            f'<g class="fade" {delay(2.1 + i * 0.08)}><rect x="{bx}" y="{by}" width="{bw}" height="32" rx="2" fill="{box}" stroke="{ink}" stroke-width="1.45"/>'
+            + svg.text(bx + bw / 2, by + 21, step, "allsc", 14, ink, "middle", tracking=1.2)
             + "</g>"
         )
         if i:
-            svg.add(arrow(bx - 2, by + 16, bx - bgap + 3, by + 16, blue, 1.3, 5, f'class="fade" {delay(2.2 + i * 0.08)}'))
-    svg.add(
-        f'<path class="back" d="M{476 + 5 * (bw + bgap) + 30} {by + 16}H{476 + 5 * (bw + bgap) - bgap + 2}" stroke="{blue}" stroke-width="1.3" stroke-dasharray="5 6" fill="none"/>'
-    )
+            svg.add(arrow(bx - 2, by + 16, bx - bgap + 3, by + 16, blue, 1, 5, f'class="fade" {delay(2.2 + i * 0.08)}'))
+    end = 476 + 5 * (bw + bgap)
+    svg.add(f'<path class="back" d="M{end + 30} {by + 16}H{end - bgap + 2}" stroke="{blue}" stroke-width="1.45" stroke-dasharray="5 6" fill="none"/>')
     svg.add(heading(1000, 474, "4", "frozen actor", 1.8))
     for i, name in enumerate(["ToolQA", "AppWorld", "ALFWorld"]):
         wx, wy = 1004 + i * 12, 488 + i * 31
         svg.add(
-            f'<g class="fade" {delay(1.9 + i * 0.1)}><rect x="{wx}" y="{wy}" width="124" height="38" rx="4" fill="#f6f1e6" stroke="{ink}" stroke-width="1.2"/>'
-            f'<path d="M{wx} {wy + 10}H{wx + 124}" stroke="{ink}" stroke-width=".9"/>'
-            + "".join(f'<circle cx="{wx + 8 + d * 7}" cy="{wy + 5}" r="1.7" fill="{ink}"/>' for d in range(3))
-            + svg.text(wx + 10, wy + 26, name, "mono-b", 12, ink, tracking=0.4)
+            f'<g class="fade" {delay(1.9 + i * 0.1)}><rect x="{wx}" y="{wy}" width="124" height="38" rx="2" fill="{box}" stroke="{ink}" stroke-width="1.45"/>'
+            f'<path d="M{wx} {wy + 10}H{wx + 124}" stroke="{ink}" stroke-width="1.15"/>'
+            + "".join(f'<circle cx="{wx + 8 + d * 7}" cy="{wy + 5}" r="1.5" fill="{ink}"/>' for d in range(3))
+            + svg.text(wx + 10, wy + 28, name, "italic", 17, ink)
             + "</g>"
         )
-    svg.add(f'<g class="fade" {delay(2.3)}>' + svg.text(476, 586, "the actor reads the original skill document only", "italic", 19, red) + "</g>")
-    svg.add("</g>", f'<path d="{sheet}" fill="none" stroke="#c9bea8" stroke-width="1"/>')
-    svg.add(svg.text(1150, 62, "02 / 09", "mono", 12, lead, "end", tracking=2.2))
+    svg.add(f'<g class="fade" {delay(2.3)}>' + svg.text(476, 576, "the actor reads the original skill document only", "italic", 19, red) + "</g>")
+    svg.add("</g>", f'<path d="{sheet}" fill="none" stroke="#b9a37d" stroke-width="1.25"/>')
+    svg.add(svg.text(1134, 76, "Plate II", "allsc", 14, lead, "end", tracking=2.4))
     return svg.render()
 
 
@@ -402,15 +399,15 @@ def deep_learning(data: dict) -> str:
     pal = DEEP
     chalk, yellow, pink, blue = pal.ink, pal.accent, pal.accent2, pal.accent3
     w, h = 1200, 600
-    svg = Svg(w, h, "From y = ax + b to MiniMind: an open deep learning textbook, implementation first")
+    svg = Svg(w, h, "From y = ax + b to MiniMind: an open deep learning textbook, adopted for a university elective")
     plate = Plate(svg, pal)
     plate.open()
     glow, grid, dust = svg.uid("glow"), svg.uid("grid"), svg.uid("dust")
     svg.define(
-        f'<radialGradient id="{glow}" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#21302a"/>'
+        f'<radialGradient id="{glow}" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#1f2b25"/>'
         f'<stop offset="1" stop-color="{pal.bg}"/></radialGradient>',
         f'<pattern id="{grid}" width="30" height="30" patternUnits="userSpaceOnUse">'
-        '<path d="M30 0H0V30" fill="none" stroke="#e9f2ec" stroke-opacity=".045"/></pattern>',
+        '<path d="M30 0H0V30" fill="none" stroke="#e9f2ec" stroke-opacity=".03"/></pattern>',
         f'<radialGradient id="{dust}"><stop offset="0" stop-color="#f4f1e8" stop-opacity=".07"/>'
         '<stop offset="1" stop-color="#f4f1e8" stop-opacity="0"/></radialGradient>',
     )
@@ -423,8 +420,8 @@ def deep_learning(data: dict) -> str:
     chalk_dash = 'stroke-dasharray="19 2.5 7 1.8 26 3 11 2" stroke-linecap="round"'
 
     stars = int(data["repos"].get("quickly_access_to_deeplearning", {}).get("stars", 0))
-    x = 56
-    svg.add(kicker(svg, x, 88, "OPEN TEXTBOOK  ·  NUMPY → PYTORCH", yellow))
+    x = 58
+    svg.add(kicker(svg, x, 90, "Open textbook · NumPy → PyTorch", yellow))
     first = "From "
     first_w = measure(first, "serif", 66)
     svg.add(
@@ -433,11 +430,7 @@ def deep_learning(data: dict) -> str:
         + svg.text(x - 3 + first_w, 168, "y = ax + b", "italic", 70, yellow)
         + "</g>",
         f'<g class="rise" {delay(0.3)}>' + svg.text(x - 3, 238, "to MiniMind", "serif", 66, chalk) + "</g>",
-    )
-    svg.add(
-        f'<g class="fade" {delay(0.6)}>'
-        + svg.text(x, 282, "DEEP LEARNING, ONE RUNNABLE EXERCISE AT A TIME", "mono-b", 13, pal.dim, tracking=2.2)
-        + "</g>"
+        f'<g class="fade" {delay(0.6)}>' + svg.text(x, 284, "deep learning, one runnable exercise at a time", "italic", 22, pal.dim) + "</g>",
     )
 
     # The chalk note: adopted for a university elective.
@@ -447,39 +440,37 @@ def deep_learning(data: dict) -> str:
         + svg.text(978, 164, "for a university elective", "italic", 30, pink, "middle")
         + "</g>",
         f'<path class="draw" {delay(1.3)} d="{sketch_loop(978, 140, 176, 56, seed=7)}" pathLength="1" fill="none" '
-        f'stroke="{pink}" stroke-width="2" opacity=".8" {chalk_dash}/>',
-        f'<path class="draw" {delay(2.0)} d="M796 176C740 198 690 196 640 176" pathLength="1" fill="none" stroke="{pink}" stroke-width="2" opacity=".75"/>',
-        f'<path class="fade" {delay(2.6)} d="M652 168L640 176L654 184" fill="none" stroke="{pink}" stroke-width="2" stroke-linecap="round" opacity=".75"/>',
-        f'<g class="fade" {delay(1.6)}>'
-        + svg.text(978, 228, "20 interactive demos · unit-tested exercises", "mono", 13.5, pal.dim, "middle")
-        + "</g>",
+        f'stroke="{pink}" stroke-width="1.9" opacity=".8" {chalk_dash}/>',
+        f'<path class="draw" {delay(2.0)} d="M796 176C740 198 690 196 640 176" pathLength="1" fill="none" stroke="{pink}" stroke-width="1.9" opacity=".75"/>',
+        f'<path class="fade" {delay(2.6)} d="M652 168L640 176L654 184" fill="none" stroke="{pink}" stroke-width="1.9" stroke-linecap="round" opacity=".75"/>',
+        f'<g class="fade" {delay(1.6)}>' + svg.text(978, 230, "twenty interactive demos · unit-tested exercises", "italic", 18, pal.dim, "middle") + "</g>",
     )
 
     panels = [
-        (56, "BLOCK 1", "NumPy from scratch", "Linear · ReLU · backprop → MNIST"),
-        (436, "BLOCK 2", "Convolution & ResNet", "im2col · BatchNorm → CIFAR-100"),
-        (816, "BLOCK 3", "Transformer & MiniMind", "RoPE · GQA · SwiGLU · KV cache"),
+        (58, "Block I", "NumPy from scratch", "Linear, ReLU, backprop → MNIST"),
+        (436, "Block II", "Convolution & ResNet", "im2col, BatchNorm → CIFAR-100"),
+        (816, "Block III", "Transformer & MiniMind", "RoPE, GQA, SwiGLU, KV cache"),
     ]
     for i, (px, tag, title, body) in enumerate(panels):
         at = 1.2 + i * 0.35
+        tag_w = measure(tag, "allsc", 16, 2.4)
         svg.add(
             f'<g class="fade" {delay(at)}>'
-            f'<circle cx="{px + 12}" cy="{334}" r="12" fill="none" stroke="{chalk}" stroke-width="1.6" opacity=".85"/>'
-            + svg.text(px + 12, 339, str(i + 1), "mono-b", 13, chalk, "middle")
-            + svg.text(px + 34, 339, tag, "mono-b", 13, yellow, tracking=2.4)
+            + svg.text(px, 338, tag, "allsc", 16, yellow, tracking=2.4)
+            + f'<path d="{sketch_line(px, 346, px + tag_w, 345, seed=60 + i, amp=0.8)}" fill="none" stroke="{yellow}" stroke-width="1.55" opacity=".55"/>'
             + svg.text(px, 512, title, "serif", 26, chalk)
-            + svg.text(px, 540, body, "mono", 14, pal.dim)
+            + svg.text(px, 540, body, "italic", 19, pal.dim)
             + "</g>"
         )
         if i:
             svg.add(
                 f'<path class="draw" {delay(at + 0.2)} d="{sketch_line(px - 54, 404, px - 18, 402, seed=40 + i, amp=1)}" '
-                f'pathLength="1" fill="none" stroke="{chalk}" stroke-width="2" opacity=".6"/>',
+                f'pathLength="1" fill="none" stroke="{chalk}" stroke-width="1.9" opacity=".6"/>',
                 f'<path class="fade" {delay(at + 0.6)} d="M{px - 26} 395L{px - 17} 402L{px - 27} 409" fill="none" stroke="{chalk}" '
-                'stroke-width="2" stroke-linecap="round" opacity=".6"/>',
+                'stroke-width="1.9" stroke-linecap="round" opacity=".6"/>',
             )
 
-    # Block 1: points and a line that keeps settling onto them.
+    # Block I: points and a line that keeps settling onto them.
     rng = random.Random(4)
     points = []
     for k in range(11):
@@ -487,51 +478,44 @@ def deep_learning(data: dict) -> str:
         points.append((px, 452 - (px - 80) * 0.32 + rng.uniform(-13, 13)))
     svg.style(
         "@keyframes fitline{0%{transform:rotate(-16deg)}55%,85%{transform:rotate(0deg)}100%{transform:rotate(-16deg)}}",
-        ".fitline{animation:fitline 7s cubic-bezier(.3,0,.2,1) 2s infinite both;transform-box:fill-box;transform-origin:50% 50%}",
+        ".fitline{animation:fitline 8s cubic-bezier(.3,0,.2,1) 2s infinite both;transform-box:fill-box;transform-origin:50% 50%}",
     )
     svg.add(
-        f'<path class="draw" {delay(1.3)} d="M74 360V462H372" pathLength="1" fill="none" stroke="{chalk}" stroke-width="1.8" opacity=".7" {chalk_dash}/>',
+        f'<path class="draw" {delay(1.3)} d="M74 360V462H372" pathLength="1" fill="none" stroke="{chalk}" stroke-width="1.7" opacity=".7" {chalk_dash}/>',
         f'<g class="fade" {delay(1.5)} fill="{chalk}">'
-        + "".join(f'<circle cx="{num(px)}" cy="{num(py)}" r="3.4" opacity=".9"/>' for px, py in points)
+        + "".join(f'<circle cx="{num(px)}" cy="{num(py)}" r="3" opacity=".9"/>' for px, py in points)
         + "</g>",
-        f'<g class="fade" {delay(1.8)}><path class="fitline" d="M84 {num(452 - 4 * .32)}L364 {num(452 - 284 * .32)}" stroke="{yellow}" stroke-width="2.6" stroke-linecap="round" fill="none"/></g>',
-        f'<g class="fade" {delay(2.0)}>' + svg.text(300, 456, "loss → 0.042", "mono", 12, pal.dim, "end") + "</g>",
+        f'<g class="fade" {delay(1.8)}><path class="fitline" d="M84 {num(452 - 4 * .32)}L364 {num(452 - 284 * .32)}" stroke="{yellow}" stroke-width="2" stroke-linecap="round" fill="none"/></g>',
+        f'<g class="fade" {delay(2.0)}>' + svg.text(300, 456, "loss → 0.042", "italic", 17, pal.dim, "end") + "</g>",
     )
 
-    # Block 2: a 3×3 window sliding over a 6×6 input, filling a 4×4 output.
+    # Block II: a 3×3 window sliding over a 6×6 input, filling a 4×4 output.
     cell, gx, gy, ox, oy = 16, 456, 358, 612, 382
-    grid_cells = "".join(
-        f'<rect x="{gx + c * cell}" y="{gy + r * cell}" width="{cell}" height="{cell}"/>' for r in range(6) for c in range(6)
-    )
+    grid_cells = "".join(f'<rect x="{gx + c * cell}" y="{gy + r * cell}" width="{cell}" height="{cell}"/>' for r in range(6) for c in range(6))
     positions = [(r, c) for r in range(4) for c in range(4)]
-    slide = "".join(
-        f"{num(k * 100 / 16)}%{{transform:translate({c * cell}px,{r * cell}px)}}" for k, (r, c) in enumerate(positions)
-    )
-    svg.style(
-        f"@keyframes slide{{{slide}100%{{transform:translate(0,0)}}}}",
-        ".slide{animation:slide 9.6s step-end 2.2s infinite both}",
-    )
+    slide = "".join(f"{num(k * 100 / 16)}%{{transform:translate({c * cell}px,{r * cell}px)}}" for k, (r, c) in enumerate(positions))
+    svg.style(f"@keyframes slide{{{slide}100%{{transform:translate(0,0)}}}}", ".slide{animation:slide 12.8s step-end 2.2s infinite both}")
     outputs = []
     for k, (r, c) in enumerate(positions):
         start = k * 100 / 16
         svg.style(
-            f"@keyframes out{k}{{0%{{opacity:.08}}{num(start)}%{{opacity:.08}}{num(start + 0.01)}%,99.9%{{opacity:.85}}100%{{opacity:.08}}}}",
-            f".out{k}{{animation:out{k} 9.6s step-end 2.2s infinite both}}",
+            f"@keyframes out{k}{{0%{{opacity:.08}}{num(start)}%{{opacity:.08}}{num(start + 0.01)}%,99.9%{{opacity:.8}}100%{{opacity:.08}}}}",
+            f".out{k}{{animation:out{k} 12.8s step-end 2.2s infinite both}}",
         )
         outputs.append(f'<rect class="out{k}" x="{ox + c * cell + 1}" y="{oy + r * cell + 1}" width="{cell - 2}" height="{cell - 2}" fill="{blue}"/>')
     svg.add(
-        f'<g class="fade" {delay(1.7)}><g fill="none" stroke="{chalk}" stroke-width="1" opacity=".55">{grid_cells}</g>'
-        f'<rect class="slide" x="{gx}" y="{gy}" width="{cell * 3}" height="{cell * 3}" fill="{yellow}" fill-opacity=".14" stroke="{yellow}" stroke-width="2"/>'
-        + arrow(560, 406, 600, 406, chalk, 1.6, 6, 'opacity=".7"')
-        + svg.text(580, 392, "im2col", "mono", 11.5, pal.dim, "middle")
-        + f'<g fill="none" stroke="{chalk}" stroke-width="1" opacity=".55">'
+        f'<g class="fade" {delay(1.7)}><g fill="none" stroke="{chalk}" stroke-width="1.25" opacity=".55">{grid_cells}</g>'
+        f'<rect class="slide" x="{gx}" y="{gy}" width="{cell * 3}" height="{cell * 3}" fill="{yellow}" fill-opacity=".12" stroke="{yellow}" stroke-width="1.9"/>'
+        + arrow(560, 406, 600, 406, chalk, 1.3, 6, 'opacity=".7"')
+        + svg.text(580, 390, "im2col", "italic", 16, pal.dim, "middle")
+        + f'<g fill="none" stroke="{chalk}" stroke-width="1.25" opacity=".55">'
         + "".join(f'<rect x="{ox + c * cell}" y="{oy + r * cell}" width="{cell}" height="{cell}"/>' for r in range(4) for c in range(4))
         + "</g>"
         + "".join(outputs)
         + "</g>"
     )
 
-    # Block 3: the first chapter's equation as tokens, attended causally.
+    # Block III: the first chapter's equation as tokens, attended causally.
     tokens = ["y", "=", "a", "x", "+", "b"]
     tx0, ty, tw, tgap = 836, 440, 36, 13
     centers = [tx0 + k * (tw + tgap) + tw / 2 for k in range(len(tokens))]
@@ -545,27 +529,28 @@ def deep_learning(data: dict) -> str:
         s, e = (q - 1) * 20, q * 20
         svg.style(
             f"@keyframes att{q}{{0%,{s}%{{opacity:0}}{s + 3}%,{e - 3}%{{opacity:1}}{e}%,100%{{opacity:0}}}}",
-            f".att{q}{{animation:att{q} 10s ease-in-out 2.4s infinite both}}",
+            f".att{q}{{animation:att{q} 12s ease-in-out 2.4s infinite both}}",
         )
         lights.append(
-            f'<g class="att{q}" opacity="0"><path d="{"".join(group)}" fill="none" stroke="{yellow}" stroke-width="2"/>'
-            f'<rect x="{num(centers[q] - tw / 2)}" y="{ty}" width="{tw}" height="30" rx="4" fill="{yellow}" fill-opacity=".16" stroke="{yellow}" stroke-width="1.8"/></g>'
+            f'<g class="att{q}" opacity="0"><path d="{"".join(group)}" fill="none" stroke="{yellow}" stroke-width="1.8"/>'
+            f'<rect x="{num(centers[q] - tw / 2)}" y="{ty}" width="{tw}" height="30" rx="2" fill="{yellow}" fill-opacity=".14" stroke="{yellow}" stroke-width="1.7"/></g>'
         )
     svg.add(
-        f'<g class="fade" {delay(2.0)}><path d="{"".join(arcs)}" fill="none" stroke="{chalk}" stroke-width="1.1" opacity=".22"/>'
+        f'<g class="fade" {delay(2.0)}><path d="{"".join(arcs)}" fill="none" stroke="{chalk}" stroke-width="1.35" opacity=".22"/>'
         + "".join(
-            f'<rect x="{num(cx - tw / 2)}" y="{ty}" width="{tw}" height="30" rx="4" fill="none" stroke="{chalk}" stroke-width="1.4" opacity=".75"/>'
-            + svg.text(cx, ty + 21, tok, "mono-b", 15, chalk, "middle")
+            f'<rect x="{num(cx - tw / 2)}" y="{ty}" width="{tw}" height="30" rx="2" fill="none" stroke="{chalk}" stroke-width="1.55" opacity=".75"/>'
+            + svg.text(cx, ty + 22, tok, "italic", 22, chalk, "middle")
             for cx, tok in zip(centers, tokens)
         )
         + "".join(lights)
         + "</g>"
     )
 
-    footer, fx = [], x
-    star_markup, fx = meta_stars(svg, fx, 578, stars, yellow, 13)
-    footer.append(star_markup)
-    footer.append(svg.text(fx + 18, 578, "STARS  ·  HUGO SITE  ·  TESTS FOR GRADIENTS, SHAPES, CAUSAL MASKS", "mono", 12, pal.dim, tracking=1.4))
-    svg.add(f'<g class="fade" {delay(2.4)}>' + "".join(footer) + "</g>")
-    plate.close("03 / 09", corner="tr")
+    star_markup, fx = meta_stars(svg, x, 578, stars, yellow, 18, "italic")
+    svg.add(
+        f'<g class="fade" {delay(2.4)}>' + star_markup
+        + svg.text(fx + 16, 578, "stars · a Hugo site · tests for gradients, shapes and causal masks", "italic", 18, pal.dim)
+        + "</g>"
+    )
+    plate.close(3, corner="tr")
     return svg.render()

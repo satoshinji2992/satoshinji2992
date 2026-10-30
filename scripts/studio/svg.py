@@ -19,8 +19,8 @@ from typing import Callable
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "assets" / "src"
 
-# Short tags keep glyph ids small: "s41" is "A" in the serif face.
-FACE_TAGS = {"serif": "s", "serif-m": "m", "italic": "i", "mono": "o", "mono-b": "b"}
+# Short tags keep glyph ids small: "s41" is "A" in the serif face, "s66_69" its fi ligature.
+FACE_TAGS = {"serif": "s", "serif-m": "m", "italic": "i", "sc": "c", "allsc": "a", "mono": "o", "mono-b": "b"}
 
 BASE_CSS = (
     "@keyframes rise{from{opacity:0;transform:translateY(14px)}}"
@@ -72,21 +72,32 @@ class Face:
         self.glyphs: dict[str, tuple[int, str]] = {
             char: (advance, path) for char, (advance, path) in data["glyphs"].items()
         }
+        # Ligatures share the table, keyed by their character sequence.
+        self.ligatures = sorted(data.get("ligatures", {}), key=len, reverse=True)
+        self.glyphs.update({seq: (advance, path) for seq, (advance, path) in data.get("ligatures", {}).items()})
         self.kern: dict[str, int] = data["kern"]
 
+    def glyph_id(self, key: str) -> str:
+        return self.tag + "_".join(f"{ord(char):x}" for char in key)
+
     def layout(self, text: str, tracking: float = 0.0) -> tuple[list[tuple[str, float]], float]:
-        """Place each character; returns (char, x) in font units and the advance."""
+        """Place each glyph; returns (key, x) in font units and the advance.
+
+        Ligatures apply only to untracked text, as in print."""
         placed: list[tuple[str, float]] = []
         pen = 0.0
         previous = ""
-        for char in text:
-            if char not in self.glyphs:
-                char = "?"
+        i = 0
+        while i < len(text):
+            key = next((seq for seq in self.ligatures if not tracking and text.startswith(seq, i)), text[i])
+            if key not in self.glyphs:
+                key = "?"
             if previous:
-                pen += self.kern.get(previous + char, 0) + tracking
-            placed.append((char, pen))
-            pen += self.glyphs[char][0]
-            previous = char
+                pen += self.kern.get(previous[-1] + key[0], 0) + tracking
+            placed.append((key, pen))
+            pen += self.glyphs[key][0]
+            previous = key
+            i += max(1, len(key) if key != "?" else 1)
         return placed, pen
 
 
@@ -176,12 +187,12 @@ class Svg:
             x -= advance * scale
         used = self.used.setdefault(face, set())
         uses = []
-        for index, (char, pen) in enumerate(placed):
-            if not font.glyphs[char][1]:
+        for index, (key, pen) in enumerate(placed):
+            if not font.glyphs[key][1]:
                 continue
-            used.add(char)
-            extra = f" {glyph_attrs(index, char)}" if glyph_attrs else ""
-            uses.append(f'<use href="#{font.tag}{ord(char):x}" x="{num(pen, 1)}"{extra}/>')
+            used.add(key)
+            extra = f" {glyph_attrs(index, key)}" if glyph_attrs else ""
+            uses.append(f'<use href="#{font.glyph_id(key)}" x="{num(pen, 1)}"{extra}/>')
         extra = f" {attrs}" if attrs else ""
         return (
             f'<g transform="translate({num(x)} {num(y)}) scale({num(scale, 5)})" '
@@ -202,8 +213,8 @@ class Svg:
         glyph_defs = []
         for face in sorted(self.used):
             font = faces()[face]
-            for char in sorted(self.used[face]):
-                glyph_defs.append(f'<path id="{font.tag}{ord(char):x}" d="{font.glyphs[char][1]}"/>')
+            for key in sorted(self.used[face]):
+                glyph_defs.append(f'<path id="{font.glyph_id(key)}" d="{font.glyphs[key][1]}"/>')
         return (
             f'<svg xmlns="http://www.w3.org/2000/svg" width="{self.width}" height="{self.height}" '
             f'viewBox="0 0 {self.width} {self.height}" role="img" aria-labelledby="title">'

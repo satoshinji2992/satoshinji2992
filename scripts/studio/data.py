@@ -57,6 +57,11 @@ def short_date(value: str | None) -> str:
     return parsed.strftime("%d %b %Y") if parsed else ""
 
 
+def long_date(value: str | None) -> str:
+    parsed = parse_time(value)
+    return f"{parsed.day} {parsed.strftime('%B %Y')}" if parsed else ""
+
+
 def month_year(value: str | None) -> str:
     parsed = parse_time(value)
     return parsed.strftime("%b %Y") if parsed else ""
@@ -153,7 +158,13 @@ def collect(config: dict[str, Any], token: str | None, offline: bool = False) ->
             data["activity"] = group_activity(found)
 
     def release() -> None:
-        latest = request(f"/repos/{user}/{config['release_repo']}/releases/latest", token)
+        try:
+            latest = request(f"/repos/{user}/{config['release_repo']}/releases/latest", token)
+        except urllib.error.HTTPError as exc:
+            if exc.code != 404:
+                raise
+            data["release"] = None  # the repository has no published release
+            return
         data["release"] = {
             "tag": latest["tag_name"],
             "published_at": latest.get("published_at"),

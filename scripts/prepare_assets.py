@@ -33,16 +33,48 @@ CHARSET = (
     + "".join(chr(c) for c in range(0xA0, 0x100))
     + "–—‘’“”•…′″‰←↑→↓↗↘±×÷−≈≤≥ΔΣ√∞⁰¹²³⁴⁵⁶⁷⁸⁹₀₁₂₃₄π·◆◇●■□▲▼"
     + "αβγδεθλμσφω"
+    + "†‡⁂❦☞☜◦○"
 )
 
+# Ligatures the serif faces may use; the renderer turns them off for tracked text.
+LIGATURES = ["ffi", "ffl", "ff", "fi", "fl", "ft", "Th", "ct", "st", "sp"]
+
 FONTS = [
-    # (face key used by the renderer, source file, weight)
-    ("serif", "CormorantGaramond[wght].ttf", 600),
-    ("serif-m", "CormorantGaramond[wght].ttf", 500),
-    ("italic", "CormorantGaramond-Italic[wght].ttf", 500),
-    ("mono", "JetBrainsMono[wght].ttf", 500),
-    ("mono-b", "JetBrainsMono[wght].ttf", 700),
+    # (face key used by the renderer, source file, weight, single-substitution
+    # features applied in order). Display numbers are lining; small caps and
+    # italic captions use old-style figures, as a book would.
+    ("serif", "CormorantGaramond[wght].ttf", 700, ["lnum"]),
+    ("serif-m", "CormorantGaramond[wght].ttf", 600, ["lnum"]),
+    ("italic", "CormorantGaramond-Italic[wght].ttf", 600, ["lnum"]),
+    ("sc", "CormorantGaramond[wght].ttf", 700, ["smcp", "onum"]),
+    ("allsc", "CormorantGaramond[wght].ttf", 700, ["c2sc", "smcp", "onum"]),
+    ("mono", "JetBrainsMono[wght].ttf", 500, []),
+    ("mono-b", "JetBrainsMono[wght].ttf", 700, []),
 ]
+
+
+def ligature_glyphs(font, names: dict[str, str]) -> dict[str, str]:
+    """Sequence -> ligature glyph for LIGATURES, standard ligatures first."""
+    by_glyph = {glyph: char for char, glyph in names.items()}
+    found: dict[str, str] = {}
+    gsub = font["GSUB"].table
+    for feature in ("liga", "dlig"):
+        for record in gsub.FeatureList.FeatureRecord:
+            if record.FeatureTag != feature:
+                continue
+            for index in record.Feature.LookupListIndex:
+                lookup = gsub.LookupList.Lookup[index]
+                for table in lookup.SubTable:
+                    if lookup.LookupType == 7:
+                        table = table.ExtSubTable
+                    for first, ligatures in (getattr(table, "ligatures", None) or {}).items():
+                        for ligature in ligatures:
+                            parts = [first, *ligature.Component]
+                            if all(part in by_glyph for part in parts):
+                                sequence = "".join(by_glyph[part] for part in parts)
+                                if sequence in LIGATURES and sequence not in found:
+                                    found[sequence] = ligature.LigGlyph
+    return found
 
 
 def kerning(font, names: dict[str, str]) -> dict[str, int]:
@@ -125,21 +157,25 @@ def build_fonts(src: Path) -> None:
     from fontTools.varLib import instancer
 
     faces = {}
-    for key, filename, weight in FONTS:
+    for key, filename, weight, features in FONTS:
         font = instancer.instantiateVariableFont(TTFont(src / filename), {"wght": weight}, updateFontNames=False)
         cmap = font.getBestCmap()
         glyph_set = font.getGlyphSet()
         names = {char: cmap[ord(char)] for char in CHARSET if ord(char) in cmap}
-        # Cormorant defaults to old-style figures; numbers on the cards read better lining.
-        lining = single_substitutions(font, "lnum")
-        for digit in "0123456789":
-            if digit in names:
-                names[digit] = lining.get(names[digit], names[digit])
-        glyphs = {}
-        for char, name in names.items():
+        base = dict(names)
+        for feature in features:
+            mapping = single_substitutions(font, feature)
+            names = {char: mapping.get(name, name) for char, name in names.items()}
+
+        def outline(name: str) -> list:
             pen = SVGPathPen(glyph_set)
             glyph_set[name].draw(TransformPen(pen, (1, 0, 0, -1, 0, 0)))
-            glyphs[char] = [glyph_set[name].width, compact_path(pen.getCommands())]
+            return [glyph_set[name].width, compact_path(pen.getCommands())]
+
+        glyphs = {char: outline(name) for char, name in names.items()}
+        ligatures = {}
+        if not features or features == ["lnum"] or features == ["onum"]:
+            ligatures = {seq: outline(name) for seq, name in ligature_glyphs(font, base).items()}
         hhea = font["hhea"]
         faces[key] = {
             "upm": font["head"].unitsPerEm,
@@ -148,10 +184,12 @@ def build_fonts(src: Path) -> None:
             "cap": getattr(font["OS/2"], "sCapHeight", 0),
             "x": getattr(font["OS/2"], "sxHeight", 0),
             "glyphs": glyphs,
+            "ligatures": ligatures,
             "kern": kerning(font, names),
         }
         missing = sorted(set(CHARSET) - set(names))
-        print(f"{key}: {len(glyphs)} glyphs, {len(faces[key]['kern'])} kern pairs, missing {''.join(missing)!r}")
+        print(f"{key}: {len(glyphs)} glyphs, {len(ligatures)} ligatures {sorted(ligatures)}, "
+              f"{len(faces[key]['kern'])} kern pairs, missing {''.join(missing)!r}")
     out = OUT / "fonts"
     out.mkdir(parents=True, exist_ok=True)
     target = OUT / "glyphs.json.gz"

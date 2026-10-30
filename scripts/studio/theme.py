@@ -1,8 +1,9 @@
-"""Shared materials: palettes, grain, torn paper, drafting marks and plates.
+"""Shared materials: aged palettes, grain, torn paper, engraved frames and ornaments.
 
-Every card is a dark (or paper) plate with the same grain, hairline border,
-corner registration marks and catalogue number; each one has its own palette
-and its own layout on top of that.
+Every card is a plate from the same old archive: lamp-black or parchment,
+speckled grain, a double engraved frame with diamond corners, a "Plate"
+number in small capitals and gold-leaf ornaments. Each card then has its own
+material and layout on top of that.
 """
 
 from __future__ import annotations
@@ -12,7 +13,7 @@ import random
 from dataclasses import dataclass
 from functools import lru_cache
 
-from .svg import SRC, Svg, cap_height, data_uri, delay, num
+from .svg import SRC, Svg, cap_height, data_uri, delay, measure, num
 
 
 @dataclass(frozen=True)
@@ -27,17 +28,28 @@ class Palette:
     accent3: str = ""
 
 
-# The header's graphite, torn grey paper and mauve.
-PAGE = Palette("#100f0e", "#181615", "#2d2a28", "#ece6dd", "#958d86", "#b59ca4", "#735960", "#7d7b7a")
-AUTOKEEPER = Palette("#110c0b", "#1b1311", "#37251f", "#ecdfc8", "#a89785", "#c95c4d", "#a6a268")
-COMPSKILL = Palette("#e9e2d3", "#ded5c3", "#bfb5a2", "#1e1b17", "#5f584e", "#b4432f", "#2e5592")
-DEEP = Palette("#141d19", "#1a2620", "#2a3a32", "#ece8dc", "#9caba1", "#e9d590", "#e8a79e", "#a3cad8")
-SEIYUU = Palette("#15121b", "#1c1824", "#2f2839", "#eee8f6", "#a59db4", "#bda8e4", "#e8a8c6", "#e4c584")
-LEROBOT = Palette("#0d1715", "#12201d", "#22372f", "#e2eee8", "#8fa99f", "#66bca5", "#cb8c5a")
-HBALL = Palette("#0b120f", "#101c16", "#1e3228", "#ece7d2", "#98a190", "#d3ad60", "#bb763e")
-NAILONG = Palette("#120c06", "#1a1209", "#3d2b12", "#ffd99e", "#a77b3e", "#f7ae42", "#dc722e")
-FPGA = Palette("#110b0a", "#1a1110", "#3a2720", "#f2ded1", "#a98c7c", "#e48a5b", "#ebd3b5")
-PRIZES = Palette("#161012", "#1f171a", "#36292e", "#ece3d3", "#a8999c", "#d69da9", "#c9b37f", "#e9e0cf")
+GOLD = "#b99b62"
+
+# Lamp-black, umber and parchment, with the header's mauve and gold leaf.
+PAGE = Palette("#0e0c0a", "#16130f", "#2d2721", "#e9dfca", "#9c9180", GOLD, "#8e6f77", "#7d7b7a")
+AUTOKEEPER = Palette("#100b0a", "#1a1210", "#3a2620", "#eadcc2", "#a08f7a", "#b04a3c", "#b39660")
+COMPSKILL = Palette("#e4d7bb", "#d8c8a8", "#b4a181", "#2a2017", "#6a5b47", "#983a28", "#3b4f78")
+DEEP = Palette("#131a16", "#19221d", "#28342d", "#e6e1d3", "#98a59b", "#dccb8e", "#d9a199", "#9dbfcc")
+SEIYUU = Palette("#110e16", "#18141f", "#2b2434", "#e8e1ee", "#9b93a8", "#a99ac8", "#d9a6b8", "#cdb27a")
+LEROBOT = Palette("#0f1412", "#151c19", "#26332d", "#e2e6dc", "#8f9a8f", "#86ab9b", GOLD)
+HBALL = Palette("#110f0b", "#1a1710", "#332c1d", "#ebe2c8", "#9d927a", "#c2a160", "#a8683c")
+NAILONG = Palette("#100b07", "#1a130b", "#3a2a17", "#f0dcb8", "#a2875f", "#d9a052", "#b45e2e")
+FPGA = Palette("#120d0b", "#1b1411", "#3a2a22", "#eedccc", "#a48b7c", "#c8754d", "#ddd0b6")
+PRIZES = Palette("#150f11", "#1d1518", "#352a2e", "#ece2d0", "#a3959a", "#c58f9b", GOLD, "#e6dcc8")
+
+ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
+
+# Candlelight: an uneven, slow breathing of a warm glow.
+FLICKER = (
+    "@keyframes flicker{0%,100%{opacity:.82}9%{opacity:.7}17%{opacity:.9}31%{opacity:.76}"
+    "44%{opacity:1}58%{opacity:.8}71%{opacity:.93}86%{opacity:.74}}"
+    ".flicker{animation:flicker 7s ease-in-out infinite}"
+)
 
 
 @lru_cache(maxsize=1)
@@ -93,15 +105,6 @@ def torn_rect(x: float, y: float, w: float, h: float, amp: float, seed: int, edg
     return polyline(top + right + bottom + left, close=True)
 
 
-def corner_marks(w: float, h: float, inset: float, size: float, color: str, opacity: float = 1) -> str:
-    i, s = inset, size
-    d = (
-        f"M{i} {i + s}V{i}H{i + s}M{w - i - s} {i}H{w - i}V{i + s}"
-        f"M{w - i} {h - i - s}V{h - i}H{w - i - s}M{i + s} {h - i}H{i}V{h - i - s}"
-    )
-    return f'<path d="{d}" fill="none" stroke="{color}" stroke-width="1.2" opacity="{num(opacity)}"/>'
-
-
 def crosshair(x: float, y: float, r: float, color: str, width: float = 1, attrs: str = "") -> str:
     return (
         f'<g stroke="{color}" stroke-width="{num(width)}" fill="none" {attrs}>'
@@ -110,10 +113,30 @@ def crosshair(x: float, y: float, r: float, color: str, width: float = 1, attrs:
     )
 
 
-class Plate:
-    """Card base: background, clip, grain, border, marks and catalogue number."""
+def frame(w: float, h: float, rx: float, line: str, ornament: str, inset: float = 8) -> str:
+    """A double engraved border; each inner corner carries a diamond and a bracket."""
+    i, arm, gap = inset, 20, 5
+    diamonds, brackets = [], []
+    for sx, sy, cx, cy in ((1, 1, i, i), (-1, 1, w - i, i), (-1, -1, w - i, h - i), (1, -1, i, h - i)):
+        diamonds.append(
+            f"M{num(cx)} {num(cy - 3.5)}L{num(cx + 3.5)} {num(cy)}L{num(cx)} {num(cy + 3.5)}L{num(cx - 3.5)} {num(cy)}Z"
+        )
+        bx, by = cx + sx * gap, cy + sy * gap
+        brackets.append(f"M{num(bx)} {num(by + sy * arm)}V{num(by)}H{num(bx + sx * arm)}")
+        brackets.append(f"M{num(bx + sx * 4)} {num(by + sy * (arm - 6))}V{num(by + sy * 4)}H{num(bx + sx * (arm - 6))}")
+    return (
+        f'<rect x=".5" y=".5" width="{num(w - 1)}" height="{num(h - 1)}" rx="{num(rx)}" fill="none" stroke="{line}"/>'
+        f'<rect x="{num(i)}" y="{num(i)}" width="{num(w - 2 * i)}" height="{num(h - 2 * i)}" rx="{num(max(rx - i, 2))}" '
+        f'fill="none" stroke="{ornament}" stroke-opacity=".26" stroke-width="1.25"/>'
+        f'<path d="{"".join(brackets)}" fill="none" stroke="{ornament}" stroke-opacity=".5" stroke-width="1.25"/>'
+        f'<path d="{"".join(diamonds)}" fill="{ornament}" opacity=".75"/>'
+    )
 
-    def __init__(self, svg: Svg, pal: Palette, rx: float = 18) -> None:
+
+class Plate:
+    """Card base: background, clip, grain, engraved frame and plate number."""
+
+    def __init__(self, svg: Svg, pal: Palette, rx: float = 16) -> None:
         self.svg = svg
         self.pal = pal
         self.rx = rx
@@ -129,24 +152,31 @@ class Plate:
             f'<rect width="{svg.width}" height="{svg.height}" fill="{fill or self.pal.bg}"/>',
         )
 
-    def close(self, number: str = "", grain_opacity: float = 0.55, corner: str = "tr") -> None:
+    def close(self, number: int = 0, grain_opacity: float = 0.6, corner: str = "tr", ornament: str = GOLD) -> None:
         svg, pal = self.svg, self.pal
         w, h = svg.width, svg.height
-        svg.add(grain(svg, 0, 0, w, h, grain_opacity), "</g>")
-        svg.add(
-            f'<rect x=".5" y=".5" width="{w - 1}" height="{h - 1}" rx="{num(self.rx)}" '
-            f'fill="none" stroke="{pal.line}"/>',
-            corner_marks(w, h, 12, 9, pal.dim, 0.45),
-        )
+        svg.add(grain(svg, 0, 0, w, h, grain_opacity), "</g>", frame(w, h, self.rx, pal.line, ornament))
         if number:
             x = w - 30 if "r" in corner else 30
-            y = 36 if "t" in corner else h - 26
+            y = 38 if "t" in corner else h - 24
             anchor = "end" if "r" in corner else "start"
-            svg.add(svg.text(x, y, number, "mono", 12, pal.dim, anchor, tracking=2.2, attrs='opacity=".8"'))
+            svg.add(svg.text(x, y, f"Plate {ROMAN[number]}", "allsc", 15, pal.dim, anchor, tracking=2.4, attrs='opacity=".85"'))
 
 
-def kicker(svg: Svg, x: float, y: float, text: str, color: str, size: float = 13, at: float = 0.1) -> str:
-    return f'<g class="fade" {delay(at)}>' + svg.text(x, y, text, "mono-b", size, color, tracking=2.6) + "</g>"
+def kicker(svg: Svg, x: float, y: float, text: str, color: str, size: float = 17, at: float = 0.1, anchor: str = "start") -> str:
+    return f'<g class="fade" {delay(at)}>' + svg.text(x, y, text, "allsc", size, color, anchor, tracking=2.6) + "</g>"
+
+
+def ornament_rule(svg: Svg, x0: float, x1: float, y: float, color: str, glyph: str = "❦", size: float = 20, at: float = 0.5) -> str:
+    """Hairlines either side of a fleuron, as between sections of an old book."""
+    mid = (x0 + x1) / 2
+    half = measure(glyph, "serif", size) / 2 + 8
+    return (
+        f'<g class="fade" {delay(at)}><path d="M{num(x0)} {num(y)}H{num(mid - half)}M{num(mid + half)} {num(y)}H{num(x1)}" '
+        f'stroke="{color}" stroke-opacity=".55"/>'
+        + svg.text(mid, y + size * 0.3, glyph, "serif", size, color, "middle")
+        + "</g>"
+    )
 
 
 def bullet_lines(
@@ -156,32 +186,41 @@ def bullet_lines(
     lines: list[str],
     color: str,
     mark: str,
-    size: float = 15,
-    leading: float = 27,
+    size: float = 20,
+    leading: float = 30,
     at: float = 0.6,
-    face: str = "mono",
+    face: str = "italic",
 ) -> str:
     out = []
     for i, line in enumerate(lines):
         yy = y + i * leading
+        cy = yy - size * 0.3
         out.append(
             f'<g class="rise" {delay(at + i * 0.12)}>'
-            f'<rect x="{num(x)}" y="{num(yy - cap_height(face, size) / 2 - 3)}" width="6" height="6" '
-            f'transform="rotate(45 {num(x + 3)} {num(yy - cap_height(face, size) / 2)})" fill="{mark}"/>'
-            + svg.text(x + 20, yy, line, face, size, color)
+            f'<path d="M{num(x + 3.5)} {num(cy - 3.5)}L{num(x + 7)} {num(cy)}L{num(x + 3.5)} {num(cy + 3.5)}L{num(x)} {num(cy)}Z" fill="{mark}"/>'
+            + svg.text(x + 19, yy, line, face, size, color)
             + "</g>"
         )
     return "".join(out)
 
 
-def button(label: str, pal: Palette, width: int = 300, height: int = 50, icon: str = "↗") -> str:
+def button(label: str, pal: Palette, width: int = 300, height: int = 50) -> str:
+    """A museum label: chamfered corners, double rule, a manicule and small capitals."""
     svg = Svg(width, height, label)
-    base = height / 2 + cap_height("mono-b", 15) / 2
+    c, w, h = 9, width, height
+
+    def label_path(i: float) -> str:
+        return (
+            f"M{num(i + c)} {num(i)}H{num(w - i - c)}L{num(w - i)} {num(i + c)}V{num(h - i - c)}"
+            f"L{num(w - i - c)} {num(h - i)}H{num(i + c)}L{num(i)} {num(h - i - c)}V{num(i + c)}Z"
+        )
+
+    base = h / 2 + cap_height("allsc", 18) * 0.36
     svg.add(
-        f'<rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="10" fill="{pal.panel}" stroke="{pal.line}"/>',
-        f'<rect x="18" y="{num(height / 2 - 8)}" width="3" height="16" rx="1.5" fill="{pal.accent}"/>',
-        svg.text(34, base, label.upper(), "mono-b", 15, pal.ink, tracking=1.6),
-        svg.text(width - 20, base + 1, icon, "mono-b", 17, pal.accent, "end"),
+        f'<path d="{label_path(0.5)}" fill="{pal.panel}" stroke="{pal.line}"/>',
+        f'<path d="{label_path(5)}" fill="none" stroke="{GOLD}" stroke-opacity=".3"/>',
+        svg.text(20, h / 2 + 9, "☞", "serif", 30, GOLD),
+        svg.text(62, base + 3, label, "allsc", 18, pal.ink, tracking=2.2),
     )
     return svg.render()
 
@@ -197,6 +236,7 @@ def star(x: float, y: float, r: float, fill: str, attrs: str = "") -> str:
 
 def arrow(x1: float, y1: float, x2: float, y2: float, color: str, width: float = 1.4,
           head: float = 7, attrs: str = "", dash: str = "") -> str:
+    width = width * 1.4  # drawn a little heavier than specified, to read at README scale
     angle = math.atan2(y2 - y1, x2 - x1)
     left = (x2 - head * math.cos(angle - 0.42), y2 - head * math.sin(angle - 0.42))
     right = (x2 - head * math.cos(angle + 0.42), y2 - head * math.sin(angle + 0.42))
@@ -210,6 +250,7 @@ def arrow(x1: float, y1: float, x2: float, y2: float, color: str, width: float =
 
 def seal(cx: float, cy: float, r: float, color: str, width: float = 1) -> str:
     """A drafting compass rose: rings, degree ticks and an eight-point star."""
+    width = width * 1.6
     ticks = []
     for degree in range(0, 360, 5):
         a = math.radians(degree)
