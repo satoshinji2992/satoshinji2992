@@ -204,12 +204,14 @@ def autokeeper(data: dict) -> str:
 
 
 def compskill(data: dict) -> str:
+    """The paper's architecture figure, redrawn in ink on old paper."""
     pal = COMPSKILL
-    ink, blue, red, lead, cell = pal.ink, pal.accent2, pal.accent, pal.dim, "#cbccce"
-    box = "#efe4c9"
-    w, h = 1200, 640
-    svg = Svg(w, h, "CompSkill: compiling execution experience for skill retrieval; first-author paper")
-    sheet = torn_rect(10, 18, 1180, 604, 5.5, seed=29, edges="tb")
+    ink, red, lead = pal.ink, pal.accent, pal.dim
+    blue, ochre, violet, slate = pal.accent2, "#a8692c", "#6a5288", "#4b5563"
+    box, cell = "#efe4c9", "#cfd0d0"
+    w, h = 1200, 880
+    svg = Svg(w, h, "CompSkill: compiling execution experience for skill retrieval; the paper's architecture, redrawn")
+    sheet = torn_rect(10, 18, 1180, h - 36, 5.5, seed=29, edges="tb")
     clip, paper, burn = svg.uid("sheet"), svg.uid("paper"), svg.uid("burn")
     svg.define(
         f'<clipPath id="{clip}"><path d="{sheet}"/></clipPath>',
@@ -220,9 +222,9 @@ def compskill(data: dict) -> str:
     )
     rng = random.Random(1897)
     foxing = "".join(
-        f'<circle cx="{num(rng.uniform(30, 1170))}" cy="{num(rng.uniform(30, 610))}" r="{num(rng.uniform(4, 22))}" '
-        f'fill="#8a6234" opacity="{num(rng.uniform(.04, .11))}"/>'
-        for _ in range(22)
+        f'<circle cx="{num(rng.uniform(30, 1170))}" cy="{num(rng.uniform(30, h - 30))}" r="{num(rng.uniform(4, 22))}" '
+        f'fill="#8a6234" opacity="{num(rng.uniform(.03, .09))}"/>'
+        for _ in range(26)
     )
     svg.add(
         f'<path d="{sheet}" transform="translate(5 8)" fill="#000" opacity=".32"/>',
@@ -230,180 +232,258 @@ def compskill(data: dict) -> str:
         f'<g clip-path="url(#{clip})">{foxing}',
         grain(svg, 0, 0, w, h, 0.85),
         f'<rect width="{w}" height="{h}" fill="url(#{burn})"/>',
-        # A printer's double rule, set inside the torn edges.
-        f'<rect x="34" y="44" width="1132" height="552" fill="none" stroke="{ink}" stroke-opacity=".22"/>'
-        f'<rect x="38" y="48" width="1124" height="544" fill="none" stroke="{ink}" stroke-opacity=".12"/>',
+        f'<rect x="34" y="44" width="1132" height="{h - 88}" fill="none" stroke="{ink}" stroke-opacity=".25" stroke-width="1.2"/>'
+        f'<rect x="39" y="49" width="1122" height="{h - 98}" fill="none" stroke="{ink}" stroke-opacity=".14"/>',
     )
 
-    # Left column: title and results.
+    # Title band: the paper on the left, three results on the right.
     x = 66
-    svg.add(kicker(svg, x, 92, "First-author paper · Code", red))
-    size = fit("CompSkill", "serif", 92, 352)
-    svg.add(f'<g class="rise" {delay(0.15)}>' + svg.text(x - 4, 178, "CompSkill", "serif", size, ink) + "</g>")
-    svg.add(
-        f'<g class="rise" {delay(0.3)}>'
-        + svg.lines(x, 224, ["Compiling execution experience", "for skill retrieval"], 34, face="italic", size=28, fill="#3e3124")
-        + "</g>"
-    )
-    results = [
-        ("79.8%", "ToolQA hit@1 · baseline 63.0"),
-        ("70.9", "SkillRet NDCG@10 · baseline 64.0"),
-        ("8×", "smaller keys · 4096 → 512-d"),
-    ]
-    for i, (value, caption) in enumerate(results):
-        y = 348 + i * 92
-        width = measure(value, "serif", 54)
+    svg.add(kicker(svg, x, 94, "First-author paper · Code", red))
+    svg.add(f'<g class="rise" {delay(0.15)}>' + svg.text(x - 4, 172, "CompSkill", "serif", 84, ink) + "</g>")
+    svg.add(f'<g class="rise" {delay(0.3)}>' + svg.text(x, 210, "Compiling execution experience for skill retrieval", "italic", 26, "#3e3124") + "</g>")
+    results = [("79.8%", "ToolQA hit@1", "baseline 63.0"), ("70.9", "SkillRet NDCG@10", "baseline 64.0"), ("8×", "smaller keys", "4096 → 512-d")]
+    for i, (value, caption, note) in enumerate(results):
+        rx = 680 + i * 164
+        width = measure(value, "serif", 48)
         svg.add(
-            f'<g class="rise" {delay(0.7 + i * 0.18)}>'
-            + svg.text(x - 2, y, value, "serif", 54, ink)
-            + svg.text(x, y + 30, caption, "allsc", 15, lead, tracking=1.6)
+            f'<g class="rise" {delay(0.6 + i * 0.15)}>'
+            + svg.text(rx, 150, value, "serif", 48, ink)
+            + svg.text(rx, 180, caption, "allsc", 14.5, lead, tracking=1.2)
+            + svg.text(rx, 204, note, "italic", 17, lead)
             + "</g>",
-            f'<path class="draw" {delay(1.3 + i * 0.2)} d="{sketch_line(x - 4, y + 9, x + width + 10, y + 7, seed=i + 3, amp=1.4)}" '
-            f'pathLength="1" fill="none" stroke="{red}" stroke-width="1.9" stroke-linecap="round" opacity=".8"/>',
+            f'<path class="draw" {delay(1.2 + i * 0.2)} d="{sketch_line(rx - 2, 160, rx + width + 8, 158, seed=i + 3, amp=1.2)}" '
+            f'pathLength="1" fill="none" stroke="{red}" stroke-width="2" stroke-linecap="round" opacity=".8"/>',
         )
-    svg.add(
-        f'<path class="draw" {delay(0.4)} d="M430 70V582" pathLength="1" stroke="{blue}" stroke-width="1.35" '
-        'stroke-dasharray="5 5" opacity=".45" fill="none"/>'
-    )
+    svg.add(f'<path class="draw" {delay(0.4)} d="M64 236H1136" pathLength="1" stroke="{ink}" stroke-opacity=".35" stroke-width="1.2" fill="none"/>')
 
-    # The test-time path along the top: task → ① → ② → ③ → ④.
-    flow = [("task", ""), ("top-10", "1"), ("score S", "2"), ("6 + ≤4", "3"), ("actor", "4")]
-    widths = [measure(label, "serif-m", 22) + (32 if number else 30) for label, number in flow]
-    left, right, y = 476, 1140, 112
-    gap = (right - left - sum(widths)) / (len(flow) - 1)
-    fx = left
+    # The figure. Panels sit where they do in the paper: (1) top left, (2) bottom left,
+    # the skill key in the centre, (3) top right, (4) bottom right, the support loop along the bottom.
+    fy = 256
+
+    def panel(px: float, py: float, pw: float, ph: float, color: str, number: str, title: str, at: float) -> str:
+        return (
+            f'<g class="fade" {delay(at)}>'
+            f'<rect x="{num(px)}" y="{num(py)}" width="{num(pw)}" height="{num(ph)}" rx="5" fill="{color}" fill-opacity=".09" stroke="{color}" stroke-width="1.6"/>'
+            f'<rect x="{num(px)}" y="{num(py)}" width="{num(pw)}" height="32" rx="5" fill="{color}" fill-opacity=".85"/>'
+            f'<rect x="{num(px)}" y="{num(py + 26)}" width="{num(pw)}" height="6" fill="{color}" fill-opacity=".85"/>'
+            + (f'<circle cx="{num(px + 18)}" cy="{num(py + 16)}" r="10" fill="#f3ead6"/>' + svg.text(px + 18, py + 21, number, "serif", 15, color, "middle") if number else "")
+            + svg.text(px + (36 if number else 14), py + 23, title, "serif", 20, "#f6eedc")
+            + "</g>"
+        )
+
+    def sub(px: float, py: float, pw: float, ph: float, title: str, color: str) -> str:
+        return (
+            f'<rect x="{num(px)}" y="{num(py)}" width="{num(pw)}" height="{num(ph)}" rx="4" fill="#f4ecd9" fill-opacity=".75" stroke="{color}" stroke-opacity=".7" stroke-width="1.1"/>'
+            + svg.text(px + 10, py + 22, title, "serif", 18, ink)
+        )
+
+    def bar(bx: float, by: float, n: int, cw: float, ch: float, color: str, hi: int = -1) -> str:
+        return "".join(
+            f'<rect x="{num(bx + k * cw)}" y="{num(by)}" width="{num(cw)}" height="{num(ch)}" fill="{"#e2b48a" if k == hi else cell}" stroke="{color}" stroke-width=".9"/>'
+            for k in range(n)
+        )
+
+    # Top flow: task → semantic top-10 → calibrated score → 6 kept + ≤4 recalled → (3).
+    flow = [("task x", ""), ("semantic top-10", "1"), ("calibrated score S", "2"), ("6 kept + ≤4 recalled", "3")]
+    size = 16
+    widths = [64 if not n else measure(t, "serif-m", size) + 30 for t, n in flow]
+    gap = (892 - 300 - sum(widths) - 26) / len(flow)
+    fx = 300
     for i, ((label, number), width) in enumerate(zip(flow, widths)):
         if number:
             part = (
-                f'<circle cx="{num(fx + 11)}" cy="{y - 7}" r="11" fill="none" stroke="{ink}" stroke-width="1.45"/>'
-                + svg.text(fx + 11, y - 2, number, "serif-m", 14, ink, "middle")
-                + svg.text(fx + 30, y, label, "serif-m", 22, ink)
+                svg.text(fx, fy + 30, label, "serif-m", size, "#3a4458")
+                + f'<circle cx="{num(fx + width - 10)}" cy="{fy + 24}" r="10" fill="#3a4458"/>'
+                + svg.text(fx + width - 10, fy + 29, number, "serif", 14, "#f3ead6", "middle")
             )
         else:
-            part = (
-                f'<path d="M{num(fx)} {y - 26}h{num(width)}v32h-{num(width - 22)}l-9 9v-9h-13z" fill="{box}" '
-                f'stroke="{ink}" stroke-width="1.45" stroke-linejoin="round"/>'
-                + svg.text(fx + 14, y - 3, label, "italic", 22, ink)
-            )
-        svg.add(f'<g class="fade" {delay(0.5 + i * 0.15)}>{part}</g>')
-        if i < len(flow) - 1:
-            ax = fx + width + 8
-            svg.add(arrow(ax, y - 7, ax + gap - 16, y - 7, ink, 1, 7, f'class="fade" {delay(0.6 + i * 0.15)}'))
+            part = f'<path d="M{fx} {fy + 6}h64v32h-42l-9 9v-9h-13z" fill="{box}" stroke="{ink}" stroke-width="1.3" stroke-linejoin="round"/>' + svg.text(fx + 14, fy + 29, label, "italic", 19, ink)
+        svg.add(f'<g class="fade" {delay(0.6 + i * 0.12)}>{part}</g>')
+        svg.add(arrow(fx + width + 5, fy + 24, fx + width + gap - 5, fy + 24, "#3a4458", 1.3, 7, f'class="fade" {delay(0.7)}'))
         fx += width + gap
+    svg.add(arrow(282, fy + 24, 296, fy + 24, "#3a4458", 1.3, 7, f'class="fade" {delay(0.7)}'))
     svg.style(
-        "@keyframes probe{0%{transform:translateX(0);opacity:0}6%{opacity:1}70%{transform:translateX(640px);opacity:1}"
-        "76%,100%{transform:translateX(640px);opacity:0}}",
+        "@keyframes probe{0%{transform:translateX(0);opacity:0}8%{opacity:1}72%{transform:translateX(560px);opacity:1}"
+        "78%,100%{transform:translateX(560px);opacity:0}}",
         ".probe{animation:probe 9s cubic-bezier(.45,0,.55,1) 2.5s infinite both}",
     )
-    svg.add(
-        f'<path d="M482 134H1136" stroke="{blue}" stroke-width="1.35" stroke-dasharray="2 5" opacity=".5"/>',
-        f'<circle class="probe" cx="484" cy="134" r="4" fill="{red}"/>',
-    )
+    svg.add(f'<circle class="probe" cx="330" cy="{fy + 54}" r="4.5" fill="{red}"/>')
 
-    def heading(xx: float, yy: float, number: str, text: str, at: float) -> str:
-        return (
-            f'<g class="fade" {delay(at)}><circle cx="{num(xx + 10)}" cy="{num(yy - 7)}" r="10" fill="none" stroke="{ink}" stroke-width="1.45"/>'
-            + svg.text(xx + 10, yy - 2.5, number, "serif-m", 13, ink, "middle")
-            + svg.text(xx + 28, yy, text, "serif-m", 21, ink)
-            + "</g>"
+    # (1) Compact keys.
+    px, py, pw, ph = 52, fy, 230, 286
+    svg.add(panel(px, py, pw, ph, blue, "1", "Compact keys", 0.9))
+    docs = "".join(f'<rect x="{px + 16 + d * 5}" y="{py + 66 + d * 5}" width="40" height="50" rx="2" fill="#f7f0de" stroke="{ink}" stroke-width="1.1"/>' for d in range(3))
+    svg.add(
+        f'<g class="fade" {delay(1.0)}>'
+        + sub(px + 8, py + 40, pw - 16, 118, "Skill library", blue)
+        + docs + svg.text(px + 46, py + 102, "skill", "italic", 15, ink, "middle")
+        + f'<rect x="{px + 92}" y="{py + 70}" width="30" height="26" rx="3" fill="#c8ccd2" stroke="{ink}" stroke-width="1.1"/>' + svg.text(px + 107, py + 89, "E", "serif", 17, ink, "middle")
+        + f'<rect x="{px + 92}" y="{py + 112}" width="30" height="26" rx="3" fill="#e8c497" stroke="{ink}" stroke-width="1.1"/>' + svg.text(px + 107, py + 131, "C", "italic", 17, ink, "middle")
+        + bar(px + 136, py + 76, 6, 13, 14, blue) + bar(px + 150, py + 118, 4, 13, 14, blue)
+        + arrow(px + 122, py + 83, px + 134, py + 83, blue, 1.1, 5) + arrow(px + 122, py + 125, px + 148, py + 125, blue, 1.1, 5)
+        + arrow(px + 175, py + 92, px + 175, py + 114, blue, 1.1, 5)
+        + svg.text(px + 140, py + 150, "4096-d → 512-d", "italic", 15, lead)
+        + sub(px + 8, py + 166, pw - 16, 112, "Key index", blue)
+        + "".join(
+            svg.text(px + 22, py + 210 + k * 22, f"s{k + 1}", "italic", 16, red if k == 1 else ink)
+            + bar(px + 42, py + 198 + k * 22, 7, 12, 14, red if k == 1 else blue, 6 if k == 1 else -1)
+            for k in range(3)
         )
-
-    # ① compact keys.
-    svg.add(heading(476, 188, "1", "compact keys", 1.0))
-    cells = "".join(f'<rect x="{476 + c * 9}" y="208" width="9" height="15" fill="{cell}" stroke="{blue}" stroke-width="1.25"/>' for c in range(16))
-    short = "".join(f'<rect x="{538 + c * 9}" y="294" width="9" height="15" fill="{cell}" stroke="{blue}" stroke-width="1.25"/>' for c in range(2))
-    svg.add(
-        f'<g class="fade" {delay(1.1)}>{cells}'
-        + svg.text(476, 246, "4096-d", "italic", 17, lead)
-        + f'<path d="M524 252H572L560 274H536Z" fill="none" stroke="{ink}" stroke-width="1.45" stroke-linejoin="round"/>'
-        + arrow(548, 226, 548, 248, ink, 1, 5)
-        + arrow(548, 276, 547, 291, ink, 1, 5)
-        + short
-        + svg.text(562, 307, "512-d", "italic", 17, lead)
-        + "</g>",
-        f'<g class="fade" {delay(1.9)}>'
-        + svg.text(476, 356, "×8 fewer", "italic", 21, red)
-        + svg.text(476, 380, "coordinates", "italic", 21, red)
-        + f'<path d="M560 344C590 340 600 326 590 314" fill="none" stroke="{red}" stroke-width="1.55"/>'
-        + "</g>",
+        + f'<rect x="{px + 150}" y="{py + 198}" width="62" height="40" rx="6" fill="#f6e3c4" stroke="{ink}" stroke-width="1.1"/>'
+        + "".join(f'<circle cx="{px + 164 + c * 14}" cy="{py + 209 + r * 16}" r="4" fill="{blue}"/>' for r in range(2) for c in range(3))
+        + svg.text(px + 181, py + 258, "top-10 pool", "italic", 15, ink, "middle")
+        + "</g>"
     )
 
-    # ② KeyOpt calibration and the skill key.
-    svg.add(heading(664, 188, "2", "KeyOpt calibration", 1.2))
-    ox, oy = 690, 326
+    # (2) KeyOpt calibration.
+    px, py, pw, ph = 52, fy + 300, 230, 296
+    svg.add(panel(px, py, pw, ph, ochre, "2", "KeyOpt calibration", 1.2))
+    cards = "".join(
+        f'<rect x="{px + 18 + k * 66}" y="{py + 68}" width="38" height="46" rx="2" fill="#f7f0de" stroke="{ink}" stroke-width="1.1"/>'
+        + svg.text(px + 37 + k * 66, py + 96, "task", "italic", 13, ink, "middle")
+        + f'<circle cx="{px + 52 + k * 66}" cy="{py + 112}" r="7" fill="{"#5f8a5a" if k == 0 else red}"/>'
+        + (f'<path d="M{px + 48 + k * 66} {py + 112}l3 3 5-6" fill="none" stroke="#fff" stroke-width="1.6"/>' if k == 0
+           else f'<path d="M{px + 49 + k * 66} {py + 109}l6 6M{px + 55 + k * 66} {py + 109}l-6 6" stroke="#fff" stroke-width="1.6"/>')
+        for k in range(3)
+    )
+    svg.add(
+        f'<g class="fade" {delay(1.3)}>'
+        + sub(px + 8, py + 40, pw - 16, 118, "Matched support", ochre) + cards
+        + svg.text(px + 20, py + 146, "same task: loss(Sa − Sb) → c", "italic", 15, ink)
+        + sub(px + 8, py + 166, pw - 16, 122, "Bounded key edit", ochre)
+        + f'<circle cx="{px + 66}" cy="{py + 238}" r="34" fill="none" stroke="{ochre}" stroke-width="1.3" stroke-dasharray="4 4"/>'
+        + arrow(px + 40, py + 268, px + 66, py + 204, ink, 1.2, 7)
+        + arrow(px + 40, py + 268, px + 92, py + 222, blue, 1.2, 7)
+        + arrow(px + 40, py + 268, px + 96, py + 240, ochre, 1.2, 7)
+        + svg.text(px + 64, py + 200, "q", "italic", 16, ink) + svg.text(px + 96, py + 220, "k⁰", "italic", 16, blue) + svg.text(px + 100, py + 248, "k′", "italic", 16, ochre)
+        + bar(px + 124, py + 210, 6, 13, 14, blue, 5)
+        + svg.text(px + 124, py + 246, "[k⁰ + Δk ; b]", "serif-m", 16, ink)
+        + svg.text(px + 124, py + 270, "change ≤ c", "italic", 15, lead)
+        + "</g>"
+    )
+
+    # The skill key, centre.
+    px, py, pw, ph = 296, fy + 66, 592, 404
+    svg.add(
+        f'<g class="fade" {delay(1.0)}>'
+        f'<rect x="{px}" y="{py}" width="{pw}" height="{ph}" rx="6" fill="{red}" fill-opacity=".06" stroke="{red}" stroke-width="1.8"/>'
+        f'<rect x="{px}" y="{py}" width="{pw}" height="54" rx="6" fill="{red}" fill-opacity=".85"/>'
+        + svg.text(px + pw / 2, py + 24, "The skill key", "serif", 22, "#f6eedc", "middle")
+        + svg.text(px + pw / 2, py + 46, "fitted between rounds · read with one inner product and a clip", "italic", 16, "#f3e3d0", "middle")
+        + "</g>"
+    )
+    cw3 = (pw - 32) / 3
+    reads = [
+        ("One read", ["=S=r+β+clip(d)+ac", "no LLM call"]),
+        ("Coffee case", ["single-day  .844", "range  .835   + .37", "rank 2 → 1"]),
+        ("One row per edit", ["s₁ … s₄: local edits", "each one can be undone"]),
+    ]
+    reads[2] = ("One row per edit", ["s1 … s4: local edits", "each one can be undone"])
+
+    def line_text(lx: float, ly: float, text: str) -> str:
+        # Lines starting with "=" are formulas, set in the mono face that has the Greek.
+        if text.startswith("="):
+            return svg.text(lx, ly, text[1:], "mono", 14, ink)
+        return svg.text(lx, ly, text, "italic", 15.5, ink)
+    svg.add(f'<g class="fade" {delay(1.4)}>' + svg.text(px + 12, py + 78, "Reading the key", "serif", 19, red) + svg.text(px + 170, py + 78, "at test time", "italic", 16, lead))
+    for k, (title, lines) in enumerate(reads):
+        bx = px + 8 + k * (cw3 + 8)
+        svg.add(sub(bx, py + 90, cw3, 98, title, red) + "".join(line_text(bx + 10, py + 136 + j * 21, line) for j, line in enumerate(lines)))
+    svg.add("</g>")
+    svg.style("@keyframes edit{0%,30%{opacity:.3}38%,62%{opacity:1}75%,100%{opacity:.3}}", ".edit{animation:edit 9s ease-in-out 2.5s infinite both}")
+    kb = px + 50
+    svg.add(
+        f'<g class="fade" {delay(1.6)}>'
+        + svg.text(px + 14, py + 222, "k⁰", "italic", 20, blue) + svg.text(px + 14, py + 246, "Δk", "italic", 20, ochre)
+        + bar(kb, py + 206, 22, 13, 18, blue)
+        + f'<rect class="edit" x="{kb}" y="{py + 230}" width="{22 * 13}" height="8" fill="{ochre}" opacity=".8"/>'
+        + f'<rect x="{kb + 22 * 13 + 10}" y="{py + 206}" width="22" height="22" fill="#e2b48a" stroke="{ochre}" stroke-width="1.2"/>' + svg.text(kb + 22 * 13 + 21, py + 223, "b", "italic", 17, ink, "middle")
+        + svg.text(kb + 22 * 13 + 44, py + 224, "key = [k⁰ + Δk ; b]", "serif-m", 19, ink)
+        + svg.text(kb + 22 * 13 + 44, py + 246, "one key per skill", "italic", 15, lead)
+        + "</g>"
+    )
+    writes = [
+        ("k⁰: only keys move", ["requests pull the key", "toward raw queries"]),
+        ("Δk: query advantage", ["won pulls in, lost pushes out", "=Δk ~ Σ±(q−μ)"]),
+        ("b: not task ease", ["raw rates mislead;", "compare the same task"]),
+    ]
+    svg.add(f'<g class="fade" {delay(1.8)}>' + svg.text(px + 12, py + 280, "Writing the key", "serif", 19, blue) + svg.text(px + 166, py + 280, "between rounds", "italic", 16, lead))
+    for k, (title, lines) in enumerate(writes):
+        bx = px + 8 + k * (cw3 + 8)
+        svg.add(sub(bx, py + 292, cw3, 104, title, ochre if k else blue) + "".join(line_text(bx + 10, py + 338 + j * 21, line) for j, line in enumerate(lines)))
+    svg.add("</g>")
+
+    # (3) Experience hypergraph.
+    px, py, pw, ph = 902, fy, 246, 334
+    svg.add(panel(px, py, pw, ph, violet, "3", "Experience hypergraph", 1.2))
+    nodes = [(924, fy + 92), (950, fy + 72), (972, fy + 104), (938, fy + 122), (1000, fy + 78), (1018, fy + 112), (992, fy + 130)]
     svg.add(
         f'<g class="fade" {delay(1.4)}>'
-        f'<circle cx="842" cy="244" r="28" fill="none" stroke="{blue}" stroke-width="1.35" stroke-dasharray="4 4"/>'
-        + arrow(ox, oy, 772, 214, ink, 1.2, 9)
-        + arrow(ox, oy, 840, 244, blue, 1.2, 9)
-        + arrow(ox, oy, 826, 224, red, 1.2, 9)
-        + svg.text(752, 210, "q", "italic", 22, ink)
-        + svg.text(852, 272, "k⁰", "italic", 22, blue)
-        + svg.text(818, 214, "k′", "italic", 22, red)
-        + f'<circle cx="{ox}" cy="{oy}" r="2.6" fill="{ink}"/>'
-        + svg.text(800, 302, "score change ≤ c", "italic", 19, lead)
-        + "</g>"
-    )
-    key_cells = "".join(f'<rect x="{664 + c * 13}" y="356" width="13" height="18" fill="{cell}" stroke="{blue}" stroke-width="1.25"/>' for c in range(20))
-    svg.style(
-        "@keyframes edit{0%,30%{opacity:.25}38%,62%{opacity:1}75%,100%{opacity:.25}}",
-        ".edit{animation:edit 9s ease-in-out 2.5s infinite both}",
-    )
-    svg.add(
-        f'<g class="fade" {delay(1.6)}>{key_cells}'
-        f'<rect class="edit" x="664" y="377" width="260" height="5" fill="{red}" opacity=".7"/>'
-        f'<rect x="930" y="356" width="18" height="18" fill="#efd6c8" stroke="{red}" stroke-width="1.35"/>'
-        + svg.text(939, 370, "b", "italic", 17, red, "middle")
-        + svg.text(664, 412, "key = [k⁰ + Δk ; b]", "serif-m", 22, ink)
-        + "</g>",
-        f'<g class="fade" {delay(2.1)}>' + svg.text(664, 440, "read with one inner product and a clip", "italic", 19, red) + "</g>",
-    )
-
-    # ③ the experience hypergraph.
-    svg.add(heading(978, 188, "3", "hypergraph", 1.4))
-    nodes = [(996, 240), (1032, 218), (1050, 266), (1006, 294), (1092, 228), (1118, 274), (1080, 306)]
-    blob_a = "M984 234C990 204 1040 200 1062 226C1080 250 1060 304 1022 306C990 308 978 266 984 234Z"
-    blob_b = "M1040 256C1046 218 1100 202 1126 234C1140 266 1118 322 1080 318C1050 314 1036 288 1040 256Z"
-    svg.add(
-        f'<g class="fade" {delay(1.7)}>'
-        f'<path d="{blob_a}" fill="{blue}" fill-opacity=".1" stroke="{blue}" stroke-width="1.35"/>'
-        f'<path d="{blob_b}" fill="{red}" fill-opacity=".08" stroke="{red}" stroke-width="1.35"/>'
-        f'<path d="M996 240L1032 218L1050 266L1006 294ZM1050 266L1092 228L1118 274L1080 306Z" fill="none" stroke="{ink}" stroke-width="1.35" opacity=".7"/>'
+        + sub(px + 8, py + 40, pw - 16, 118, "Attributed events", violet)
+        + f'<path d="M914 {fy + 90}C918 {fy + 62} 966 {fy + 58} 980 {fy + 86}C992 {fy + 112} 974 {fy + 140} 946 {fy + 138}C920 {fy + 136} 910 {fy + 112} 914 {fy + 90}Z" fill="{blue}" fill-opacity=".16" stroke="{blue}" stroke-width="1.1"/>'
+        + f'<path d="M964 {fy + 98}C968 {fy + 66} 1016 {fy + 60} 1030 {fy + 92}C1040 {fy + 120} 1020 {fy + 146} 992 {fy + 142}C970 {fy + 140} 960 {fy + 120} 964 {fy + 98}Z" fill="{violet}" fill-opacity=".14" stroke="{violet}" stroke-width="1.1"/>'
+        + f'<path d="M924 {fy + 92}L950 {fy + 72}L972 {fy + 104}L938 {fy + 122}ZM972 {fy + 104}L1000 {fy + 78}L1018 {fy + 112}L992 {fy + 130}Z" fill="none" stroke="{ink}" stroke-width="1.1" opacity=".7"/>'
         + "".join(f'<circle cx="{nx}" cy="{ny}" r="4" fill="{ink}"/>' for nx, ny in nodes)
-        + svg.text(978, 350, "attributed events", "italic", 18, lead)
-        + svg.text(978, 372, "task · executor · version", "allsc", 14.5, lead, tracking=1.2)
+        + "".join(svg.text(1046, fy + 82 + j * 19, t, "italic", 15, ink) for j, t in enumerate(["task", "executor", "versions", "arms (s, y)"]))
+        + sub(px + 8, py + 166, pw - 16, 66, "Admit & read · recall", violet)
+        + "".join(f'<circle cx="{px + 26 + c * 13}" cy="{py + 216}" r="5" fill="{violet}"/>' for c in range(4))
+        + svg.text(px + 90, py + 221, "6 kept + 4 recalled", "italic", 15.5, ink)
+        + sub(px + 8, py + 240, pw - 16, 86, "Evidence review", violet)
+        + f'<rect x="{px + 22}" y="{py + 272}" width="26" height="34" rx="2" fill="#f7f0de" stroke="{ink}" stroke-width="1.1"/>'
+        + "".join(f'<path d="M{px + 27} {py + 282 + j * 7}h16" stroke="{ink}" stroke-width=".9"/>' for j in range(3))
+        + arrow(px + 54, py + 289, px + 74, py + 289, ink, 1.1, 5)
+        + svg.text(px + 82, py + 286, "cited skill,", "italic", 15.5, ink) + svg.text(px + 82, py + 306, "cited evidence", "italic", 15.5, ink)
+        + "</g>"
+    )
+    # The original document handed to the actor.
+    svg.add(
+        f'<g class="fade" {delay(1.9)}><path d="M902 {fy + 346}h64l14 14v46h-78z" fill="{red}" fill-opacity=".85"/>'
+        + svg.text(938, fy + 370, "original", "italic", 15, "#f6eedc", "middle") + svg.text(938, fy + 390, "doc only", "italic", 15, "#f6eedc", "middle")
+        + arrow(984, fy + 384, 1004, fy + 384, red, 1.3, 6)
         + "</g>"
     )
 
-    # Between rounds: publish ← fit ← filter ← record ← outcomes, fed by ④.
-    svg.add(f'<g class="fade" {delay(2.0)}>' + svg.text(476, 486, "between rounds · support tasks only", "italic", 20, blue) + "</g>")
-    steps = ["Publish", "Fit", "Filter", "Record", "Outcomes"]
-    bw, bgap, by = 84, 13, 504
-    svg.style("@keyframes back{to{stroke-dashoffset:22}}", ".back{animation:back 2.4s linear infinite}")
-    for i, step in enumerate(steps):
-        bx = 476 + i * (bw + bgap)
+    # (4) Execution with a frozen actor.
+    px, py, pw, ph = 1008, fy + 346, 140, 250
+    svg.add(panel(px, py, pw, ph, slate, "4", "Execution", 1.5))
+    for i, name in enumerate(["ToolQA", "AppWorld", "ALFWorld"]):
+        wx, wy = px + 10 + i * 6, py + 44 + i * 52
         svg.add(
-            f'<g class="fade" {delay(2.1 + i * 0.08)}><rect x="{bx}" y="{by}" width="{bw}" height="32" rx="2" fill="{box}" stroke="{ink}" stroke-width="1.45"/>'
-            + svg.text(bx + bw / 2, by + 21, step, "allsc", 14, ink, "middle", tracking=1.2)
+            f'<g class="fade" {delay(1.7 + i * 0.1)}><rect x="{wx}" y="{wy}" width="112" height="44" rx="3" fill="#f6efdf" stroke="{ink}" stroke-width="1.1"/>'
+            f'<path d="M{wx} {wy + 11}H{wx + 112}" stroke="{ink}" stroke-width=".9"/>'
+            + "".join(f'<circle cx="{wx + 8 + d * 7}" cy="{wy + 5.5}" r="1.7" fill="{ink}"/>' for d in range(3))
+            + svg.text(wx + 56, wy + 33, name, "serif", 17, ink, "middle")
+            + "</g>"
+        )
+    svg.add(f'<g class="fade" {delay(2.0)}>' + svg.text(px + pw / 2, py + 228, "frozen actor", "serif", 18, ink, "middle") + "</g>")
+
+    # Between rounds: support tasks only.
+    px, py, pw, ph = 296, fy + 484, 698, 112
+    svg.add(
+        f'<g class="fade" {delay(2.0)}><rect x="{px}" y="{py}" width="{pw}" height="{ph}" rx="6" fill="{slate}" fill-opacity=".08" stroke="{slate}" stroke-width="1.4"/>'
+        + svg.text(px + 14, py + 28, "Between rounds: support only", "serif", 19, ink)
+        + svg.text(px + pw - 14, py + 28, "frozen at test time", "italic", 16, lead, "end")
+        + "</g>"
+    )
+    steps = [("Publish", "1"), ("Fit KeyOpt", "2"), ("Filter", "3"), ("Record", "3"), ("Outcomes", "4")]
+    bw, gap = 118, 18
+    svg.style("@keyframes back{to{stroke-dashoffset:-22}}", ".back{animation:back 2.4s linear infinite}")
+    for i, (step, n) in enumerate(steps):
+        bx = px + 14 + i * (bw + gap)
+        svg.add(
+            f'<g class="fade" {delay(2.1 + i * 0.08)}><rect x="{bx}" y="{py + 42}" width="{bw}" height="54" rx="4" fill="#f6efdf" stroke="{ink}" stroke-width="1.2"/>'
+            + svg.text(bx + bw / 2, py + 76, step, "serif", 18, ink, "middle")
+            + f'<circle cx="{bx + bw - 8}" cy="{py + 44}" r="10" fill="#3a4458"/>' + svg.text(bx + bw - 8, py + 49, n, "serif", 13, "#f3ead6", "middle")
             + "</g>"
         )
         if i:
-            svg.add(arrow(bx - 2, by + 16, bx - bgap + 3, by + 16, blue, 1, 5, f'class="fade" {delay(2.2 + i * 0.08)}'))
-    end = 476 + 5 * (bw + bgap)
-    svg.add(f'<path class="back" d="M{end + 30} {by + 16}H{end - bgap + 2}" stroke="{blue}" stroke-width="1.45" stroke-dasharray="5 6" fill="none"/>')
-    svg.add(heading(1000, 474, "4", "frozen actor", 1.8))
-    for i, name in enumerate(["ToolQA", "AppWorld", "ALFWorld"]):
-        wx, wy = 1004 + i * 12, 488 + i * 31
-        svg.add(
-            f'<g class="fade" {delay(1.9 + i * 0.1)}><rect x="{wx}" y="{wy}" width="124" height="38" rx="2" fill="{box}" stroke="{ink}" stroke-width="1.45"/>'
-            f'<path d="M{wx} {wy + 10}H{wx + 124}" stroke="{ink}" stroke-width="1.15"/>'
-            + "".join(f'<circle cx="{wx + 8 + d * 7}" cy="{wy + 5}" r="1.5" fill="{ink}"/>' for d in range(3))
-            + svg.text(wx + 10, wy + 28, name, "italic", 17, ink)
-            + "</g>"
-        )
-    svg.add(f'<g class="fade" {delay(2.3)}>' + svg.text(476, 576, "the actor reads the original skill document only", "italic", 19, red) + "</g>")
-    svg.add("</g>", f'<path d="{sheet}" fill="none" stroke="#b9a37d" stroke-width="1.25"/>')
-    svg.add(svg.text(1134, 76, "Plate II", "allsc", 14, lead, "end", tracking=2.4))
+            svg.add(arrow(bx - 2, py + 69, bx - gap + 3, py + 69, violet if i > 2 else blue, 1.3, 6, f'class="fade" {delay(2.2 + i * 0.08)}'))
+    svg.add(
+        f'<path class="back" d="M1008 {py + 69}H{px + 14 + 5 * (bw + gap) - gap + 2}" stroke="{slate}" stroke-width="1.4" stroke-dasharray="6 5" fill="none"/>',
+        f'<path class="back" d="M{px + 14 + bw / 2} {py + 42}V{fy + 66 + 404 + 4}" stroke="{ochre}" stroke-width="1.4" stroke-dasharray="6 5" fill="none"/>',
+    )
+    svg.add("</g>", f'<path d="{sheet}" fill="none" stroke="#b9a37d" stroke-width="1.2"/>')
+    svg.add(svg.text(1134, 82, "Plate II", "allsc", 15, lead, "end", tracking=2.4))
     return svg.render()
 
 
