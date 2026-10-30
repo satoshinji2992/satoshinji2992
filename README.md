@@ -69,7 +69,7 @@
 </p>
 
 <p align="center">
-  <img src="./assets/almanac.svg?v=d6b09263b7" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
+  <img src="./assets/almanac.svg?v=8157615bbc" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
 </p>
 
 <a name="instruments"></a>
@@ -82,7 +82,7 @@
 </p>
 
 <p align="center">
-  <a href="#featured"><img src="./assets/footer.svg?v=cbf93144ca" width="100%" alt="Back to top"></a>
+  <a href="#featured"><img src="./assets/footer.svg?v=a091bbaa37" width="100%" alt="Back to top"></a>
 </p>
 
 <details>
@@ -97,6 +97,6 @@
 - **naiLongRacing**: a pseudo-3D racer in C on openvela. [openvela branch](https://github.com/satoshinji2992/naiLongRacing/tree/openvela)
 - **FPGA CPU**: RV32IM five-stage pipeline on a Spartan-6 board. [fpga_cpu](https://github.com/satoshinji2992/fpga_cpu)
 - **Prizes**: RoboMaster University League and CUMCM (China Undergraduate Mathematical Contest in Modeling), national 2nd (2026); electronics design contest, provincial 2nd (2026) and 3rd (2025).
-- **Almanac**: 1118 contributions in the last year; 45 stars across 24 public repositories.
+- **Almanac**: 1066 contributions in the last year; 45 stars across 24 public repositories.
 
 </details>
