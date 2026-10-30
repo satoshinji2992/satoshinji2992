@@ -70,7 +70,7 @@
 </p>
 
 <p align="center">
-  <img src="./assets/pulse.svg?v=38a850f978" width="100%" alt="Contributions over the last year, recent activity, languages and the latest AutoKeeper release">
+  <img src="./assets/pulse.svg?v=79a25597a1" width="100%" alt="Contributions over the last year, recent activity, languages and the latest AutoKeeper release">
 </p>
 
 <a name="toolkit"></a>
@@ -83,7 +83,7 @@
 </p>
 
 <p align="center">
-  <a href="#featured"><img src="./assets/footer.svg?v=f0f941c9ac" width="100%" alt="Back to top"></a>
+  <a href="#featured"><img src="./assets/footer.svg?v=2cf130fcf8" width="100%" alt="Back to top"></a>
 </p>
 
 <details>
@@ -98,6 +98,6 @@
 - **naiLongRacing**: a pseudo-3D racer in C on openvela. [openvela branch](https://github.com/satoshinji2992/naiLongRacing/tree/openvela)
 - **FPGA CPU**: RV32IM five-stage pipeline on a Spartan-6 board. [fpga_cpu](https://github.com/satoshinji2992/fpga_cpu)
 - **Prizes**: RoboMaster University League and CUMCM (China Undergraduate Mathematical Contest in Modeling), national 2nd (2026); electronics design contest, provincial 2nd (2026) and 3rd (2025).
-- **Pulse**: 1945 contributions in the last year; 49 stars across 24 public repositories.
+- **Pulse**: 1884 contributions in the last year; 49 stars across 24 public repositories.
 
 </details>
