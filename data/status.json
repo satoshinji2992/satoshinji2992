@@ -1,119 +1,194 @@
 {
-  "mode": "EXPERIMENTING",
-  "focus": "Embodied intelligence",
-  "now": "Building foundations across deep learning and robot learning.",
-  "tagline": "I tend to learn things by rebuilding them.",
-  "fallback": {
-    "public_repos": 22,
-    "total_stars": "—",
-    "followers": "—"
-  },
-  "projects": [
-    {
-      "repo": "quickly_access_to_deeplearning",
-      "label": "Deep Learning Tutorial",
-      "kind": "tutorial",
-      "fallback_pushed_at": "2026-08-20T14:15:07Z",
-      "fallback_stars": 0
+  "username": "satoshinji2992",
+  "release_repo": "autokeeper",
+  "snapshot_note": "Fallback values captured 2026-10-31; the renderer uses live API data when it can.",
+  "snapshot": {
+    "public_repos": 24,
+    "followers": 4,
+    "stars": 49,
+    "repos": {
+      "satoshinji2992": {
+        "stars": 0,
+        "pushed_at": "2026-10-30T08:42:08Z",
+        "language": "Python"
+      },
+      "CompSkill": {
+        "stars": 0,
+        "pushed_at": "2026-10-29T17:04:49Z",
+        "language": "Python"
+      },
+      "autokeeper": {
+        "stars": 4,
+        "pushed_at": "2026-10-28T06:28:29Z",
+        "language": "Python"
+      },
+      "quickly_access_to_deeplearning": {
+        "stars": 29,
+        "pushed_at": "2026-09-22T03:51:42Z",
+        "language": "JavaScript"
+      },
+      "satoshinji2992.github.io": {
+        "stars": 0,
+        "pushed_at": "2026-10-08T10:32:37Z",
+        "language": "HTML"
+      },
+      "SeiyuuMatch": {
+        "stars": 4,
+        "pushed_at": "2026-06-04T09:27:33Z",
+        "language": "Python"
+      },
+      "git_demo": {
+        "stars": 0,
+        "pushed_at": "2026-09-21T14:15:09Z",
+        "language": "HTML"
+      },
+      "tri_bev_track": {
+        "stars": 3,
+        "pushed_at": "2025-11-21T12:43:30Z",
+        "language": "Python"
+      },
+      "math_agent": {
+        "stars": 0,
+        "pushed_at": "2025-04-02T06:11:15Z",
+        "language": "Python"
+      },
+      "H_ball": {
+        "stars": 0,
+        "pushed_at": "2026-08-01T10:43:01Z",
+        "language": "C++"
+      },
+      "fpga_cpu": {
+        "stars": 0,
+        "pushed_at": "2026-07-12T12:54:54Z",
+        "language": "SystemVerilog"
+      },
+      "futari-maj": {
+        "stars": 0,
+        "pushed_at": "2026-07-12T04:28:07Z",
+        "language": "TypeScript"
+      },
+      "naiLongRacing": {
+        "stars": 5,
+        "pushed_at": "2026-07-01T11:07:19Z",
+        "language": "C"
+      },
+      "trip": {
+        "stars": 0,
+        "pushed_at": "2026-06-18T03:21:02Z",
+        "language": "Python"
+      },
+      "wan2.2": {
+        "stars": 0,
+        "pushed_at": "2026-06-15T13:33:08Z",
+        "language": "Python"
+      },
+      "servo": {
+        "stars": 2,
+        "pushed_at": "2026-04-07T13:07:29Z",
+        "language": "C"
+      },
+      "sp_vision_25": {
+        "stars": 0,
+        "pushed_at": "2026-01-21T21:36:25Z",
+        "language": "C"
+      },
+      "lerobot": {
+        "stars": 0,
+        "pushed_at": "2026-01-20T13:27:47Z",
+        "language": "Python"
+      },
+      "Rmtest_2_ans": {
+        "stars": 1,
+        "pushed_at": "2025-10-10T16:00:57Z",
+        "language": "Python"
+      },
+      "Rmtest_hard_ans": {
+        "stars": 0,
+        "pushed_at": "2025-09-09T13:56:49Z",
+        "language": "Python"
+      },
+      "25-": {
+        "stars": 0,
+        "pushed_at": "2025-06-10T02:03:50Z",
+        "language": "C"
+      },
+      "python_read": {
+        "stars": 1,
+        "pushed_at": "2025-06-03T09:32:33Z",
+        "language": "Python"
+      },
+      "car": {
+        "stars": 0,
+        "pushed_at": "2025-05-11T04:51:00Z",
+        "language": null
+      },
+      "Pytorch-Transformer": {
+        "stars": 0,
+        "pushed_at": "2025-05-07T13:13:30Z",
+        "language": "Python"
+      }
     },
-    {
-      "repo": "SeiyuuMatch",
-      "label": "SeiyuuMatch",
-      "kind": "production website",
-      "fallback_pushed_at": "2026-06-04T06:17:10Z",
-      "fallback_stars": 0
-    },
-    {
-      "repo": "lerobot",
-      "label": "LeRobot",
-      "kind": "upstream contribution",
-      "fallback_pushed_at": "2026-01-20T13:27:47Z",
-      "fallback_stars": 0
-    }
-  ],
-  "showcases": [
-    {
-      "id": "autokeeper",
-      "repo": "autokeeper",
-      "label": "AutoKeeper",
-      "kicker": "OPEN-SOURCE AGENT SYSTEM",
-      "kind": "LangGraph · multi-agent harness",
-      "summary": "An AI keeper for Call of Cthulhu 7e: a keeper, an arbiter, a director and NPC agents share one model-agnostic harness, while a rule engine settles every die.",
-      "link": "https://github.com/satoshinji2992/autokeeper",
-      "fallback_pushed_at": "2026-10-19T08:55:00Z",
-      "fallback_stars": 1
-    },
-    {
-      "id": "compskill",
-      "repo": "compskill-review",
-      "label": "CompSkill",
-      "kicker": "RESEARCH PAPER",
-      "kind": "skill retrieval · execution feedback",
-      "summary": "Compiles execution experience into skill retrieval, so an agent picks skills by what actually worked on its executor rather than by description similarity.",
-      "link": "https://anonymous.4open.science/r/compskill-review-CCEB/",
-      "fallback_pushed_at": "2026-10-13T00:00:00Z",
-      "fallback_stars": 0
-    },
-    {
-      "id": "electronics",
-      "repos": [
-        "H_ball",
-        "servo"
+    "languages": [
+      [
+        "Python",
+        12
       ],
-      "label": "H_ball + servo",
-      "kicker": "ELECTRONICS COMPETITION",
-      "kind": "vision · embedded control",
-      "summary": "A paired competition build: camera-based ball tracking with a UART control loop, plus STM32 servo, gimbal, and sensor firmware.",
-      "links": [
-        "https://github.com/satoshinji2992/H_ball",
-        "https://github.com/satoshinji2992/servo"
+      [
+        "C",
+        3
       ],
-      "fallback_pushed_at": "2026-08-01T10:43:01Z",
-      "fallback_stars": 2
+      [
+        "HTML",
+        2
+      ],
+      [
+        "C++",
+        1
+      ],
+      [
+        "JavaScript",
+        1
+      ],
+      [
+        "SystemVerilog",
+        1
+      ],
+      [
+        "TypeScript",
+        1
+      ]
+    ],
+    "release": {
+      "tag": "v0.0.6.5",
+      "published_at": "2026-10-28T06:26:57Z",
+      "url": "https://github.com/satoshinji2992/autokeeper/releases/tag/v0.0.6.5"
     },
-    {
-      "id": "nailong",
-      "repo": "naiLongRacing",
-      "label": "naiLongRacing",
-      "kicker": "EMBEDDED 3D GAME",
-      "kind": "openvela · lvgl · sdl",
-      "summary": "A portable pure-C racing game core with an OpenVela/LVGL target and an SDL desktop preview.",
-      "link": "https://github.com/satoshinji2992/naiLongRacing/tree/openvela",
-      "fallback_pushed_at": "2026-07-01T11:07:19Z",
-      "fallback_stars": 5
+    "calendar": {
+      "total": 1053,
+      "start": "2025-10-26",
+      "counts": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 12, 1, 1, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 4, 0, 0, 0, 0, 0, 2, 5, 2, 0, 0, 0, 0, 1, 0, 8, 1, 0, 5, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 16, 0, 4, 1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 51, 6, 10, 3, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 87, 132, 86, 173, 122, 104, 23, 23, 16, 46, 7, 1, 2, 0]
     },
-    {
-      "id": "fpga-cpu",
-      "repo": "fpga_cpu",
-      "label": "FPGA RISC-V CPU",
-      "kicker": "DIGITAL SYSTEMS",
-      "kind": "rv32i · pipeline · cache",
-      "summary": "A SystemVerilog RV32I CPU for FPGA: single-cycle and five-stage pipeline variants with BRAM, I-cache, and UART MMIO.",
-      "link": "https://github.com/satoshinji2992/fpga_cpu",
-      "fallback_pushed_at": "2026-07-12T12:54:54Z",
-      "fallback_stars": 0
-    }
-  ],
-  "fallback_activity": [
-    {
-      "created_at": "2026-08-20T14:15:07Z",
-      "repo": "Deep Learning Tutorial",
-      "summary": "refined the tutorial overview"
-    },
-    {
-      "created_at": "2026-08-19T14:41:02Z",
-      "repo": "Deep Learning Tutorial",
-      "summary": "added an interactive residual-block component"
-    },
-    {
-      "created_at": "2026-06-04T06:17:10Z",
-      "repo": "SeiyuuMatch",
-      "summary": "updated the production website"
-    },
-    {
-      "created_at": "2026-01-20T13:27:47Z",
-      "repo": "LeRobot",
-      "summary": "merged an async-inference device fix upstream"
-    }
-  ]
+    "activity": [
+      {
+        "date": "2026-10-28",
+        "repo": "autokeeper",
+        "summary": "released v0.0.6.5 · pushed to main"
+      },
+      {
+        "date": "2026-10-26",
+        "repo": "autokeeper",
+        "summary": "released v0.0.6.4 · pushed to main"
+      },
+      {
+        "date": "2026-10-25",
+        "repo": "autokeeper",
+        "summary": "4 releases, up to v0.0.6.3 · pushed to main"
+      },
+      {
+        "date": "2026-10-24",
+        "repo": "autokeeper",
+        "summary": "pushed to main"
+      }
+    ]
+  }
 }
