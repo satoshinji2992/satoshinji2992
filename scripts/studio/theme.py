@@ -40,7 +40,6 @@ LEROBOT = Palette("#0f1412", "#151c19", "#26332d", "#e2e6dc", "#8f9a8f", "#86ab9
 HBALL = Palette("#110f0b", "#1a1710", "#332c1d", "#ebe2c8", "#9d927a", "#c2a160", "#a8683c")
 NAILONG = Palette("#100b07", "#1a130b", "#3a2a17", "#f0dcb8", "#a2875f", "#d9a052", "#b45e2e")
 FPGA = Palette("#120d0b", "#1b1411", "#3a2a22", "#eedccc", "#a48b7c", "#c8754d", "#ddd0b6")
-PRIZES = Palette("#150f11", "#1d1518", "#352a2e", "#ece2d0", "#a3959a", "#c58f9b", GOLD, "#e6dcc8")
 
 ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 

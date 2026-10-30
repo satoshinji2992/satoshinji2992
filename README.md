@@ -48,7 +48,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/satoshinji2992/H_ball"><img src="./assets/card-hball.svg?v=f31dde7611" width="49%" alt="H_ball and servo: electronics design contest builds with MaixCAM vision and STM32 control"></a>
+  <a href="https://github.com/satoshinji2992/H_ball"><img src="./assets/card-hball.svg?v=8501e77347" width="49%" alt="H_ball and servo: electronics design contest builds with MaixCAM vision and STM32 control"></a>
   <a href="https://github.com/satoshinji2992/naiLongRacing/tree/openvela"><img src="./assets/card-nailong.svg?v=be14d38ecb" width="49%" alt="naiLongRacing: a pseudo-3D racer in C on openvela"></a><br>
   <a href="https://github.com/satoshinji2992/H_ball"><img src="./assets/btn-hball-h-ball.svg?v=3f70a80837" width="24%" alt="H_ball repository"></a>
   <a href="https://github.com/satoshinji2992/servo"><img src="./assets/btn-hball-servo.svg?v=00003e6c7b" width="24%" alt="servo repository"></a>
@@ -57,10 +57,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/satoshinji2992/fpga_cpu"><img src="./assets/card-fpga.svg?v=aaf3d9afb0" width="49%" alt="FPGA RISC-V CPU: RV32IM five-stage pipeline on a Spartan-6 board"></a>
-  <a href="https://satoshinji2992.github.io"><img src="./assets/card-prizes.svg?v=e2fc9cf45b" width="49%" alt="Prizes: RoboMaster University League and CUMCM national second prizes, electronics design contest provincial prizes"></a><br>
+  <a href="https://github.com/satoshinji2992/fpga_cpu"><img src="./assets/card-fpga.svg?v=aaf3d9afb0" width="49%" alt="FPGA RISC-V CPU: RV32IM five-stage pipeline on a Spartan-6 board"></a><br>
   <a href="https://github.com/satoshinji2992/fpga_cpu"><img src="./assets/btn-fpga-fpga-cpu.svg?v=7330637794" width="49%" alt="fpga_cpu repository"></a>
-  <a href="https://satoshinji2992.github.io"><img src="./assets/btn-prizes-homepage.svg?v=1fdcf830a8" width="49%" alt="Academic homepage"></a>
 </p>
 
 <a name="almanac"></a>
@@ -69,7 +67,7 @@
 </p>
 
 <p align="center">
-  <img src="./assets/almanac.svg?v=8157615bbc" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
+  <img src="./assets/almanac.svg?v=eb35c629e1" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
 </p>
 
 <a name="instruments"></a>
@@ -82,7 +80,7 @@
 </p>
 
 <p align="center">
-  <a href="#featured"><img src="./assets/footer.svg?v=a091bbaa37" width="100%" alt="Back to top"></a>
+  <a href="#featured"><img src="./assets/footer.svg?v=cbf93144ca" width="100%" alt="Back to top"></a>
 </p>
 
 <details>
@@ -96,7 +94,6 @@
 - **H_ball + servo**: electronics design contest builds, MaixCAM vision and STM32 control. [H_ball](https://github.com/satoshinji2992/H_ball) · [servo](https://github.com/satoshinji2992/servo)
 - **naiLongRacing**: a pseudo-3D racer in C on openvela. [openvela branch](https://github.com/satoshinji2992/naiLongRacing/tree/openvela)
 - **FPGA CPU**: RV32IM five-stage pipeline on a Spartan-6 board. [fpga_cpu](https://github.com/satoshinji2992/fpga_cpu)
-- **Prizes**: RoboMaster University League and CUMCM (China Undergraduate Mathematical Contest in Modeling), national 2nd (2026); electronics design contest, provincial 2nd (2026) and 3rd (2025).
-- **Almanac**: 1066 contributions in the last year; 45 stars across 24 public repositories.
+- **Almanac**: 1121 contributions in the last year; 45 stars across 24 public repositories.
 
 </details>

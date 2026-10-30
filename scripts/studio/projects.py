@@ -1,4 +1,4 @@
-"""Six half-width plates, each an object from the same old archive."""
+"""Five half-width plates, each an object from the same old archive."""
 
 from __future__ import annotations
 
@@ -15,14 +15,12 @@ from .theme import (
     HBALL,
     LEROBOT,
     NAILONG,
-    PRIZES,
     SEIYUU,
     Plate,
     bullet_lines,
     grain,
     kicker,
     seal,
-    torn_rect,
 )
 
 W, H = 600, 380
@@ -331,7 +329,7 @@ def hball(data: dict) -> str:
         _title(svg, 40, 132, "H_ball", 54, pal.ink),
         _title(svg, 42, 176, "+ servo", 38, "#cfc6aa", 0.25, "italic"),
         bullet_lines(svg, 42, 228, ["YOLO11n on a MaixCAM", "alpha–beta filter, UART link", "STM32 gimbal: PID and IMU"], pal.ink, brass, 18, 27, 0.55),
-        f'<g class="fade" {delay(1.0)}>' + svg.text(42, 334, "Provincial 2nd, 2026 · 3rd, 2025", "allsc", 14.5, brass, tracking=1.4) + "</g>",
+        f'<g class="fade" {delay(1.0)}>' + svg.text(42, 334, "Two contest builds · 2025 and 2026", "allsc", 14.5, brass, tracking=1.4) + "</g>",
     )
     plate.close(6, corner="tr")
     return svg.render()
@@ -538,73 +536,4 @@ def fpga(data: dict) -> str:
         + "</g>",
     )
     plate.close(8, corner="br")
-    return svg.render()
-
-
-PRIZE_ROWS = [
-    ("2026", "RoboMaster University League", "National 2nd"),
-    ("2026", "CUMCM · Math Modeling", "National 2nd"),
-    ("2026", "Electronics Design Contest · H", "Provincial 2nd"),
-    ("2025", "Electronics Design Contest · E", "Provincial 3rd"),
-]
-
-
-def prizes(data: dict) -> str:
-    pal = PRIZES
-    ink, rose, paper = "#2a2124", "#9c4f63", pal.accent3
-    svg = Svg(W, H, "Prizes: national second prizes in the RoboMaster University League and CUMCM; electronics design contest provincial prizes")
-    plate = Plate(svg, pal)
-    plate.open()
-    rosette = "".join(f'<ellipse cx="300" cy="190" rx="300" ry="96" transform="rotate({k * 7.5} 300 190)"/>' for k in range(24))
-    rosette2 = "".join(f'<ellipse cx="300" cy="190" rx="220" ry="60" transform="rotate({k * 10 + 5} 300 190)"/>' for k in range(18))
-    svg.add(f'<g fill="none" stroke="{pal.accent}" stroke-width="1.1" opacity=".09">{rosette}{rosette2}</g>')
-    sheet = torn_rect(44, 40, 512, 296, 2.4, seed=2026, edges="lrtb")
-    rng = random.Random(1925)
-    foxing = "".join(
-        f'<circle cx="{num(rng.uniform(60, 540))}" cy="{num(rng.uniform(56, 320))}" r="{num(rng.uniform(3, 14))}" fill="#8a6234" opacity="{num(rng.uniform(.04, .09))}"/>'
-        for _ in range(9)
-    )
-    svg.add(
-        f'<g transform="rotate(-1.2 300 190)">'
-        f'<path d="{sheet}" transform="translate(4 6)" fill="#000" opacity=".45"/>'
-        f'<path d="{sheet}" fill="{paper}"/>{foxing}'
-        + grain(svg, 40, 36, 520, 304, 0.9)
-        + f'<rect x="58" y="54" width="484" height="268" fill="none" stroke="{rose}" stroke-width="1.35" opacity=".55"/>'
-        f'<rect x="62" y="58" width="476" height="260" fill="none" stroke="{rose}" stroke-width="1" opacity=".45"/>'
-        + f'<g class="rise" {delay(0.2)}>'
-        + svg.text(80, 104, "Prizes", "serif", 38, ink)
-        + svg.text(520, 100, "2025 – 2026", "allsc", 14, rose, "end", tracking=1.8)
-        + "</g>"
-        + f'<path class="draw" {delay(0.4)} d="M80 118H520" pathLength="1" stroke="{rose}" stroke-width="1.45"/>'
-        + f'<path class="draw" {delay(0.5)} d="M80 121.5H520" pathLength="1" stroke="{rose}" stroke-width="1" opacity=".7"/>'
-    )
-    for i, (year, name, level) in enumerate(PRIZE_ROWS):
-        y = 160 + i * 42
-        name_end = 128 + measure(name, "serif-m", 21)
-        level_start = 520 - measure(level, "italic", 20)
-        leader = ""
-        if level_start - name_end > 40:
-            leader = f'<path d="M{num(name_end + 10)} {y - 4}H{num(level_start - 10)}" stroke="{rose}" stroke-width="1.5" stroke-dasharray="1 5" stroke-linecap="round" opacity=".55"/>'
-        svg.add(
-            f'<g class="rise" {delay(0.45 + i * 0.12)}>'
-            + svg.text(80, y, year, "italic", 18, "#8a6a71")
-            + svg.text(128, y, name, "serif-m", 21, ink)
-            + leader
-            + svg.text(520, y, level, "italic", 20, rose, "end")
-            + "</g>"
-        )
-    svg.add("</g>")
-    svg.style("@keyframes sheen{0%,100%{opacity:.12}50%{opacity:.42}}", ".sheen{animation:sheen 6s ease-in-out infinite}")
-    sx, sy = 526, 316
-    svg.add(
-        f'<g class="fade" {delay(1.0)}>'
-        f'<circle cx="{sx + 3}" cy="{sy + 4}" r="31" fill="#000" opacity=".4"/>'
-        f'<path d="M{sx - 31} {sy}Q{sx - 33} {sy - 20} {sx - 18} {sy - 28}Q{sx} {sy - 36} {sx + 18} {sy - 28}Q{sx + 33} {sy - 18} {sx + 31} {sy}'
-        f'Q{sx + 33} {sy + 20} {sx + 18} {sy + 28}Q{sx} {sy + 36} {sx - 18} {sy + 28}Q{sx - 33} {sy + 18} {sx - 31} {sy}Z" fill="#7f3343"/>'
-        f'<circle cx="{sx}" cy="{sy}" r="22" fill="#94404f" stroke="#6c2635" stroke-width="2"/>'
-        f'<g opacity=".7">{seal(sx, sy, 18, "#d68a99", 0.7)}</g>'
-        f'<ellipse class="sheen" cx="{sx - 8}" cy="{sy - 12}" rx="12" ry="5" fill="#fff" transform="rotate(-30 {sx - 8} {sy - 12})"/>'
-        "</g>"
-    )
-    plate.close(9, corner="bl")
     return svg.render()

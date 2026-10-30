@@ -6,7 +6,7 @@ import hashlib
 from dataclasses import dataclass, field
 
 from . import chrome, featured, projects, pulse
-from .theme import AUTOKEEPER, COMPSKILL, DEEP, FPGA, HBALL, LEROBOT, NAILONG, PAGE, PRIZES, SEIYUU, Palette, button
+from .theme import AUTOKEEPER, COMPSKILL, DEEP, FPGA, HBALL, LEROBOT, NAILONG, PAGE, SEIYUU, Palette, button
 
 USER = "satoshinji2992"
 GH = f"https://github.com/{USER}"
@@ -59,8 +59,6 @@ PROJECTS = [
           Link("Repository", f"{GH}/naiLongRacing", "naiLongRacing repository")], NAILONG),
     Card("fpga", f"{GH}/fpga_cpu", "FPGA RISC-V CPU: RV32IM five-stage pipeline on a Spartan-6 board",
          [Link("fpga_cpu", f"{GH}/fpga_cpu", "fpga_cpu repository")], FPGA),
-    Card("prizes", f"https://{USER}.github.io", "Prizes: RoboMaster University League and CUMCM national second prizes, electronics design contest provincial prizes",
-         [Link("Homepage", f"https://{USER}.github.io", "Academic homepage")], PRIZES),
 ]
 
 # Buttons share one displayed height: design width = 50 * displayed width / 34.
@@ -90,7 +88,7 @@ def build(data: dict) -> tuple[dict[str, str], str]:
     renderers = {
         "autokeeper": featured.autokeeper, "compskill": featured.compskill, "deep-learning": featured.deep_learning,
         "seiyuumatch": projects.seiyuumatch, "lerobot": projects.lerobot, "hball": projects.hball,
-        "nailong": projects.nailong, "fpga": projects.fpga, "prizes": projects.prizes,
+        "nailong": projects.nailong, "fpga": projects.fpga,
     }
     if not data.get("release"):
         # No published release: drop the release button rather than link to an empty page.
@@ -155,7 +153,12 @@ def readme(files: dict[str, str], data: dict) -> str:
         out += ["</p>", ""]
 
     section(1)
-    for left, right in zip(PROJECTS[::2], PROJECTS[1::2]):
+    if len(PROJECTS) % 2:
+        last = PROJECTS[-1]
+        pairs_end = len(PROJECTS) - 1
+    else:
+        last, pairs_end = None, len(PROJECTS)
+    for left, right in zip(PROJECTS[:pairs_end:2], PROJECTS[1:pairs_end:2]):
         out += [
             '<p align="center">',
             f'  <a href="{left.href}">{img(files, f"card-{left.name}.svg", "49%", left.alt)}</a>',
@@ -165,6 +168,15 @@ def readme(files: dict[str, str], data: dict) -> str:
             width = f"{link_width(card)}%"
             for link in card.links:
                 out.append(f'  <a href="{link.href}">{img(files, button_file(card, link), width, link.alt)}</a>')
+        out += ["</p>", ""]
+
+    if last is not None:
+        out += [
+            '<p align="center">',
+            f'  <a href="{last.href}">{img(files, f"card-{last.name}.svg", "49%", last.alt)}</a><br>',
+        ]
+        for link in last.links:
+            out.append(f'  <a href="{link.href}">{img(files, button_file(last, link), f"{link_width(last)}%", link.alt)}</a>')
         out += ["</p>", ""]
 
     section(2)
@@ -203,7 +215,6 @@ def text_version(data: dict) -> list[str]:
         f"- **H_ball + servo**: electronics design contest builds, MaixCAM vision and STM32 control. [H_ball]({GH}/H_ball) · [servo]({GH}/servo)",
         f"- **naiLongRacing**: a pseudo-3D racer in C on openvela. [openvela branch]({GH}/naiLongRacing/tree/openvela)",
         f"- **FPGA CPU**: RV32IM five-stage pipeline on a Spartan-6 board. [fpga_cpu]({GH}/fpga_cpu)",
-        "- **Prizes**: RoboMaster University League and CUMCM (China Undergraduate Mathematical Contest in Modeling), national 2nd (2026); electronics design contest, provincial 2nd (2026) and 3rd (2025).",
         f"- **Almanac**: {cal['total']} contributions in the last year; {data['stars']} stars across {data['public_repos']} public repositories.",
     ]
     return ["<details>", "<summary>Text version</summary>", "", *rows, "", "</details>", ""]
