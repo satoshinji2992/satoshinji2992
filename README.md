@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/satoshinji2992/autokeeper"><img src="./assets/card-autokeeper.svg?v=02f9962f17" width="100%" alt="AutoKeeper: play Call of Cthulhu 7e with an AI keeper, in the terminal or the browser"></a><br>
+  <a href="https://github.com/satoshinji2992/autokeeper"><img src="./assets/card-autokeeper.svg?v=af89bdd939" width="100%" alt="AutoKeeper: play Call of Cthulhu 7e with an AI keeper, in the terminal or the browser"></a><br>
   <a href="https://github.com/satoshinji2992/autokeeper"><img src="./assets/btn-autokeeper-repository.svg?v=4a8333b6c9" width="49%" alt="AutoKeeper repository"></a>
   <a href="https://satoshinji2992.github.io/autokeeper/"><img src="./assets/btn-autokeeper-website.svg?v=e34cdfe9b0" width="49%" alt="AutoKeeper website"></a>
 </p>
@@ -67,7 +67,7 @@
 </p>
 
 <p align="center">
-  <img src="./assets/almanac.svg?v=8157615bbc" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
+  <img src="./assets/almanac.svg?v=1ec779cfbb" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
 </p>
 
 <a name="instruments"></a>
@@ -80,7 +80,7 @@
 </p>
 
 <p align="center">
-  <a href="#featured"><img src="./assets/footer.svg?v=a091bbaa37" width="100%" alt="Back to top"></a>
+  <a href="#featured"><img src="./assets/footer.svg?v=cbf93144ca" width="100%" alt="Back to top"></a>
 </p>
 
 <details>
@@ -94,6 +94,6 @@
 - **H_ball + servo**: electronics design contest builds, MaixCAM vision and STM32 control. [H_ball](https://github.com/satoshinji2992/H_ball) · [servo](https://github.com/satoshinji2992/servo)
 - **naiLongRacing**: a pseudo-3D racer in C on openvela. [openvela branch](https://github.com/satoshinji2992/naiLongRacing/tree/openvela)
 - **FPGA CPU**: RV32IM five-stage pipeline on a Spartan-6 board. [fpga_cpu](https://github.com/satoshinji2992/fpga_cpu)
-- **Almanac**: 1066 contributions in the last year; 45 stars across 24 public repositories.
+- **Almanac**: 1159 contributions in the last year; 45 stars across 24 public repositories.
 
 </details>
