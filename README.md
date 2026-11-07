@@ -67,7 +67,7 @@
 </p>
 
 <p align="center">
-  <img src="./assets/almanac.svg?v=2f03c53c59" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
+  <img src="./assets/almanac.svg?v=0057aa9e5a" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
 </p>
 
 <a name="instruments"></a>
@@ -80,7 +80,7 @@
 </p>
 
 <p align="center">
-  <a href="#featured"><img src="./assets/footer.svg?v=3dbea394b0" width="100%" alt="Back to top"></a>
+  <a href="#featured"><img src="./assets/footer.svg?v=140bb0aa6a" width="100%" alt="Back to top"></a>
 </p>
 
 <details>
@@ -94,6 +94,6 @@
 - **H_ball + servo**: electronics design contest builds, MaixCAM vision and STM32 control. [H_ball](https://github.com/satoshinji2992/H_ball) · [servo](https://github.com/satoshinji2992/servo)
 - **naiLongRacing**: a pseudo-3D racer in C on openvela. [openvela branch](https://github.com/satoshinji2992/naiLongRacing/tree/openvela)
 - **FPGA CPU**: RV32IM five-stage pipeline on a Spartan-6 board. [fpga_cpu](https://github.com/satoshinji2992/fpga_cpu)
-- **Almanac**: 1367 contributions in the last year; 49 stars across 26 public repositories.
+- **Almanac**: 1477 contributions in the last year; 49 stars across 26 public repositories.
 
 </details>
