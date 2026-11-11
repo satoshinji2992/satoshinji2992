@@ -67,7 +67,7 @@
 </p>
 
 <p align="center">
-  <img src="./assets/almanac.svg?v=6dea4d7909" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
+  <img src="./assets/almanac.svg?v=6b6463b069" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
 </p>
 
 <a name="instruments"></a>
@@ -80,7 +80,7 @@
 </p>
 
 <p align="center">
-  <a href="#featured"><img src="./assets/footer.svg?v=513a14e78f" width="100%" alt="Back to top"></a>
+  <a href="#featured"><img src="./assets/footer.svg?v=606aa8b223" width="100%" alt="Back to top"></a>
 </p>
 
 <details>
