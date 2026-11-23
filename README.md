@@ -28,7 +28,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><img src="./assets/card-deep-learning.svg?v=956ab5c5e6" width="100%" alt="From y = ax + b to MiniMind: an open deep learning textbook adopted for a university elective"></a><br>
+  <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><img src="./assets/card-deep-learning.svg?v=d38ace8359" width="100%" alt="From y = ax + b to MiniMind: an open deep learning textbook adopted for a university elective"></a><br>
   <a href="https://github.com/satoshinji2992/quickly_access_to_deeplearning"><img src="./assets/btn-deep-learning-repository.svg?v=229c5f862d" width="49%" alt="Deep learning course repository"></a>
   <a href="https://satoshinji2992.github.io/quickly_access_to_deeplearning/"><img src="./assets/btn-deep-learning-read-online.svg?v=271b1276d3" width="49%" alt="Deep learning course website"></a>
 </p>
@@ -67,7 +67,7 @@
 </p>
 
 <p align="center">
-  <img src="./assets/almanac.svg?v=482d460624" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
+  <img src="./assets/almanac.svg?v=22bd629114" width="100%" alt="Almanac: a year of contributions, recent activity, languages and the latest AutoKeeper release">
 </p>
 
 <a name="instruments"></a>
@@ -80,7 +80,7 @@
 </p>
 
 <p align="center">
-  <a href="#featured"><img src="./assets/footer.svg?v=f05d30a134" width="100%" alt="Back to top"></a>
+  <a href="#featured"><img src="./assets/footer.svg?v=32cb104e8a" width="100%" alt="Back to top"></a>
 </p>
 
 <details>
@@ -94,6 +94,6 @@
 - **H_ball + servo**: electronics design contest builds, MaixCAM vision and STM32 control. [H_ball](https://github.com/satoshinji2992/H_ball) · [servo](https://github.com/satoshinji2992/servo)
 - **naiLongRacing**: a pseudo-3D racer in C on openvela. [openvela branch](https://github.com/satoshinji2992/naiLongRacing/tree/openvela)
 - **FPGA CPU**: RV32IM five-stage pipeline on a Spartan-6 board. [fpga_cpu](https://github.com/satoshinji2992/fpga_cpu)
-- **Almanac**: 2071 contributions in the last year; 51 stars across 26 public repositories.
+- **Almanac**: 2070 contributions in the last year; 53 stars across 26 public repositories.
 
 </details>
